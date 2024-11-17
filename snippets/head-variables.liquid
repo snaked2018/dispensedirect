@@ -1,0 +1,322 @@
+{%- liquid
+	assign heading_font = settings.heading_font
+	assign body_font = settings.body_font
+	assign body_font_500 = body_font | font_modify: 'weight', '500'
+
+	unless body_font_500
+		assign body_font_500 = body_font | font_modify: 'weight', '600'
+	endunless
+
+	assign body_font_bold = body_font | font_modify: 'weight', '600'
+	unless body_font_bold
+		assign body_font_bold = body_font | font_modify: 'weight', '700'
+	endunless
+
+	assign body_font_italic = body_font | font_modify: 'style', 'italic'
+	assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+
+	assign menu_font = settings.menu_font
+	assign button_font = settings.button_font
+	assign heading_text_color = settings.heading_text_color
+	assign body_text_color = settings.body_text_color
+	assign price_color = settings.price_color
+	assign body_bg = settings.body_bg
+	assign border_color = settings.border_color
+	assign links_color = settings.links_color
+	assign links_hover_color = settings.links_hover_color
+	assign stars_color = settings.stars_color
+	assign badge_sale_bg = settings.badge_sale_bg
+	assign badge_soldout_bg = settings.badge_soldout_bg
+	assign color_badge_preorder = settings.color_badge_preorder
+	assign badge_text_color = settings.badge_text_color
+	assign notification_success = settings.notification_success
+	assign notification_error = settings.notification_error
+	assign notification_success_text_color = settings.notification_success_text_color
+	assign notification_error_text_color = settings.notification_error_text_color
+	assign header_bg = settings.header_bg
+	assign header_links_color = settings.header_links_color
+	assign header_links_hover_color = settings.header_links_hover_color
+	assign header_icons_color = settings.header_icons_color
+	assign sidepanel_header_bg = settings.sidepanel_header_bg
+	assign sidepanel_header_text = settings.sidepanel_header_text
+	assign sidepanel_click_capture = settings.sidepanel_click_capture
+	assign global_spacing_mobile = settings.global_spacing_mobile
+	assign global_spacing_desktop = settings.global_spacing_desktop
+
+	assign button_border_radius = settings.button_border_radius
+
+	assign product_title_size = settings.product_title_size
+	assign menu_font_size = settings.menu_font_size
+	assign badge_corner_radius = settings.badge_corner_radius
+	assign product_out_of_stock = settings.product_out_of_stock
+	assign cart_remove_color = settings.cart_remove_color
+
+	assign solid_button_text = settings.solid_button_text
+	assign solid_button_bg = settings.solid_button_bg
+	assign outline_button_color = settings.outline_button_color
+ -%}
+
+{% style %}
+	
+
+	{{ body_font | font_face: font_display: 'swap' }}
+
+	{%- if body_font_500 -%}
+	  {{ body_font_500 | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	{%- if body_font_bold -%}
+	  {{ body_font_bold | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	{%- if body_font_italic -%}
+	  {{ body_font_italic | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	{%- if body_font_bold_italic -%}
+	  {{ body_font_bold_italic | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	{% if body_font != heading_font %}
+		{{ heading_font | font_face: font_display: 'swap' }}
+	{%- endif -%}
+	{% if body_font != menu_font %}
+		{{ menu_font | font_face: font_display: 'swap' }}
+	{%- endif -%}
+	{% if body_font != button_font %}
+		{{ button_font | font_face: font_display: 'swap' }}
+	{%- endif -%}
+
+	h1,h2,h3,h4,h5,h6,
+	.h1,.h2,.h3,.h4,.h5,.h6,
+	.h1-large, .h1-xlarge,
+	.cart-product-link {
+		font-style: {{ heading_font.style }};
+		font-weight: {{ heading_font.weight }};
+		font-family: {{ heading_font.family }}, {{ heading_font.fallback_families }};
+	}
+	body,
+	p {
+		font-style: {{ body_font.style }};
+		font-weight: {{ body_font.weight }};
+		font-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+	}
+	{% if body_font != menu_font and heading_font != menu_font %}
+	.header,
+	.header .thb-full-menu {
+		font-style: {{ menu_font.style }};
+		font-weight: {{ menu_font.weight }};
+		font-family: {{ menu_font.family }}, {{ menu_font.fallback_families }};
+	}
+	{%- endif -%}
+	{% if body_font != button_font and heading_font != button_font %}
+	.button,
+	.btn {
+		font-style: {{ button_font.style }};
+		font-weight: {{ button_font.weight }};
+		font-family: {{ button_font.family }}, {{ button_font.fallback_families }};
+	}
+	{%- endif -%}
+	:root {
+		--announcement-height: 0px;
+  	--header-height: 75px;
+
+		--font-body-scale: {{ settings.body_font_scale | divided_by: 100.0 }};
+		--font-body-medium-weight: {{ body_font_500.weight | default: '500' }};
+    --font-body-bold-weight: {{ body_font_bold.weight | default: '600' }};
+		--font-heading-scale: {{ settings.heading_font_scale | times: 1.0 | divided_by: settings.body_font_scale }};
+		--font-button-scale: {{ settings.button_font_scale | divided_by: 100.0 }};
+
+		--bg-drawer: {{ sidepanel_click_capture | default: '#c0c0c0' | color_modify: 'alpha', 0.6 }};
+
+		--color-text: {{ body_text_color | default: '#151515' }};
+		--color-text-rgb: {{ body_text_color.rgb | default: '21 21 21' | replace: ' ' , ',' }};
+		--color-heading: {{ heading_text_color | default: '#151515' }};
+		--bg-body: {{ body_bg | default: '#ffffff' }};
+		--bg-body--darken: {{ body_bg | default: '#ffffff' | color_darken: 5 }};
+		--bg-body-rgb: {{ body_bg.rgb | default: '255 255 255' | replace: ' ' , ',' }};
+
+		--color-link: {{ links_color | default: '#151515' }};
+		--color-link-hover: {{ links_hover_color | default: '#666666' }};
+
+		--color-border: {{ border_color | default: '#eaeaea' }};
+		--color-stars: {{ stars_color | default: '#151515' }};
+		--color-price: {{ price_color | default: '#444444' }};
+
+		--cart-remove: {{ cart_remove_color | default: '#db4141' }};
+
+		--button-solid-bg: {{ solid_button_bg | default: '#151515' }};
+		--button-solid-bg-hover: {{ solid_button_bg | default: '#151515' | color_lighten: 10 }};
+		--button-solid-text: {{ solid_button_text | default: '#ffffff' }};
+		--outline-button-color: {{ outline_button_color | default: '#151515' }};
+
+		--button-border-radius: {{ button_border_radius | default: '0' | append: 'px' }};
+		--color-badge-preorder: {{ color_badge_preorder | default: '#666666' }};
+
+		--shopify-accelerated-checkout-button-block-size: 46px;
+		--shopify-accelerated-checkout-inline-alignment: center;
+		--shopify-accelerated-checkout-skeleton-animation-duration: 0.25s;
+		--shopify-accelerated-checkout-button-border-radius: {{ button_border_radius | append: 'px' }};
+	}
+
+	{% if badge_text_color %}
+	.badge {
+		color: {{ badge_text_color }};
+	}
+	{%- endif -%}
+	{% if badge_sale_bg %}
+	.badge.onsale {
+		background-color: {{ badge_sale_bg }};
+	}
+	{%- endif -%}
+	{% if badge_soldout_bg %}
+	.badge.out-of-stock {
+		background-color: {{ badge_soldout_bg }};
+	}
+	{%- endif -%}
+	{% if notification_error %}
+	.form-notification.error {
+		background-color: {{ notification_error }};
+	}
+	{%- endif -%}
+	{% if notification_error_text_color %}
+	.form-notification.error,
+	.form-notification.error a {
+		color: {{ notification_error_text_color }};
+	}
+	{%- endif -%}
+	{% if notification_success %}
+	.form-notification.success {
+		background-color: {{ notification_success }};
+	}
+	{%- endif -%}
+	{% if notification_success_text_color %}
+	.form-notification.success,
+	.form-notification.success a {
+		color: {{ notification_success_text_color }};
+	}
+	{%- endif -%}
+	{% if header_bg %}
+	.header:not(.fixed),
+	.header.hover,
+	.header:hover {
+		background-color: {{ header_bg }};
+	}
+	.header #cart-drawer-toggle .float_count {
+		color: {{ header_bg }};
+	}
+	.thb-full-menu .sub-menu,
+	.mega-menu-promotion h6 {
+		background-color: {{ header_bg }};
+	}
+	{%- endif -%}
+	{% if header_links_color %}
+	.header.light-title:hover a,
+	.header.light-title.hover a,
+	.header:not(.light-title) a {
+		color: {{ header_links_color }};
+	}
+	.header #cart-drawer-toggle .float_count {
+		background: {{ header_links_color }};
+	}
+	.thb-full-menu>li a:before {
+		border-color: {{ header_links_color }};
+	}
+	{%- endif -%}
+	{% if header_links_hover_color %}
+	.header.light-title:hover a:hover,
+	.header.light-title.hover a:hover,
+	.header:not(.light-title) a:hover {
+		color: {{ header_links_hover_color }};
+	}
+	{%- endif -%}
+	{% if header_icons_color %}
+	.header #cart-drawer-toggle svg {
+		stroke: {{ header_icons_color }};
+	}
+	.header #quick_profile svg,
+	.header .search-modal__button svg {
+		fill: {{ header_icons_color }};
+	}
+	.mobile-toggle span {
+		background: {{ header_icons_color }};
+	}
+	{%- endif -%}
+	{% if sidepanel_header_bg %}
+	.side-panel header {
+		background-color: {{ sidepanel_header_bg }};
+	}
+	{%- endif -%}
+	{% if sidepanel_header_text %}
+	.side-panel header h6 {
+		color: {{ sidepanel_header_text }};
+	}
+	.side-panel header svg {
+		fill: {{ sidepanel_header_text }};
+	}
+	{%- endif -%}
+	{% if global_spacing_mobile %}
+	@media only screen and (max-width: 767px) {
+		.section-margin,
+		.spr-container {
+			margin: {{ global_spacing_mobile | append: 'px' }} 0;
+		}
+		.thb-product-detail.product {
+			margin-bottom: {{ global_spacing_mobile | append: 'px' }};
+		}
+		.section-spacing {
+			padding: {{ global_spacing_mobile | append: 'px' }} 0;
+		}
+	}
+	{%- endif -%}
+	{% if global_spacing_desktop %}
+	@media only screen and (min-width: 768px) {
+		.section-margin,
+		.spr-container {
+			margin: {{ global_spacing_desktop | append: 'px' }} 0;
+		}
+		.thb-product-detail:not(.section-no-bottom-margin) {
+			margin-bottom: {{ global_spacing_desktop | append: 'px' }} !important;
+		}
+		.section-spacing {
+			padding: {{ global_spacing_desktop | append: 'px' }} 0;
+		}
+	}
+	{%- endif -%}
+
+	{% if product_title_size %}
+	.products .product h3 {
+		font-size: {{ product_title_size | append: 'px' }};
+	}
+	{%- endif -%}
+	{% if menu_font_size %}
+	.thb-full-menu,
+	.header .account-holder a {
+		font-size: {{ menu_font_size | append: 'px' }};
+	}
+	{%- endif -%}
+	{% if badge_corner_radius %}
+	.badge {
+		border-radius: {{ badge_corner_radius }}px;
+	}
+	{%- endif -%}
+	{%- if product_out_of_stock -%}
+	.thb-product-detail .product-information .stock.out-of-stock {
+		border-color: {{ product_out_of_stock }};
+		color: {{ product_out_of_stock }};
+	}
+	{%- endif -%}
+	{%- for index in (1..4) -%}
+		{%- capture tag_settings_key -%}custom_product_badge_group_{{ index }}_tag_names{%- endcapture -%}
+		{%- capture color_settings_key -%}custom_product_badge_group_{{ index }}_color{%- endcapture -%}
+		{%- unless settings[tag_settings_key] == blank -%}
+			{%- assign tags = settings[tag_settings_key] | downcase | split: ", " -%}
+			{%- for tag in tags -%}
+				.badge.{{ tag | downcase | handleize }}{%- if forloop.last != true -%},{%- endif -%}
+			{%- endfor -%}
+			{
+				background: {{ settings[color_settings_key] }};
+			}
+		{% endunless %}
+	{%- endfor -%}
+{% endstyle %}

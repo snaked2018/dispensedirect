@@ -1,0 +1,53 @@
+{%- liquid
+
+	if priority
+		assign fetchpriority = priority
+	else
+		assign fetchpriority = 'auto'
+	endif
+-%}
+{%- unless sizes -%}
+	{%- capture sizes -%}
+		{{ image.width | divided_by: 2 }}x0, {{ image.width }}x0
+	{%- endcapture -%}
+{%- endunless -%}
+{%- assign image_sizes = sizes | split: "," -%}
+{%- capture srcset -%}
+  {% for size in image_sizes %}
+    {%- assign blur_size = '20x' -%}
+    {%- assign size_array = size | split: "x" -%}
+    {%- assign size_x = size_array[0] | append: 'x' -%}
+    {% if size_array[1] != "0" %}
+      {%- assign size_x = size -%}
+      {%- assign small_x = size_array[1] | times: 20 | divided_by: size_array[0] | floor -%}
+      {%- assign blur_size = blur_size | append: small_x -%}
+    {% endif %}
+    {{- image.src | img_url: size_x, crop: 'center' }} {{ size_array[0] }}w,
+  {%- endfor -%}
+{%- endcapture -%}
+{%- liquid
+	assign focal_point = image.presentation.focal_point
+	assign l = srcset | size | minus: 1
+-%}
+<img
+	class="lazyload{% if retina %} retina_size{% endif %} {{ class | escape }}"
+	width="{{ image.width }}" height="{{ image.height }}"
+	data-sizes="auto"
+	{% if request.design_mode or disable_lazyload %}
+	src="{{- image.src | img_url: blur_size, crop: 'center' -}}"
+	srcset="{{ srcset | slice: 0, l | strip_newlines }}"
+	{% else %}
+	data-src="{{- image.src | img_url: blur_size, crop: 'center' -}}"
+	data-srcset="{{ srcset | slice: 0, l | strip_newlines }}"
+	{% endif %}
+	alt="{{ image.alt | escape }}"
+	{% if focal_point -%}
+	style="object-position: {{ focal_point }};"
+	{% endif %}
+	fetchpriority="{{ fetchpriority }}"
+/>
+{% unless request.design_mode %}
+<noscript>
+<img width="{{ image.width }}" height="{{ image.height }}" sizes="auto" src="{{- image.src | img_url: blur_size, crop: 'center' -}}" srcset="{{ srcset | slice: 0, l | strip_newlines }}" alt="{{ image.alt | escape }}" loading="lazy" {% if focal_point -%}style="object-position: {{ focal_point }};"{% endif %}  fetchpriority="{{ fetchpriority }}" />
+</noscript>
+{% endunless %}

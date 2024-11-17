@@ -1,0 +1,68 @@
+<div class="account-holder {% unless section.settings.header_secondary_icons %}has-text-links{% else %}has-icon-links{% endunless %} uppercase-{{ settings.menu_uppercase }}">
+	{% if customer %}
+	  {% assign profile_link = routes.account_url %}
+	  {% capture profile_text %}
+	    {{ 'general.header.my_account' | t }}
+	  {% endcapture %}
+	{% else %}
+	  {% assign profile_link = routes.account_login_url %}
+	  {% capture profile_text %}
+	    {{ 'general.header.login' | t }}
+	  {% endcapture %}
+	{% endif %}
+	{% unless section.settings.header_secondary_icons %}
+	  {% if shop.customer_accounts_enabled %}
+	    <a href="{{ profile_link | escape }}" id="quick_profile" class="{% if template contains 'customer' %}active{% endif %}">{{ profile_text }}</a>
+	  {% endif %}
+	  {% if section.settings.header_search %}
+	    <modal-opener
+				class="search-modal__opener no-js-hidden"
+				data-modal="#Search-Drawer"
+			>
+				<button
+					id="quick_search"
+					class="search-modal__button {% if template == 'search' %}active{% endif %}"
+					type="button"
+					aria-haspopup="dialog"
+				>
+					{{ 'general.header.search' | t }}
+				</button>
+			</modal-opener>
+			<a href="{{ routes.search_url }}" class="search-modal__button no-js" target="_blank">
+				{{ 'general.header.search' | t }}
+			</a>
+	  {% endif %}
+	  <a href="{{ routes.cart_url }}" id="cart-drawer-toggle" class="{% if template == 'cart' %}active{% endif %}">{{ 'general.header.cart' | t }} <span class="float_count">{%- if cart.item_count > 99 -%}
+			{%- render 'svg-icons' with 'thb-asterisk' -%}
+		{%- else -%}
+		{{ cart.item_count }}
+		{%- endif -%}</span></a>
+	{% else %}
+	  {% if shop.customer_accounts_enabled %}
+	    <a href="{{ profile_link | escape }}" id="quick_profile" title="{{ profile_text | escape }}">{% render 'svg-icons' with 'thb-account' %}</a>
+	  {% endif %}
+	  {% if section.settings.header_search %}
+			<modal-opener
+				class="search-modal__opener no-js-hidden"
+				data-modal="#Search-Drawer"
+			>
+				<button
+					id="quick_search"
+					class="search-modal__button {% if template == 'search' %}active{% endif %}"
+					type="button"
+					aria-haspopup="dialog"
+				>
+					{% render 'svg-icons' with 'thb-search' %}
+				</button>
+			</modal-opener>
+			<a href="{{ routes.search_url }}" class="search-modal__button no-js" target="_blank">
+				{% render 'svg-icons' with 'thb-search' %}
+			</a>
+	  {% endif %}
+	  <a href="{{ routes.cart_url }}" id="cart-drawer-toggle">{% render 'svg-icons' with 'thb-cart' %} <span class="float_count">{%- if cart.item_count > 99 -%}
+			{%- render 'svg-icons' with 'thb-asterisk' -%}
+		{%- else -%}
+		{{ cart.item_count }}
+		{%- endif -%}</span></a>
+	{% endunless %}
+</div>

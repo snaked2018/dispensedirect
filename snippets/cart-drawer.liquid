@@ -1,0 +1,125 @@
+{%- if settings.cart_drawer -%}
+{%- liquid
+	assign free_shipping = settings.free_shipping
+	assign free_shipping_minimum = settings.free_shipping_minimum | times: 100
+	assign total = cart.total_price
+-%}
+<aside id="Cart-Drawer" class="side-panel cart-drawer" role="dialog" tabindex="-1">
+	<header>
+		<h6>{{ 'cart.sidecart.cart' | t }}</h6>
+		<button class="thb-close" title="{{ 'general.close' | t }}">{% render 'svg-icons' with 'thb-close' %}</button>
+	</header>
+	<div class="side-panel-content">
+		{%- if cart != empty -%}
+    <div class="widget_shopping_cart">
+      <div class="widget_shopping_cart_content">
+        <ul class="mini-cart cart_list product_list_widget">
+					{%- liquid
+						if free_shipping and settings.free_shipping_minimum != blank
+							render 'free-shipping', free_shipping_minimum: free_shipping_minimum, total: total
+						endif
+					-%}
+          {% for item in cart.items %}
+            <li class="mini_cart_item" id="CartDrawerItem-{{ item.index | plus: 1 }}">
+              <button class="remove" data-id="{{ item.variant_id }}" data-index="{{ item.index | plus: 1 }}">×</button>
+              <a href="{{ item.url }}" title="{{ item.product.title | escape }}">
+								{% if item.image %}
+									{%- render 'responsive-image', image: item.image, sizes: '168x0', priority: 'low' -%}
+								{% else %}
+									<div class="thb-placeholder" style="width: 75px; height:75px;">
+										{{ 'product-1' | placeholder_svg_tag }}
+									</div>
+								{% endif %}
+              </a>
+							<div class="mini_cart_item_content">
+								<h3><a href="{{ item.url }}" title="{{ item.product.title | escape }}">{{ item.product.title }}</a></h3>
+								{% if item.selling_plan_allocation %}
+								<div class="properties">
+									<span class="selling-plan">{{ item.selling_plan_allocation.selling_plan.name }}</span>
+								</div>
+								{% endif %}
+								{%- unless item.product.has_only_default_variant -%}
+									<div class="mini_cart_item__meta-text">
+										{% for option in item.options_with_values %}
+											<span>{{ option.name }}:</span> {{ option.value }}<br/>
+										{% endfor %}
+									</div>
+								{% endunless %}
+								{%- if item.discounts != blank -%}
+								<ul class="discounts" role="list">
+									{%- for discount in item.discounts -%}
+										<li class="discounts__discount">
+											{%- render 'svg-icons' with 'thb-discount' -%}
+											{{ discount.title }} (-{{ discount.amount | money }})
+										</li>
+									{%- endfor -%}
+								</ul>
+								{%- endif -%}
+	              <span class="price">
+									<span class="mini-quantity">{{ item.quantity }} ×</span> <span class="amount">{{ item.final_price | money }}</span>
+									{%- if item.variant.available and item.unit_price_measurement -%}
+										<small class="unit-price">
+											{{ item.variant.unit_price | money }}
+											<span class="unit-price-separator">/</span>
+											{%- if item.variant.unit_price_measurement.reference_value != 1 -%}
+												{{- item.variant.unit_price_measurement.reference_value -}}
+											{%- endif -%}
+											{{ item.variant.unit_price_measurement.reference_unit }}
+										</small>
+									{%- endif -%}
+								</span>
+
+							</div>
+            </li>
+          {% endfor %}
+        </ul>
+				{% if settings.cart_drawer_notes %}
+					<div class="mini-cart__notes">
+						<button class="mini-cart__notes_toggle" id="order-note-toggle">{{ 'cart.general.add_note' | t }}</button>
+						<div class="mini-cart__notes_content" id="mini-cart-note">
+							<textarea name="note" id="mini-cart__notes">{{ cart.note }}</textarea>
+							<button class="button alt mini-cart__notes_save" id="mini-cart-save">{{ 'cart.general.save' | t }}</button>
+						</div>
+					</div>
+				{% endif %}
+				{%- if cart.cart_level_discount_applications.size > 0 -%}
+					{%- for discount in cart.cart_level_discount_applications -%}
+						<div class="mini-cart__row mini-cart__discount">
+							<strong>{{ discount.title }}</strong>
+							<span>(-{{ discount.total_allocated_amount | money }})</span>
+						</div>
+					{%- endfor -%}
+				{%- endif -%}
+        <div class="mini-cart__row mini-cart__total total">
+          <strong>{{ 'cart.general.subtotal' | t }}</strong> <span class="amount">{{ cart.total_price | money }}</span>
+        </div>
+				{% if settings.cart_terms_conditions_enable %}
+          <div class="mini-cart__row mini-cart__terms">
+            <input type="checkbox" id="CartDrawerTerms" required>
+            <label for="CartDrawerTerms">
+              {% if settings.cart_terms_conditions_page != blank %}
+                {{ 'cart.general.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
+              {% else %}
+                {{ 'cart.general.terms' | t }}
+              {% endif %}
+            </label>
+          </div>
+        {% endif %}
+        <div class="mini-cart__buttons buttons">
+					{% if settings.cart_drawer_cart_button %}
+          <a href="{{ routes.cart_url }}" class="button alt" title="{{ 'cart.sidecart.view_cart' | t | escape }}">{{ 'cart.sidecart.view_cart' | t }}</a>
+					{% endif %}
+					{% if settings.cart_drawer_checkout_button %}
+					<form action="{{ routes.cart_url }}" method="post" novalidate>
+						<button type="submit" class="button checkout full" name="checkout" title="{{ 'cart.sidecart.checkout' | t | escape }}">{{ 'cart.sidecart.checkout' | t }}</button>
+					</form>
+					{% endif %}
+				</div>
+      </div>
+    </div>
+		{% else %}
+		  {% render 'cart-empty' %}
+		{% endif %}
+	</div>
+</aside>
+{%- endif -%}

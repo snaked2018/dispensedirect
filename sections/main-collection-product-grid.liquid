@@ -1,0 +1,177 @@
+{%- liquid
+	assign collection_pagination_count = section.settings.collection_product_count | plus: 0
+	assign grid_size = section.settings.collection_grid_num
+	assign collection_layout = section.settings.collection_layout
+
+	assign total_active = 0
+	for filter in collection.filters
+		assign total_active = total_active | plus: filter.active_values.size
+
+		if filter.type == 'price_range'
+			if filter.min_value.value
+				assign min_value = filter.min_value
+				assign total_active = total_active | plus: 1
+			endif
+			if filter.max_value.value
+				assign total_active = total_active | plus: 1
+			endif
+		endif
+	endfor
+-%}
+{%- paginate collection.products by collection_pagination_count -%}
+  {%- render 'shop-bar', results: collection, paginate: paginate, filtering: section.settings.enable_filtering, sorting: section.settings.enable_sorting, total_active: total_active -%}
+	{% if section.settings.enable_filtering %}
+		{% render 'facets', results: collection, show_counts: section.settings.show_counts %}
+	{% else %}
+	<form id="FacetFiltersForm" class="facets__form"></form>
+	{% endif %}
+	<div class="row">
+    <div class="small-12 columns">
+			<div id="ProductGridContainer">
+				{% if collection.products.size > 0 %}
+					<div id="product-grid" data-id="{{ section.id }}" class="collection products row">
+						{% for product in collection.products %}
+							{% case collection_layout %}
+								{% assign grid_item_width = '' %}
+								{% when 'style1' %}
+									{% case grid_size %}
+										{% when 1 %}
+											{% assign grid_item_width = 'small-12' %}
+										{% when 2 %}
+											{% assign grid_item_width = 'small-6' %}
+										{% when 3 %}
+											{% assign grid_item_width = 'small-6 medium-4' %}
+										{% when 4 %}
+											{% assign grid_item_width = 'small-6 medium-3' %}
+										{% when 5 %}
+											{% assign grid_item_width = 'small-6 medium-1/5' %}
+										{% when 6 %}
+											{% assign grid_item_width = 'small-6 medium-4 large-2' %}
+										{% else %}
+											{% assign grid_item_width = 'small-6 medium-4' %}
+									{% endcase %}
+								{% when 'style2' %}
+									{% assign class_1 = 'small-6 medium-4' %}
+									{% assign class_2 = 'small-6 medium-3' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_2, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style3' %}
+									{% assign class_1 = 'small-6 medium-3' %}
+									{% assign class_2 = 'small-6 medium-1/5' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_2, class_2, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style4' %}
+									{% assign class_1 = 'small-6 medium-1/5' %}
+									{% assign class_2 = 'small-6 medium-2' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_1, class_2, class_2, class_2, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style5' %}
+									{% assign class_1 = 'small-6 medium-3' %}
+									{% assign class_2 = 'small-6 medium-4' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style6' %}
+									{% assign class_1 = 'small-6 medium-1/5' %}
+									{% assign class_2 = 'small-6 medium-3' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_1, class_2, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style7' %}
+									{% assign class_1 = 'small-6 medium-2' %}
+									{% assign class_2 = 'small-6 medium-1/5' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_1, class_1, class_2, class_2, class_2, class_2, class_2 %}
+									{% endcapture %}
+								{% when 'style8' %}
+									{% assign class_1 = 'small-6 medium-3' %}
+									{% assign class_2 = 'small-6 medium-4' %}
+									{% capture grid_item_width %}
+										{% cycle class_1, class_1, class_1, class_1, class_1, class_1, class_1, class_1, class_2, class_2, class_2 %}
+									{% endcapture %}
+							{% endcase %}
+							{% render 'product-card', product: product, grid_item_width: grid_item_width, grid_layout: collection_layout %}
+						{% endfor %}
+						{% render 'pagination', pagination: paginate, class: 'small-12 columns' %}
+					</div>
+				{% else %}
+					<div id="product-grid" data-id="{{ section.id }}" class="collection">
+						{% render 'no-products-found' %}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{%- endpaginate -%}
+{% schema %}
+  {
+    "name": "Product grid",
+    "settings": [
+			{
+        "type": "range",
+        "id": "collection_product_count",
+        "min": 2,
+        "max": 24,
+        "step": 1,
+        "label": "Products per page",
+        "default": 12
+      },
+      {
+        "type": "select",
+        "id": "collection_layout",
+        "label": "Collection layout",
+        "default": "style1",
+        "options": [
+          { "value": "style1", "label": "Grid" },
+          { "value": "style2", "label": "Alternating - 3 / 4" },
+          { "value": "style3", "label": "Alternating - 4 / 5" },
+          { "value": "style4", "label": "Alternating - 5 / 6" },
+          { "value": "style5", "label": "Alternating - 4 / 3" },
+          { "value": "style6", "label": "Alternating - 5 / 4" },
+          { "value": "style7", "label": "Alternating - 6 / 5" },
+          { "value": "style8", "label": "Alternating - 4 / 4 / 3" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Grid settings"
+      },
+			{
+        "type": "range",
+        "id": "collection_grid_num",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "Products per row",
+        "default": 4,
+        "info": "Works with the grid layout."
+      },
+	    {
+	      "type": "header",
+	      "content": "Filtering and sorting"
+	    },
+	    {
+	      "type": "checkbox",
+	      "id": "enable_filtering",
+	      "default": true,
+	      "label": "Enable filtering",
+	      "info": "Customize [filters](/admin/menus)"
+	    },
+	    {
+	      "type": "checkbox",
+	      "id": "enable_sorting",
+	      "default": true,
+	      "label": "Enable sorting"
+	    },
+			{
+	      "type": "checkbox",
+	      "id": "show_counts",
+	      "default": true,
+	      "label": "Show filter values count"
+	    }
+    ]
+  }
+{% endschema %}

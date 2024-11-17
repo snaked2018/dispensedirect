@@ -1,0 +1,401 @@
+{%- liquid
+	assign desktop_height = section.settings.desktop_height
+	assign mobile_height = section.settings.mobile_height
+
+	case mobile_height
+		when 'mobile-height-350'
+			assign mobile_image_height = 350
+		when 'mobile-height-400'
+			assign mobile_image_height = 400
+		when 'mobile-height-450'
+			assign mobile_image_height = 450
+		else
+			assign mobile_image_height = 650
+	endcase
+
+	assign priority = false
+
+	if section.index == 1
+		assign priority = 'high'
+	endif
+-%}
+<div class="north-hero section-margin {{ mobile_height | escape }} {{ desktop_height | escape }} {{ section.settings.vertical_alignment | escape }} text-{{ section.settings.text_alignment | escape }} {% if section.settings.parallax %}thb-parallax{% endif %} {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}" id="section-hero-{{ section.id }}">
+	{% if section.settings.bg_image %}
+		{%- liquid
+			assign class = ''
+			assign focal_point = section.settings.bg_image.presentation.focal_point
+			if section.settings.bg_image_mobile != blank
+				assign class = 'north-hero-image--desktop'
+			endif
+		-%}
+		<img data-src="{{ section.settings.bg_image | image_url }}" alt="{{ section.settings.bg_image.alt | escape }}" width="{{ section.settings.bg_image.width }}" height="{{ section.settings.bg_image.height }}" class="thb-parallax-image lazyload {{ class }}" {% if focal_point -%}style="object-position: {{ focal_point }};"{% endif %} fetchpriority="{{ priority }}" />
+		<noscript>
+		<img src="{{ section.settings.bg_image | image_url }}" alt="{{ section.settings.bg_image.alt | escape }}" width="{{ section.settings.bg_image.width }}" height="{{ section.settings.bg_image.height }}" class="thb-parallax-image {{ class }}" {% if focal_point -%}style="object-position: {{ focal_point }};"{% endif %} fetchpriority="{{ priority }}" />
+		</noscript>
+	{% else %}
+		{{ 'lifestyle-1' | placeholder_svg_tag: 'thb-parallax-image placeholder_svg_tag' }}
+	{% endif %}
+	{%- if section.settings.bg_image_mobile != blank -%}
+		{%- liquid
+			assign image = section.settings.bg_image_mobile
+			assign double_height = mobile_image_height | times: 2
+			assign master_width = image.src.width | append: 'x' | append: image.src.height
+			assign width = '375x' | append: mobile_image_height | append: ',750x' | append: double_height
+		 -%}
+		{%- render 'responsive-image', image: image, sizes: width, class: 'thb-parallax-image north-hero-image--mobile', priority: priority -%}
+	{%- endif -%}
+	<div class="north-hero-overlay" style="background-color:{{ section.settings.overlay_color }}; opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+  <div class="row {% if section.settings.text_alignment == 'center' %}align-center{% endif %}">
+    <div class="columns small-12 {% if section.settings.text_alignment == 'center' %}large-8 medium-10{% endif %}">
+			{% for block in section.blocks %}
+				{% if block.type == 'image' %}
+					{% if block.settings.image %}
+						{% assign small_width = block.settings.image.src.height | times: '320' | divided_by: block.settings.image.src.width %}
+						{% assign master_width = block.settings.image.src.width | append: 'x' | append: block.settings.image.src.height %}
+						{% assign width = '320x' | append: small_width | append: ',' | append: master_width %}
+						<div class="animation bottom-to-top text-center north-hero-image-block" {{ block.shopify_attributes }}>
+							{%- render 'responsive-image', image: block.settings.image, sizes: width, retina: block.settings.retina -%}
+						</div>
+					{% else %}
+						<div class="animation bottom-to-top text-center" {{ block.shopify_attributes }}>
+							<div class="thb-placeholder" style="width: 400px; height:200px;">
+								{{ 'product-1' | placeholder_svg_tag }}
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+				{% if block.type == 'title' %}
+          {% if block.settings.title != blank %}
+          	<{{ block.settings.heading_size }} class="animation bottom-to-top" id="section-hero-heading-{{ block.id }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</{{ block.settings.heading_size }}>
+						{% if block.settings.color != blank %}
+							{% style %}
+								#section-hero-heading-{{ block.id }} {
+									color: {{ block.settings.color }};
+								}
+							{% endstyle %}
+						{% endif %}
+					{% endif %}
+        {% endif %}
+				{% if block.type == 'content' %}
+          {% if block.settings.text != blank %}
+          <div class="animation bottom-to-top rte" id="section-hero-text-{{ block.id }}" {{ block.shopify_attributes }}>
+            {{ block.settings.text }}
+
+						{% if block.settings.color != blank %}
+							{% style %}
+								#section-hero-text-{{ block.id }},
+								#section-hero-text-{{ block.id }} a {
+									color: {{ block.settings.color }};
+								}
+							{% endstyle %}
+						{% endif %}
+          </div>
+          {% endif %}
+				{% endif %}
+				{% if block.type == 'button' %}
+          {% if block.settings.button_text != blank %}
+	          <div class="vc_empty_space" style="height: 20px"></div>
+						{% if block.settings.button_style != 'btn-text' %}
+	          <a class="btn {{ block.settings.button_style | escape }} {{ block.settings.button_color | escape }} animation bottom-to-top" href="{{ block.settings.button_link }}" role="button" title="{{ block.settings.button_text | escape }}" {{ block.shopify_attributes }}>{{ block.settings.button_text }}</a>
+						{% else %}
+						<a class="btn-text animation {{ block.settings.button_color | escape }}" href="{{ block.settings.button_link }}" title="{{ block.settings.button_text | escape }}" {{ block.shopify_attributes }}><span>{{ block.settings.button_text }}</span>
+							<div class="arrow">
+								<div>
+									{% render 'svg-icons' with 'thb-button-arrow' %}
+									{% render 'svg-icons' with 'thb-button-arrow' %}
+								</div>
+							</div>
+						</a>
+						{% endif %}
+          {% endif %}
+				{% endif %}
+			{% endfor %}
+    </div>
+  </div>
+</div>
+{% if section.settings.parallax %}
+	<script src="{{ 'parallax.min.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Image with text overlay",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Image",
+				"info": "1800 x 650 .jpg recommended."
+      },
+			{
+        "type": "image_picker",
+        "id": "bg_image_mobile",
+        "label": "Mobile image (optional)",
+				"info": "375 x 550 .jpg recommended."
+      },
+			{
+        "type": "checkbox",
+        "id": "parallax",
+        "default": true,
+        "label": "Enable parallax"
+      },
+			{
+        "type": "header",
+        "content": "Layout"
+      },
+			{
+				"type": "select",
+				"id": "desktop_height",
+				"label": "Desktop height",
+				"options": [
+					{
+						"value": "desktop-height-450",
+						"label": "Small"
+					},
+					{
+						"value": "desktop-height-550",
+						"label": "Medium"
+					},
+					{
+						"value": "desktop-height-650",
+						"label": "Large"
+					},
+					{
+						"value": "desktop-height-full",
+						"label": "Full screen"
+					}
+				],
+				"default": "desktop-height-550"
+			},
+			{
+				"type": "select",
+				"id": "mobile_height",
+				"label": "Mobile height",
+				"options": [
+					{
+						"value": "mobile-height-350",
+						"label": "Small"
+					},
+					{
+						"value": "mobile-height-400",
+						"label": "Medium"
+					},
+					{
+						"value": "mobile-height-450",
+						"label": "Large"
+					},
+					{
+						"value": "mobile-height-full",
+						"label": "Full screen"
+					}
+				],
+				"default": "mobile-height-400"
+			},
+			{
+				"type": "select",
+				"id": "vertical_alignment",
+				"label": "Content position",
+				"options": [
+					{
+						"value": "content-middle",
+						"label": "Middle"
+					},
+					{
+						"value": "content-bottom",
+						"label": "Bottom"
+					}
+				],
+				"default": "content-middle"
+			},
+			{
+				"type": "select",
+				"id": "text_alignment",
+				"label": "Content alignment",
+				"options": [
+					{
+						"value": "center",
+						"label": "Center"
+					},
+					{
+						"value": "left",
+						"label": "Left"
+					}
+				],
+				"default": "center"
+			},
+			{
+				"type": "header",
+				"content": "Colors"
+			},
+			{
+        "type": "color",
+        "id": "overlay_color",
+        "label": "Overlay",
+        "default": "#000000"
+      },
+			{
+				"type": "range",
+				"id": "overlay_opacity",
+				"min": 0,
+				"max": 100,
+				"step": 1,
+				"unit": "%",
+				"label": "Overlay opacity",
+				"default": 20
+			},
+			{
+				"type": "header",
+				"content": "Spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": true,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": true,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "checkbox",
+						"id": "retina",
+						"label": "Enable retina",
+						"default": true,
+						"info": "Image will be displayed at half the size, making it look crisp on retina screens."
+					}
+        ]
+      },
+			{
+        "type": "title",
+        "name": "Heading",
+        "settings": [
+					{
+		        "type": "select",
+		        "id": "heading_size",
+		        "label": "Size",
+		        "options": [
+		          {
+		            "value": "h1",
+		            "label": "Extra Large"
+		          },
+							{
+		            "value": "h2",
+		            "label": "Large"
+		          },
+							{
+		            "value": "h3",
+		            "label": "Medium"
+		          },
+							{
+		            "value": "h4",
+		            "label": "Small"
+		          }
+		        ],
+		        "default": "h1"
+		      },
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Text",
+						"default": "Heading"
+					},
+					{
+		        "type": "color",
+		        "id": "color",
+		        "label": "Color",
+		        "default": "#fff"
+		      }
+        ]
+      },
+			{
+        "type": "content",
+        "name": "Content",
+        "settings": [
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Text",
+						"default": "<p>Share information about <em>your brand</em> with your customers.</p>"
+					},
+					{
+		        "type": "color",
+		        "id": "color",
+		        "label": "Color",
+		        "default": "#fff"
+		      }
+        ]
+      },
+			{
+        "type": "button",
+        "name": "Button",
+	      "settings": [
+					{
+						"id": "button_text",
+						"type": "text",
+						"label": "Label",
+						"default": "Shop Now",
+						"info": "Leave the label blank to hide the button."
+					},
+					{
+						"id": "button_link",
+						"type": "url",
+						"label": "Link",
+						"default": "/collections/all"
+					},
+					{
+						"type": "select",
+						"id": "button_style",
+						"label": "Style",
+						"default": "pill alt",
+						"options": [
+							{ "value": "", "label": "Regular" },
+							{ "value": "pill alt", "label": "Pill outline" },
+							{ "value": "border-fill", "label": "Fill animation" },
+							{ "value": "btn-text", "label": "Text with arrow" }
+						]
+					},
+					{
+						"type": "select",
+						"id": "button_color",
+						"label": "Color",
+						"default": "white",
+						"options": [
+							{ "value": "", "label": "Black" },
+							{ "value": "white", "label": "White" }
+						]
+					}
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with text overlay",
+				"blocks": [
+					{
+						"type": "title"
+					},
+					{
+						"type": "content"
+					},
+					{
+						"type": "button"
+					}
+				]
+      }
+    ]
+  }
+
+{% endschema %}

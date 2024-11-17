@@ -1,0 +1,24 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Utilities
+*/
+.divider {
+  overflow: hidden;
+  display: block;
+  position: relative;
+  background: var(--divider-background, --bg-body);
+  height: var(--divider-height-mobile, 50px); }
+  @media only screen and (min-width: 768px) {
+    .divider {
+      height: var(--divider-height-desktop, 100px); } }
+  .divider-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 40;
+    pointer-events: none;
+    height: 100%;
+    fill: var(--divider-foreground, --color-text); }

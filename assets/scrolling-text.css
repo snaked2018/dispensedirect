@@ -1,0 +1,89 @@
+/*------------------------------------------------------------------
+Compass Mixins
+*/
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Utilities
+*/
+.scrolling-text--item span {
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+.scrolling-text {
+  background-color: var(--color-bg, var(--bg-body));
+  color: var(--color-text);
+  position: relative;
+  background-size: cover;
+  display: flex;
+  align-items: center; }
+  .scrolling-text:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: rgba(var(--overlay-color-rgb), var(--overlay-opacity)); }
+  .scrolling-text-uppercase--true {
+    text-transform: uppercase; }
+  .scrolling-text--inner {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 1.5rem;
+    font-weight: var(--font-body-bold-weight, 600);
+    padding: 30px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 10; }
+    .scrolling-text--inner.direction-left > div {
+      animation: marquee-left var(--marquee-speed) linear infinite; }
+    .scrolling-text--inner.direction-right > div {
+      animation: marquee-right var(--marquee-speed) linear infinite; }
+    .scrolling-text--inner > div {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0; }
+  .scrolling-text--item {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 30px; }
+    .scrolling-text--item.outline-text--true * {
+      -webkit-text-fill-color: transparent;
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: var(--color-text); }
+  .scrolling-text--link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-text); }
+    .scrolling-text--link span {
+      transform-origin: left bottom; }
+    .scrolling-text--link:hover {
+      color: var(--color-text); }
+      .scrolling-text--link:hover span {
+        transform: skew(-10deg, 0); }
+  .scrolling-text--image {
+    margin-right: 40px;
+    object-fit: cover;
+    width: auto; }
+    .scrolling-text--image--small {
+      height: 40px; }
+    .scrolling-text--image--medium {
+      height: 70px; }
+    .scrolling-text--image--large {
+      height: 100px; }
+
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%); }
+  100% {
+    transform: translateX(-100%); } }
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-100%); }
+  100% {
+    transform: translateX(0%); } }

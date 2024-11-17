@@ -1,0 +1,102 @@
+{%- liquid
+	assign bg_image = collection.featured_image
+	assign title = collection.title
+	assign description = collection.description
+	assign show_collection_description = section.settings.show_collection_description
+	assign show_subcollections = section.settings.show_subcollections
+
+	if section.settings.bg_image and collection.handle == 'all'
+		assign bg_image = section.settings.bg_image
+	endif
+-%}
+{{ 'collection-banner.css' | asset_url | stylesheet_tag }}
+<div class="collection-title">
+	{%- if bg_image -%}
+	<div class="collection-title-image">
+		{%- render 'responsive-image', image: bg_image, sizes: '320x450,960x240,2880x720', priority: 'high' -%}
+	</div>
+	{%- else -%}
+	<div class="collection-title-image">
+		{{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+	</div>
+	{%- endif -%}
+	<div class="collection-breadcrumb-row">
+		<div class="row">
+			<div class="small-12 medium-6 columns">
+				{% render 'breadcrumbs' %}
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<h1 class="thb-shop-title">{{ title }}</h1>
+			{%- if show_collection_description -%}
+			<div class="collection-title-description">
+				<p>{{ description }}</p>
+			</div>
+			{%- endif -%}
+			{%- if show_subcollections -%}
+					{%- for link in linklists.main-menu.links -%}
+						{%- if link.url == collection.url -%}
+							{%- capture subcollection_links -%}
+								{%- for sub_link in link.links -%}
+									<a href="{{ sub_link.url }}" title="{{ sub_link.title | escape }}" class="button alt white">{{ sub_link.title }}</a>
+								{%- endfor -%}
+							{%- endcapture -%}
+						{%- else -%}
+							{%- for sub_link in link.links -%}
+								{%- if sub_link.url == collection.url -%}
+									{%- capture subcollection_links -%}
+										{%- for sub_link_s in sub_link.links -%}
+											<a href="{{ sub_link_s.url }}" title="{{ sub_link_s.title | escape }}" class="button alt white">{{ sub_link_s.title }}</a>
+										{%- endfor -%}
+									{%- endcapture -%}
+								{%- endif -%}
+							{%- endfor -%}
+						{%- endif -%}
+					{%- endfor -%}
+				<div class="collection-title-subcollections">
+					{{ subcollection_links }}
+				</div>
+			{%- endif -%}
+		</div>
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Collection banner",
+    "settings": [
+			{
+				"type": "header",
+				"content": "Collection page"
+			},
+			{
+	      "type": "checkbox",
+	      "id": "show_collection_description",
+	      "default": true,
+	      "label": "Show collection description"
+	    },
+			{
+	      "type": "checkbox",
+	      "id": "show_subcollections",
+	      "default": true,
+	      "label": "Show subcollections",
+				"info": "Links to subcollections from your menu will appear here. [Learn more.](https://documentation.fuelthemes.net/kb/how-do-i-create-subcollections/)"
+	    },
+			{
+				"type": "header",
+				"content": "Catalog page"
+			},
+			{
+				"type": "paragraph",
+				"content": "Learn more about [catalog page](https://help.shopify.com/en/manual/online-store/themes/themes-by-shopify/vintage-themes/customizing-vintage-themes/change-catalog-page)"
+			},
+			{
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background image",
+	      "info": "Changes the background image for the [catalog page](https://help.shopify.com/en/manual/online-store/themes/themes-by-shopify/vintage-themes/customizing-vintage-themes/change-catalog-page). 1920 x 600 px .jpg recommended."
+      }
+    ]
+  }
+{% endschema %}

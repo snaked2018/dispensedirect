@@ -1,0 +1,120 @@
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	<div class="row section-stores" id="section-stores-{{ section.id }}">
+	  <div class="small-12 columns">
+			<div class="blog-post-wrapper">
+		    {% if section.settings.title != blank %}
+		    <h2 class="animation">{{ section.settings.title }}</h2>
+		    <div class="vc_empty_space" style="height: 30px"></div>
+		    {% endif %}
+		    {% for block in section.blocks %}
+		      <div class="row no-padding store {{ section.settings.animation | escape }}" {{ block.shopify_attributes }}>
+		        <div class="small-12 medium-3 columns">
+		          <h4>{{ block.settings.title }}</h4>
+		        </div>
+		        <div class="small-12 medium-6 columns rte">
+		          {{ block.settings.address }}
+		        </div>
+		        <div class="small-12 medium-3 columns medium-text-right">
+		          {% if block.settings.button-text != blank %}
+		            <a class="btn" href="{{ block.settings.button-link }}" role="button" title="{{ block.settings.button-text }}">{{ block.settings.button-text }}</a>
+		          {% endif %}
+		        </div>
+		      </div>
+		    {% endfor %}
+			</div>
+	  </div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Store list",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Our Stores"
+      },
+      {
+        "type": "select",
+        "id": "animation",
+        "label": "Loading animation",
+        "default": "",
+        "options": [
+          { "value": "", "label": "None" },
+          { "value": "animation right-to-left", "label": "Right to left" },
+          { "value": "animation left-to-right", "label": "Left to right" },
+          { "value": "animation right-to-left-long", "label": "Right to left long" },
+          { "value": "animation left-to-right-long", "label": "Left to right long" },
+          { "value": "animation bottom-to-top", "label": "Bottom to top" },
+          { "value": "animation top-to-bottom", "label": "Top to bottom" },
+          { "value": "animation scale", "label": "Scale" },
+          { "value": "animation fade-in", "label": "Fade" }
+        ]
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "store",
+        "name": "Store",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Store location"
+          },
+          {
+            "type": "richtext",
+            "id": "address",
+            "label": "Address",
+            "default": "<p>Add your store address or<br\/>your store hours</p>"
+          },
+          {
+            "type": "header",
+            "content": "Directions"
+          },
+          {
+            "id": "button-text",
+            "type": "text",
+            "label": "Label",
+            "default": "Get Directions",
+						"info": "Leave the label blank to hide the button."
+          },
+          {
+            "id": "button-link",
+            "type": "url",
+            "label": "Link"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Store list",
+				"blocks": [
+	        {
+	          "type": "store"
+	        }
+	      ]
+      }
+    ]
+  }
+{% endschema %}

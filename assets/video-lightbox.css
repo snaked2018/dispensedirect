@@ -1,0 +1,40 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.section-image-video-lightbox .video-play-icon path {
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+.section-image-video-lightbox {
+  padding: 70px 0;
+  background: #000;
+  color: #fff;
+  position: relative;
+  overflow: hidden; }
+  @media only screen and (min-width: 1068px) {
+    .section-image-video-lightbox {
+      padding: 135px 0; } }
+  .section-image-video-lightbox .placeholder_svg_tag {
+    background: #737373;
+    fill: #fff; }
+  .section-image-video-lightbox .row {
+    width: 100%;
+    position: relative;
+    z-index: 10; }
+  .section-image-video-lightbox p {
+    color: #fff; }
+  .section-image-video-lightbox .h6 {
+    letter-spacing: 0.5em;
+    font-size: 13px;
+    margin-bottom: 40px; }
+  .section-image-video-lightbox .h1 {
+    margin-bottom: 30px; }
+  .section-image-video-lightbox .video-play-icon {
+    width: 64px;
+    height: 64px; }
+    .section-image-video-lightbox .video-play-icon path {
+      transform-origin: center; }
+    .section-image-video-lightbox .video-play-icon:hover path {
+      transform: scale(1.08); }

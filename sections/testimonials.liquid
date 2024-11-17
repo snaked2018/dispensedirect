@@ -1,0 +1,194 @@
+{%- liquid
+    assign style = section.settings.style
+	assign color_bg = section.settings.color_bg
+	assign color_text = section.settings.color_text
+	assign text_size = section.settings.text_size
+	assign autoplay = section.settings.autoplay
+
+    if autoplay
+	    assign autoplay = section.settings.autoplay_length | times: 1000
+	endif
+	assign disable_top_spacing = section.settings.disable_top_spacing
+	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+-%}
+{{ 'testimonial.css' | asset_url | stylesheet_tag }}
+<div id="section-testimonials-{{ section.id }}" class="thb-testimonials--container section-spacing{% if disable_top_spacing %} section-no-top-spacing{% endif %}{% if disable_bottom_spacing %} section-no-bottom-spacing{% endif %}" style="--color-bg:{{ color_bg }};--color-text:{{ color_text }};--color-textrgb: {{ color_text.rgb | replace: ' ' , ',' }};">
+	<div class="row">
+	  <div class="small-12 columns">
+	    <slide-show class="thb-testimonials testimonial-{{ style | escape }} static-dots" data-dots="true" data-fade="true" data-autoplay="{{ autoplay }}">
+			{% for block in section.blocks %}
+				<div class="thb-testimonial carousel__slide" {{ block.shopify_attributes }}>
+				    <blockquote class="rte {{ text_size }}">{{ block.settings.text }}</blockquote>
+						{%- if block.settings.image -%}
+							<img data-src="{{ block.settings.image.src | image_url }}" alt="{{ block.settings.image.alt | escape }}" class="author_image retina_size hide lazyload" width="{{ block.settings.image.width | escape }}" height="{{ block.settings.image.height | escape }}">
+						{%- else -%}
+							<div class="author_image thb-placeholder hide" style="width: 80px; height: 80px;">
+								{{ 'image' | placeholder_svg_tag }}
+							</div>
+						{%- endif -%}
+					{% if block.settings.author %}
+						<div>
+							<cite>{{ block.settings.author }}</cite>
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+            {% if style == 'style3' %}
+			<ul class="flickity-custom-dots">
+				{% for block in section.blocks %}
+					<li>
+						<button class="portrait_bullet">
+						{%- if block.settings.image -%}
+							<img data-src="{{ block.settings.image.src | image_url }}" alt="{{ block.settings.image.alt | escape }}" class="author_image retina_size lazyload" width="{{ block.settings.image.width | escape }}" height="{{ block.settings.image.height | escape }}">
+						{%- else -%}
+							<div class="author_image thb-placeholder hide" style="width: 80px; height: 80px;">
+								{{ 'image' | placeholder_svg_tag }}
+							</div>
+						{%- endif -%}
+						</button>
+					</li>
+				{% endfor %}
+			</ul>
+            {% endif %}
+	    </slide-show>
+	  </div>
+	</div>
+</div>
+<script src="{{ 'slideshow.min.js' | asset_url }}" defer="defer"></script>
+{% schema %}
+{
+    "name":"Testimonials",
+    "settings":[
+        {
+            "type":"select",
+            "id":"style",
+            "label":"Style",
+            "default":"style1",
+            "options":[
+                {
+                    "value":"style1",
+                    "label":"Regular"
+                },
+                {
+                    "value":"style2",
+                    "label":"Outline"
+                },
+                {
+                    "value":"style3",
+                    "label":"Avatar Navigation"
+                }
+            ]
+        },
+        {
+            "type":"checkbox",
+            "id":"autoplay",
+            "label":"Auto-rotate slides",
+            "default":true
+        },
+        {
+            "type":"range",
+            "id":"autoplay_length",
+            "min":3,
+            "max":10,
+            "step":1,
+            "unit":"s",
+            "label":"Change slides every",
+            "default":5
+        },
+        {
+            "type":"select",
+            "id":"text_size",
+            "label":"Text size",
+            "options":[
+                {
+                    "value":"text-small",
+                    "label":"Small"
+                },
+                {
+                    "value":"text-medium",
+                    "label":"Medium"
+                },
+                {
+                    "value":"text-large",
+                    "label":"Large"
+                }
+            ],
+            "default":"text-large"
+        },
+        {
+            "type":"header",
+            "content":"Colors"
+        },
+        {
+            "type":"color",
+            "id":"color_bg",
+            "label":"Background",
+            "default":"transparent"
+        },
+        {
+            "type":"color",
+            "id":"color_text",
+            "label":"Text",
+            "default":"#151515"
+        },
+        {
+            "type":"header",
+            "content":"Spacing"
+        },
+        {
+            "type":"checkbox",
+            "id":"disable_top_spacing",
+            "default":false,
+            "label":"Remove top spacing"
+        },
+        {
+            "type":"checkbox",
+            "id":"disable_bottom_spacing",
+            "default":false,
+            "label":"Remove bottom spacing"
+        }
+    ],
+    "blocks":[
+        {
+            "type":"quote",
+            "name":"Testimonial",
+            "settings":[
+                {
+                    "type":"richtext",
+                    "id":"text",
+                    "label":"Text",
+                    "default":"<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+                },
+                {
+                    "id":"author",
+                    "type":"text",
+                    "label":"Author",
+                    "default":"Review author"
+                },
+                {
+                    "type":"image_picker",
+                    "id":"image",
+                    "label":"Author image",
+                    "info":"Used with avatar navigation"
+                }
+            ]
+        }
+    ],
+    "presets":[
+        {
+            "name":"Testimonials",
+            "blocks":[
+                {
+                    "type":"quote"
+                },
+                {
+                    "type":"quote"
+                },
+                {
+                    "type":"quote"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

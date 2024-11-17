@@ -1,0 +1,75 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.product-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: calc(100vw - 10px);
+  background: var(--bg-body, #fff);
+  overflow-y: auto;
+  will-change: transform;
+  transition: opacity 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 202;
+  width: auto;
+  left: 10px;
+  right: 10px;
+  top: 10px;
+  bottom: 10px;
+  max-width: 100%;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25); }
+  @media only screen and (min-width: 1068px) {
+    .product-drawer {
+      max-width: 1160px;
+      max-height: calc(100vh - 40px);
+      left: 50%;
+      right: auto;
+      top: 50%;
+      width: 100%;
+      bottom: auto;
+      transform: translate3d(-50%, -50%, 0); }
+      @supports (height: 100dvh) {
+        .product-drawer {
+          max-height: calc(100dvh - 40px); } } }
+  .product-drawer .thb-close {
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 30; }
+    @media only screen and (min-width: 1068px) {
+      .product-drawer .thb-close {
+        top: 0;
+        right: 0; } }
+  .product-drawer.active {
+    pointer-events: all;
+    opacity: 1; }
+  .product-drawer-content {
+    padding: 15px 0; }
+    @media only screen and (min-width: 1068px) {
+      .product-drawer-content {
+        padding: 45px 30px; } }
+    .product-drawer-content .row {
+      padding: 0; }
+    .product-drawer-content .product-images {
+      margin: 0;
+      max-width: 100%; }
+    .product-drawer-content .thb-product-detail.product {
+      margin-bottom: 0 !important; }
+    .product-drawer-content .thb-product-detail scroll-shadow {
+      margin: 0;
+      width: 100%; }
+    @media only screen and (min-width: 1068px) {
+      .product-drawer-content .thb-product-detail .product-gallery-container {
+        top: 45px; } }

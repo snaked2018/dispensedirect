@@ -1,0 +1,384 @@
+{{ 'collage.css' | asset_url | stylesheet_tag }}
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	<div class="row {% if section.settings.full_width %}full-width-row no-padding{% endif %}">
+		<div class="small-12 columns">
+			<div class="collage">
+				{% for block in section.blocks %}
+					{% assign sizes = '380x350,890x620' %}
+					{% if block.type == 'collection' %}
+						{% assign grid_collection = block.settings.collection %}
+						{% if grid_collection == blank %}
+							{% assign grid_collection_url = '#' %}
+							{% assign grid_collection_title = 'Collection' %}
+							{% assign grid_collection_description = 'Collection description' %}
+						{% else %}
+							{% assign grid_collection_url = grid_collection.url %}
+							{% assign grid_collection_title = grid_collection.title %}
+							{% assign grid_collection_description = grid_collection.description %}
+						{% endif %}
+						<div class="collage-item collage--collection {{ section.settings.animation }}" {{ block.shopify_attributes }}>
+							{% if grid_collection == empty %}
+								<div class="thb-placeholder">{{ 'collection-' | append: forloop.index | placeholder_svg_tag }}</div>
+							{% elsif grid_collection.featured_image %}
+								{%- render 'responsive-image', image: grid_collection.featured_image, sizes: sizes -%}
+							{% else %}
+								<div class="thb-placeholder">{{ 'collection-' | append: forloop.index | placeholder_svg_tag }}</div>
+							{% endif %}
+							<div class="thb-collage-overlay" style="background-color:{{ block.settings.overlay_color }}; opacity:{{ block.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+							<a href="{{ grid_collection_url }}" class="thb-collage-link" title="{{ grid_collection_title | escape }}">
+								<h3>{{ grid_collection_title | escape }}</h3>
+								<p>{{ grid_collection_description | strip_html }}</p>
+							</a>
+						</div>
+					{% endif %}
+					{% if block.type == 'text' %}
+						<div class="collage-item collage--text {{ section.settings.animation }}" style="background-color:{{ block.settings.bg_color }}" {{ block.shopify_attributes }}>
+							{% if block.settings.image %}
+								{%- render 'responsive-image', image: block.settings.image, sizes: sizes -%}
+							{% endif %}
+							<div class="thb-collage-overlay" style="background-color:{{ block.settings.overlay_color }}; opacity:{{ block.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+							<div class="collage--text-content" style="--collage-text-color: {{ block.settings.text_color }}">
+								{% if block.settings.heading != blank %}
+								<h3>{{ block.settings.heading }}</h3>
+								{% endif %}
+								{% if block.settings.description != blank %}
+								<div class="rte">
+									{{ block.settings.description }}
+								</div>
+								{% endif %}
+			          {% if block.settings.button_text != blank %}
+									<a class="btn-text animation {{ block.settings.button_color | escape }}" href="{{ block.settings.button_link }}" title="{{ block.settings.button_text | escape }}"><span>{{ block.settings.button_text }}</span>
+										<div class="arrow">
+											<div>
+												{% render 'svg-icons' with 'thb-button-arrow' %}
+												{% render 'svg-icons' with 'thb-button-arrow' %}
+											</div>
+										</div>
+									</a>
+			          {% endif %}
+							</div>
+						</div>
+					{% endif %}
+					{% if block.type == 'video' %}
+						{%- liquid
+							assign video = block.settings.video_url
+							assign video_hosted = block.settings.video_hosted
+
+							if video_hosted == blank
+								assign video_type = video.type
+							else
+								assign video_type = 'hosted'
+							endif
+						-%}
+						<div class="collage-item collage--text has-video {{ section.settings.animation }}" style="background-color:{{ block.settings.bg_color }}" {{ block.shopify_attributes }}>
+							{% if block.settings.image %}
+								{%- render 'responsive-image', image: block.settings.image, sizes: sizes -%}
+							{% endif %}
+							<div class="thb-collage-overlay" style="background-color:{{ block.settings.overlay_color }}; opacity:{{ block.settings.overlay_opacity | divided_by: 100.0 }}"></div>
+							<div class="collage--text-content" style="--collage-text-color: {{ block.settings.text_color }}">
+								{% if block.settings.heading != blank %}
+								<h3>{{ block.settings.heading }}</h3>
+								{% endif %}
+
+								{% if block.settings.description != blank %}
+								<div class="rte">
+									{{ block.settings.description }}
+								</div>
+								{% endif %}
+
+								{{ 'video-lightbox-modal.css' | asset_url | stylesheet_tag }}
+								<modal-opener
+									class="video-lightbox-modal__opener no-js-hidden"
+									data-modal="#VideoLightbox-{{ block.id }}"
+								>
+									<button
+										id="VideoLightboxToggle-{{ block.id }}"
+										class="video-lightbox-modal__button"
+										type="button"
+										aria-haspopup="dialog"
+									>
+										{% render 'svg-icons' with 'thb-video-play' %}
+									</button>
+								</modal-opener>
+								<a href="{{ video.url }}" class="video-lightbox-modal__button no-js" target="_blank">
+									{%- render 'svg-icons' with 'thb-video-play' -%}
+								</a>
+								<modal-dialog id="VideoLightbox-{{ block.id }}" class="video-lightbox-modal">
+									<div
+										role="dialog"
+										aria-label="{{ block.settings.heading }}"
+										aria-modal="true"
+										class="video-lightbox-modal__content"
+										tabindex="-1"
+									>
+										<button
+											id="ModalClose-{{ block.id }}"
+											type="button"
+											class="video-lightbox-modal__toggle"
+											aria-label="{{ 'general.close' | t }}"
+										>
+											{% render 'svg-icons' with 'thb-close' %}
+										</button>
+										<div class="video-lightbox-modal__content-info">
+											{%- if video_hosted == blank -%}
+												{%- if video.type == 'youtube' -%}
+													<iframe
+														data-src="https://www.youtube.com/embed/{{ video.id }}?enablejsapi=1"
+														class="js-youtube lazyload"
+														allow="autoplay; encrypted-media"
+														allowfullscreen
+													></iframe>
+												{%- else -%}
+													<iframe
+														data-src="https://player.vimeo.com/video/{{ video.id }}"
+														class="js-vimeo lazyload"
+														allow="autoplay; encrypted-media"
+														allowfullscreen
+													></iframe>
+												{%- endif -%}
+											{%- else -%}
+												{{ video_hosted | video_tag: autoplay: false, loop: false, controls: true }}
+											{%- endif -%}
+										</div>
+									</div>
+								</modal-dialog>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collage",
+    "settings": [
+			{
+				 "type": "checkbox",
+				 "id": "full_width",
+				 "label": "Make section full width",
+				 "default": false
+			},
+			{
+				"type": "select",
+				"id": "animation",
+				"label": "Loading animation",
+				"default": "animation fade-in",
+				"options": [
+					{ "value": "", "label": "None" },
+					{ "value": "animation right-to-left", "label": "Right to left" },
+					{ "value": "animation left-to-right", "label": "Left to right" },
+					{ "value": "animation right-to-left-long", "label": "Right to left long" },
+					{ "value": "animation left-to-right-long", "label": "Left to right long" },
+					{ "value": "animation bottom-to-top", "label": "Bottom to top" },
+					{ "value": "animation top-to-bottom", "label": "Top to bottom" },
+					{ "value": "animation scale", "label": "Scale" },
+					{ "value": "animation fade-in", "label": "Fade" }
+				]
+			},
+			{
+				"type": "header",
+				"content": "Spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": true,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": true,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+					{
+						 "type": "collection",
+						 "id": "collection",
+						 "label": "Collection"
+					},
+					{
+		        "type": "color",
+		        "id": "overlay_color",
+		        "label": "Overlay",
+		        "default": "#000000"
+		      },
+					{
+						"type": "range",
+						"id": "overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Overlay opacity",
+						"default": 10
+					}
+        ]
+      },
+			{
+        "type": "text",
+        "name": "Text",
+        "settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Cover image",
+						"info": "890 x 620 px .jpg recommended."
+					},
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Heading",
+						"default": "Heading"
+					},
+					{
+						"type": "richtext",
+						"id": "description",
+						"label": "Description",
+						"default": "<p>Share information about <em>your brand</em> with your customers.</p>"
+					},
+					{
+						"id": "button_text",
+						"type": "text",
+						"label": "Button label",
+						"default": "Shop Now",
+						"info": "Leave the label blank to hide the button."
+					},
+					{
+						"id": "button_link",
+						"type": "url",
+						"label": "Button link",
+						"default": "/collections/all"
+					},
+					{
+		        "type": "color",
+		        "id": "bg_color",
+		        "label": "Background",
+		        "default": "#f5f5f5"
+		      },
+					{
+		        "type": "color",
+		        "id": "text_color",
+		        "label": "Text",
+		        "default": "#151515"
+		      },
+					{
+		        "type": "color",
+		        "id": "overlay_color",
+		        "label": "Overlay",
+		        "default": "#000000"
+		      },
+					{
+						"type": "range",
+						"id": "overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Overlay opacity",
+						"default": 0
+					}
+        ]
+      },
+			{
+        "type": "video",
+        "name": "Video",
+        "settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Cover image",
+						"info": "890 x 620 px .jpg recommended."
+					},
+					{
+						"type": "text",
+						"id": "heading",
+						"label": "Heading",
+						"default": "Heading"
+					},
+					{
+						"type": "richtext",
+						"id": "description",
+						"label": "Description",
+						"default": "<p>Share information about your brand with your customers.</p>"
+					},
+					{
+						"id": "video_url",
+						"type": "video_url",
+						"label": "Video URL",
+						"accept": [
+		          "youtube",
+		          "vimeo"
+		        ],
+						"info": "Video plays in a pop-up. Use a YouTube or Vimeo URL",
+						"default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc"
+					},
+					{
+						"type": "video",
+						"id": "video_hosted",
+						"label": "Shopify-hosted video",
+						"info": "Overrides the Video URL setting."
+					},
+					{
+						"type": "header",
+						"content": "Colors"
+					},
+					{
+		        "type": "color",
+		        "id": "bg_color",
+		        "label": "Background",
+		        "default": "#f5f5f5"
+		      },
+					{
+		        "type": "color",
+		        "id": "text_color",
+		        "label": "Text",
+		        "default": "#151515"
+		      },
+					{
+		        "type": "color",
+		        "id": "overlay_color",
+		        "label": "Overlay",
+		        "default": "#000000"
+		      },
+					{
+						"type": "range",
+						"id": "overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Overlay opacity",
+						"default": 0
+					}
+        ]
+      }
+    ],
+  	"max_blocks": 3,
+    "presets": [
+      {
+        "name": "Collage",
+				"blocks": [
+					{
+						"type": "video"
+					},
+					{
+						"type": "collection"
+					},
+					{
+						"type": "text"
+					}
+				]
+      }
+    ]
+  }
+
+{% endschema %}

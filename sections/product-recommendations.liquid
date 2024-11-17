@@ -1,0 +1,51 @@
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	<product-recommendations class="product-recommendations" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit=4">
+		<div class="row">
+			<div class="small-12 columns">
+				{% if recommendations.performed and recommendations.products_count > 0 %}
+					<h2 class="section-header__title">{{ section.settings.heading | escape }}</h1>
+					<div class="products row">
+						{%- for recommendation in recommendations.products -%}
+							{% render 'product-card', grid_item_width: 'small-6 medium-3', product: recommendation %}
+						{%- endfor -%}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</product-recommendations>
+</div>
+<script src="{{ 'product-recommendations.min.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+	{
+		"name": "Product recommendations",
+		"settings": [
+			{
+				"type": "paragraph",
+				"content": "Customize product recommendations with Search and Discovery app. [Learn more](https://help.shopify.com/en/manual/online-store/search-and-discovery/product-recommendations)."
+			},
+			{
+			 "type": "text",
+			 "id": "heading",
+			 "default": "You may also like",
+			 "label": "Heading"
+		 	},
+		 	{
+			 "type": "header",
+			 "content": "Spacing"
+		 	},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": true,
+				"label": "Remove top spacing"
+			},
+		 	{
+			 "type": "checkbox",
+			 "id": "disable_bottom_spacing",
+			 "default": false,
+			 "label": "Remove bottom spacing"
+		 	}
+		]
+	}
+{% endschema %}

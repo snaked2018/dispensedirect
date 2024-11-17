@@ -1,0 +1,238 @@
+{{ 'article.css' | asset_url | stylesheet_tag }}
+{% assign number_of_comments = article.comments_count %}
+{% if comment and comment.created_at %}
+  {% assign number_of_comments = article.comments_count %}
+{% endif %}
+<article class="post post-detail" itemscope itemtype="http://schema.org/BlogPosting">
+	{% for block in section.blocks %}
+		{% if block.type == '@app' %}
+			{% render block %}
+		{% endif %}
+		{% if block.type == 'featured_image' %}
+			<div class="post-gallery parallax {% if block.settings.parallax %}thb-parallax{% endif %}" itemprop="image" {{ block.shopify_attributes }}>
+				{%- render 'responsive-image', image: article.image, sizes: '320x180,640x360,960x540,1280x720', class: 'thb-parallax-image' -%}
+			</div>
+			{% if block.settings.parallax %}
+			<script src="{{ 'parallax.min.js' | asset_url }}" defer="defer"></script>
+			{% endif %}
+		{% endif %}
+		{% if block.type == 'breadcrumbs' %}
+		<div class="row" {{ block.shopify_attributes }}>
+			<div class="small-12 columns">
+				<div class="blog-post-wrapper">
+					{% render 'breadcrumbs' %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% if block.type == 'title' %}
+		<div class="row" {{ block.shopify_attributes }}>
+			<div class="small-12 columns">
+				<div class="post-title blog-post-wrapper">
+					<h1 class="entry-title" itemprop="headline">{{ article.title }}</h1>
+					{% if block.settings.show_date %}
+					<aside class="post-meta" itemprop="dateCreated pubdate datePublished">
+						{{ article.published_at | time_tag: format: 'date' }}
+					</aside>
+					{% endif %}
+					{% if block.settings.show_author %}
+					<aside class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ article.author }}</span></aside>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% if block.type == 'content' %}
+		<div class="row">
+			<div class="small-12 columns">
+				<div class="post-content blog-post-wrapper rte" itemprop="articleBody" {{ block.shopify_attributes }}>
+					{{ article.content }}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+		{% if block.type == 'tags' %}
+		<footer class="article-tags entry-footer" {{ block.shopify_attributes }}>
+			<div class="row">
+				<div class="small-12 columns">
+					<div class="blog-post-wrapper">
+				    {% for tag in article.tags %}
+				      <a href="{{ blog.url | escape }}/tagged/{{ tag | handle }}" class="tag-link">{{ tag }}</a>
+				    {% endfor %}
+					</div>
+				</div>
+			</div>
+	  </footer>
+		{% endif %}
+	{% endfor %}
+</article>
+{% render 'post-nav', article_show_nav: section.settings.article_show_nav, article_show_share_buttons: section.settings.article_show_share_buttons %}
+{% if blog.comments_enabled? %}
+	{{ 'comments.css' | asset_url | stylesheet_tag }}
+  {% if article.comments_count > 0 %}
+  <div class="comments-container" id="comments">
+    <div class="row">
+      <div class="small-12 columns">
+				<div class="blog-post-wrapper">
+          <h4 class="comments-title">{{ number_of_comments }} {{ 'comments.replies_on' | t: count: number_of_comments }} {{ article.title }}</h4>
+          <ul class="commentlist">
+            {% paginate article.comments by 5 %}
+              {% for comment in article.comments %}
+                <li class="comment">
+                  <div class="comment-body">
+                    <div class="comment-author vcard">
+                      <img src="https://www.gravatar.com/avatar/{{ comment.email | remove: ' ' | strip_newlines | downcase | md5 }}?s=140" class="avatar" loading="lazy" alt="{{ comment.author | escape }}" width="70" height="70" />
+                      <cite class="fn">{{ comment.author }}</cite>
+                    </div>
+                    <div class="comment-meta commentmetadata"><a href="{{ comment.url }}">{{ comment.created_at }}</a></div>
+                    <p>{{ comment.content }}</p>
+                  </div>
+                </li>
+              {% endfor %}
+              {% render 'pagination', pagination: paginate %}
+            {% endpaginate %}
+          </ul>
+				</div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  <div class="respond-container">
+  	<div class="row">
+  		<div class="small-12 columns">
+				<div class="blog-post-wrapper">
+          <div class="comment-respond">
+            {% form 'new_comment', article %}
+							{%- liquid
+		            assign post_message = 'general.misc.success'
+		            if blog.moderated? and comment.status == 'unapproved'
+		              assign post_message = 'general.misc.success_moderated'
+		            endif
+		          -%}
+              <h4 id="reply-title" class="comment-reply-title">{{ 'comments.leave_a_reply' | t }}</h4>
+              <p class="comment-notes">{{ 'comments.email_publish' | t }}.</p>
+              {% if form.errors %}
+								<div class="form-notification error">
+	                {{ form.errors | default_errors }}
+								</div>
+							{%- elsif form.posted_successfully? -%}
+								<div class="form-notification success">
+									{{ post_message | t }}
+								</div>
+		          {%- endif -%}
+              <div class="row">
+                <div class="small-12 columns">
+                  <textarea name="comment[body]" id="CommentBody" placeholder="{{ 'comments.your_comment' | t | escape }}">{{ form.body }}</textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="small-12 medium-6 columns">
+                  <input type="text" name="comment[author]" id="CommentAuthor" placeholder="{{ 'comments.your_name' | t | escape }}" value="{{ form.author }}" autocapitalize="words">
+                </div>
+                <div class="small-12 medium-6 columns">
+                  <input type="email" name="comment[email]" id="CommentEmail" placeholder="{{ 'comments.your_email' | t | escape }}" value="{{ form.email }}" autocorrect="off" autocapitalize="off">
+                </div>
+              </div>
+              <p class="form-submit">
+                <input class="button style1" type="submit" value="{{ 'comments.submit_comment' | t | escape }}">
+              </p>
+            {% endform %}
+          </div>
+				</div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+{% schema %}
+  {
+		"name": "Blog post",
+	  "class": "article-detail-section",
+    "settings": [
+			{
+				"type": "header",
+				"content": "Settings"
+			},
+			{
+				"type": "checkbox",
+				"id": "article_show_date",
+				"label": "Show date",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "article_show_author",
+				"label": "Show author",
+				"default": true
+			},
+			{
+				"type": "checkbox",
+				"id": "article_show_nav",
+				"label": "Show adjacent posts",
+				"default": true,
+				"info": "Previous and next article will be displayed (if they exist)."
+			},
+			{
+				"type": "checkbox",
+				"id": "article_show_share_buttons",
+				"label": "Show share buttons",
+				"default": true,
+				"info": "If you include a link in social media posts, the page’s featured image will be shown as the preview image. [Learn more](https://help.shopify.com/en/manual/online-store/images/showing-social-media-thumbnail-images)"
+			}
+    ],
+		"blocks": [
+			{
+	      "type": "@app"
+	    },
+      {
+        "type": "featured_image",
+        "name": "Featured Image",
+	      "limit": 1,
+				"settings": [
+					{
+		        "type": "checkbox",
+		        "id": "parallax",
+		        "default": true,
+		        "label": "Enable parallax"
+		      }
+				]
+      },
+			{
+        "type": "breadcrumbs",
+        "name": "Breadcrumbs",
+	      "limit": 1
+      },
+			{
+        "type": "title",
+        "name": "Title",
+	      "limit": 1,
+				"settings": [
+					{
+		        "type": "checkbox",
+		        "id": "show_author",
+		        "default": true,
+		        "label": "Show author"
+		      },
+					{
+		        "type": "checkbox",
+		        "id": "show_date",
+		        "default": true,
+		        "label": "Show date"
+		      }
+				]
+      },
+			{
+        "type": "content",
+        "name": "Content",
+	      "limit": 1
+      },
+			{
+        "type": "tags",
+        "name": "Tags",
+	      "limit": 1
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,115 @@
+<div class="email-signup-section section-margin {{ section.settings.mobile_height | escape }} {{ section.settings.desktop_height | escape }} {{ section.settings.vertical_alignment | escape }} text-{{ section.settings.text_alignment | escape }} {% if section.settings.parallax %}thb-parallax{% endif %} {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}" id="section-email-signup-{{ section.id }}">
+	<div class="row">
+    <div class="text-center small-12 columns">
+			<div class="email-signup-inner">
+	      {% if section.settings.image %}
+	        <div class="animation fade-in">
+	          <img data-src="{{ section.settings.image.src | image_url }}" alt="{{ section.settings.image.alt | escape }}" class="retina_size lazyload" width="{{ section.settings.image.width | escape }}" height="{{ section.settings.image.height | escape }}" loading="lazy">
+	          <div class="vc_empty_space" style="height: 25px"></div>
+	        </div>
+	      {% endif %}
+	      <div class="animation fade-in text-center">
+	        {% if section.settings.title != blank %}
+	        <h2>{{ section.settings.title }}</h2>
+	        {% endif %}
+	        {% if section.settings.text != blank %}
+					<div class="rte">
+						{{ section.settings.text }}
+					</div>
+	        {% endif %}
+	      </div>
+				{% render 'email-signup-form' %}
+			</div>
+    </div>
+  </div>
+	{% style %}
+	  #section-email-signup-{{ section.id }} {
+	    {% if section.settings.bg_color != blank %}
+	    background: {{ section.settings.bg_color }};
+	    {% endif %}
+	  }
+		{% if section.settings.heading_color != blank %}
+			#section-email-signup-{{ section.id }} h2 {
+				color: {{ section.settings.heading_color }};
+			}
+		{% endif %}
+		{% if section.settings.text_color != blank %}
+			#section-email-signup-{{ section.id }} p,
+			#section-email-signup-{{ section.id }} p a {
+				color: {{ section.settings.text_color }};
+			}
+		{% endif %}
+	{% endstyle %}
+</div>
+{% schema %}
+  {
+    "name": "Email signup",
+    "settings": [
+			{
+				"type": "paragraph",
+				"content": "Each email subscription creates a customer account. [Learn more](https://help.shopify.com/en/manual/customers)"
+			},
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+				"info": "192 x 192 px .png recommended."
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Invite customers to join your mailing list.</p>"
+      },
+			{
+        "type": "header",
+        "content": "Colors"
+      },
+			{
+         "type": "color",
+         "id": "bg_color",
+         "label": "Background",
+         "default": "#f4e8f1"
+      },
+			{
+         "type": "color",
+         "id": "heading_color",
+         "label": "Heading",
+         "default": "#151515"
+      },
+			{
+         "type": "color",
+         "id": "text_color",
+         "label": "Text",
+         "default": "#444444"
+      },
+			{
+				"type": "header",
+				"content": "Spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": true,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": true,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Email signup"
+      }
+    ]
+  }
+{% endschema %}

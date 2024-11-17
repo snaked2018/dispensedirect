@@ -1,0 +1,11 @@
+{{ '404.css' | asset_url | stylesheet_tag }}
+<div class="error404">
+	<div class="row align-center content404">
+		<div class="small-12 medium-9 large-6 columns text-center">
+			{% render 'svg-icons' with 'thb-404' %}
+			<h2>{{ 'general.404.title' | t }}</h2>
+			<p>{{ 'general.404.subtext_html' | t }}</p>
+			<a href="{{ routes.root_url }}" class="btn">{{ 'general.404.back_to_home' | t }}</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,121 @@
+{%- liquid
+  assign image_index = -1
+-%}
+<product-slider id="product-images-{{ section.id }}" class="product-images {{ class | escape }}" data-navigation="true" data-dots="false" data-autoplay="false">
+  {%- if featured_media != null -%}
+    {%- assign image_index = image_index | plus: 1 -%}
+    <div
+      id="Slide-{{ section.id }}-{{ featured_media.id }}"
+      data-media-id="{{ section.id }}-{{ featured_media.id }}"
+      class="product-images__slide product-image {% if product.selected_or_first_available_variant.featured_media.id == media.id %}is-active{% endif %}"
+    >
+    <div class="product-single__media product-single__media-image" style="--aspect-ratio: {{ featured_media.preview_image.aspect_ratio }};">
+      {%- if section.settings.product_image_feature == 'lightbox' -%}
+      <a
+        href="{{ featured_media.src | image_url }}"
+        data-msrc="{{- featured_media.src | image_url: width: 20 -}}"
+        data-h="{{ featured_media.height }}"
+        data-w="{{ featured_media.width }}"
+        target="_blank"
+        class= "product-single__media-zoom"
+      >
+      {%- elsif section.settings.product_image_feature == 'zoom' -%}
+      <div class="zoom" data-full="{{ featured_media.src | image_url }}" data-width="{{ featured_media.src.width }}" data-height="{{ featured_media.src.height }}">
+      {%- endif -%}
+        {%- render 'responsive-image', image: featured_media.preview_image, sizes: '320x0,640x0,960x0,1310x0', priority: 'high', disable_lazyload: true -%}
+      {%- if section.settings.product_image_feature == 'lightbox' -%}
+      </a>
+      {%- elsif section.settings.product_image_feature == 'zoom' -%}
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- endif -%}
+  {%- for media in product.media -%}
+    {%- unless media.id == featured_media.id -%}
+      <div
+        id="Slide-{{ section.id }}-{{ media.id }}"
+        data-media-id="{{ section.id }}-{{ media.id }}"
+        class="product-images__slide product-image {% if product.selected_or_first_available_variant.featured_media.id == media.id or forloop.index == 1 %}is-active{% endif %}"
+      >
+        {%- case media.media_type -%}
+        {%- when 'image' -%}
+          {%- liquid
+            assign image_index = image_index | default: 0 | plus: 1
+            assign priority = false
+            assign disable_lazyload = false
+            if image_index == 0
+              assign priority = 'high'
+              assign disable_lazyload = true
+            endif
+          -%}
+          <div class="product-single__media product-single__media-image" style="--aspect-ratio: {{ media.preview_image.aspect_ratio }};">
+            {%- if section.settings.product_image_feature == 'lightbox' -%}
+            <a
+              href="{{ media.src | image_url }}"
+              data-msrc="{{- media.src | image_url: width: 20 -}}"
+              data-h="{{ media.height }}"
+              data-w="{{ media.width }}"
+              target="_blank"
+              class= "product-single__media-zoom"
+              aria-label="Zoom"
+            >
+            {%- elsif section.settings.product_image_feature == 'zoom' -%}
+            <div class="zoom" data-full="{{ media.src | image_url }}" data-width="{{ media.src.width }}" data-height="{{ media.src.height }}">
+            {%- endif -%}
+              {%- render 'responsive-image', image: media.preview_image, sizes: '320x0,640x0,960x0,1310x0', priority: priority, disable_lazyload: disable_lazyload -%}
+            {%- if section.settings.product_image_feature == 'lightbox' -%}
+            </a>
+            {%- elsif section.settings.product_image_feature == 'zoom' -%}
+            </div>
+            {%- endif -%}
+          </div>
+        {%- when 'external_video' -%}
+          <div class="product-single__media product-single__media-external-video" data-provider="{{ media.host }}" style="--aspect-ratio: {{ media.aspect_ratio }}" data-media-id="{{ media.id }}">
+            <div class="product-single__media-external-video--play">
+              {%- render 'responsive-image', image: media.preview_image, sizes: '540x' -%}
+              <button>{% render 'svg-icons' with 'thb-icon-play' %}</button>
+            </div>
+            {{- media | external_video_tag: loading: "lazy", loop: "0", muted: "1" -}}
+          </div>
+        {%- when 'video' -%}
+          <div class="product-single__media product-single__media-native-video" style="padding-top: {{ 1 | divided_by: media.aspect_ratio | times: 100 }}%;" data-media-id="{{ media.id }}">
+          {{- media | video_tag: controls: true, loading: "lazy", image_size: '540x' -}}
+          </div>
+        {%- when 'model' -%}
+          <product-model class="product-single__media product-single__media-model" style="padding-top: 100%" data-media-id="{{ media.id }}" id="Media-Thumbnails-{{ section.id }}-{{ media.id }}">
+            <button id="Deferred-Poster-Modal-{{ media.id }}" class="product-single__media-model-button" type="button">
+              {%- render 'svg-icons' with 'thb-icon-3d-model' -%}
+            </button>
+            {%- render 'responsive-image', image: media.preview_image, sizes: sizes -%}
+            <template>
+              {{ media | media_tag: image_size: "2048x", toggleable: true }}
+            </template>
+          </product-model>
+          <button
+            class="product__xr-close product-single__media-xr-close">
+            {%- render 'svg-icons' with 'thb-close' -%}
+          </button>
+          <button
+            class="button product__xr-button"
+            type="button"
+            data-shopify-xr
+            aria-label="{{ 'products.product.xr_button_label' | t }}"
+            data-shopify-model3d-id="{{ media.id }}"
+            data-shopify-xr-hidden
+            data-shopify-title="{{ product.title | escape }}"
+            >
+            <span>
+              {% render 'svg-icons' with 'thb-icon-3d-model' %}
+              {{ 'products.product.xr_button' | t }}
+            </span>
+          </button>
+        {%- endcase -%}
+      </div>
+    {%- endunless -%}
+  {%- endfor -%}
+  {%- if class contains 'carousel' -%}
+    <div class="flickity-nav flickity-prev" tabindex="0">{% render 'svg-icons' with 'carousel-prev' %}</div>
+    <div class="flickity-nav flickity-next" tabindex="0">{% render 'svg-icons' with 'carousel-next' %}</div>
+  {%- endif -%}
+</product-slider>

@@ -1,0 +1,385 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.flickity-page-dots .dot, .flickity-page-dots .dot:after, .flickity-nav, .flickity-nav svg {
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+.no-js .flickity-nav {
+  display: none !important; }
+
+/*------------------------------------------------------------------
+Flickity
+*/
+/*------------------------------------------------------------------
+Compass Mixins
+*/
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Utilities
+*/
+.flickity-page-dots .dot, .flickity-page-dots .dot:after, .flickity-nav, .flickity-nav svg {
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+.no-js .flickity-nav {
+  display: none !important; }
+
+/*! Flickity v2.3.0
+https://flickity.metafizzy.co
+---------------------------------------------- */
+.flickity-enabled {
+  position: relative; }
+
+.flickity-enabled:focus {
+  outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  min-width: 100%; }
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  will-change: transform; }
+
+/* draggable */
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab; }
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing; }
+
+/* flickity-fade */
+.flickity-enabled.is-fade .flickity-slider > * {
+  pointer-events: none;
+  z-index: 0; }
+
+.flickity-enabled.is-fade .flickity-slider > .is-selected {
+  pointer-events: auto;
+  z-index: 1; }
+
+.flickity-enabled.is-fade .flickity-slider .carousel__slide {
+  will-change: opacity, z-index; }
+
+.flickity-enabled.is-fade.main-slideshow.transition--zoom .slideshow__slide {
+  will-change: z-index; }
+  .flickity-enabled.is-fade.main-slideshow.transition--zoom .slideshow__slide-bg, .flickity-enabled.is-fade.main-slideshow.transition--zoom .slideshow__slide-video-bg {
+    transform: scale(1.1); }
+
+/* Buttons */
+.static-dots .flickity-page-dots {
+  position: static; }
+
+.flickity-page-dots {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  list-style: none;
+  text-align: center;
+  line-height: 0;
+  position: absolute;
+  bottom: 28px;
+  left: 0;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  z-index: 20; }
+  .flickity-page-dots .dot {
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    border-radius: 7px;
+    margin: 0 3px;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 0 0 1px transparent; }
+    .flickity-page-dots .dot.is-selected {
+      box-shadow: 0 0 0 1px var(--color-text); }
+      .flickity-page-dots .dot.is-selected:after {
+        opacity: 1; }
+    .flickity-page-dots .dot:after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      border-radius: 4px;
+      background: var(--color-text);
+      opacity: 0.15;
+      position: absolute;
+      left: 3px;
+      top: 3px; }
+    @media (hover: hover) {
+      .flickity-page-dots .dot:hover:after {
+        opacity: 1; } }
+  .flickity-page-dots.dot-style--logos {
+    display: inline-flex;
+    align-items: center;
+    overflow: scroll;
+    scrollbar-width: none; }
+    .flickity-page-dots.dot-style--logos::-webkit-scrollbar {
+      display: none; }
+    .flickity-page-dots.dot-style--logos .dot {
+      width: auto;
+      height: 100px;
+      background: none;
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center; }
+      .flickity-page-dots.dot-style--logos .dot img {
+        object-fit: contain;
+        max-height: 100%;
+        width: auto; }
+
+.flickity-nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 40px;
+  margin-top: -20px;
+  z-index: 30;
+  opacity: 0;
+  cursor: pointer; }
+  .flickity-nav svg {
+    pointer-events: none; }
+  .flickity-nav .border {
+    display: none; }
+  @media only screen and (min-width: 768px) {
+    .flickity-enabled .flickity-nav {
+      display: flex; } }
+  .flickity-nav.flickity-prev {
+    left: 10px;
+    transform: translate(-100%); }
+    @media only screen and (min-width: 1068px) {
+      .flickity-nav.flickity-prev {
+        left: 20px; } }
+  .flickity-nav.flickity-next {
+    right: 10px;
+    transform: translate(100%); }
+    @media only screen and (min-width: 1068px) {
+      .flickity-nav.flickity-next {
+        right: 20px; } }
+  .flickity-nav:focus-visible {
+    opacity: 1; }
+
+.flickity-enabled:hover .flickity-nav {
+  opacity: 1;
+  transform: translate(0%); }
+
+.section-slideshow .row.full-width-row {
+  padding: 0; }
+  .section-slideshow .row.full-width-row > .columns {
+    padding: 0; }
+
+.slideshow {
+  display: flex;
+  overflow: hidden;
+  background: var(--color-text); }
+  .slideshow .flickity-page-dots .dot.is-selected {
+    box-shadow: 0 0 0 1px #fff; }
+  .slideshow .flickity-page-dots .dot:after {
+    background-color: #fff; }
+  .slideshow__slide {
+    display: flex;
+    width: 100%;
+    flex-shrink: 0;
+    background: var(--color-text);
+    color: #fff;
+    position: relative; }
+    .slideshow__slide > * {
+      will-change: opacity; }
+    .slideshow__slide h1 {
+      color: #fff;
+      font-weight: var(--font-body-bold-weight, 600); }
+    .slideshow__slide-link {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 21; }
+    .slideshow__slide .button-overflow-container {
+      overflow: hidden;
+      display: inline-flex;
+      margin-right: 5px; }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide .button {
+        margin-top: 25px; } }
+    @media only screen and (min-width: 1068px) {
+      .slideshow__slide p.split-text.description-size--medium {
+        font-size: 1.25rem; } }
+    @media only screen and (min-width: 1068px) {
+      .slideshow__slide p.split-text.description-size--large {
+        font-size: 1.5rem; } }
+    .slideshow__slide .subheading {
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      color: #fff;
+      letter-spacing: 0.1em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      word-break: break-word; }
+      .animations-true .slideshow__slide .subheading {
+        opacity: 0; }
+    .slideshow__slide-inner {
+      display: flex;
+      flex-shrink: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 15;
+      padding-top: calc(var(--header-height, 64px) + var(--announcement-height, 0px)); }
+      .slideshow__slide-inner.content-middle-left {
+        justify-content: flex-start;
+        align-items: center; }
+      .slideshow__slide-inner.content-middle-center {
+        justify-content: center;
+        align-items: center; }
+      .slideshow__slide-inner.content-middle-right {
+        justify-content: flex-end;
+        align-items: center; }
+      .slideshow__slide-inner.content-bottom-left {
+        justify-content: flex-start;
+        align-items: flex-end; }
+      .slideshow__slide-inner.content-bottom-center {
+        justify-content: center;
+        align-items: flex-end; }
+      .slideshow__slide-inner.content-bottom-right {
+        justify-content: flex-end;
+        align-items: flex-end; }
+    .slideshow__slide-bg {
+      width: 100%;
+      height: 100%;
+      z-index: 0; }
+      .slideshow__slide-bg svg {
+        padding: 50px;
+        fill: var(--bg-body, #fff);
+        opacity: 0.5; }
+      .slideshow__slide-bg .slideshow-image--mobile {
+        display: block; }
+        @media only screen and (min-width: 768px) {
+          .slideshow__slide-bg .slideshow-image--mobile {
+            display: none; } }
+      .slideshow__slide-bg .slideshow-image--desktop {
+        display: none; }
+        @media only screen and (min-width: 768px) {
+          .slideshow__slide-bg .slideshow-image--desktop {
+            display: block; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide:not(.mobile-height-image) .slideshow__slide-bg svg,
+      .slideshow__slide:not(.mobile-height-image) .slideshow__slide-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide:not(.desktop-height-image) .slideshow__slide-bg svg,
+      .slideshow__slide:not(.desktop-height-image) .slideshow__slide-bg img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; } }
+    .slideshow__slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      top: 0;
+      z-index: 11;
+      pointer-events: none;
+      background: rgba(var(--overlay-color-rgb), var(--overlay-opacity)); }
+    .slideshow__slide-content {
+      z-index: 20;
+      padding: 15px 15px 50px;
+      max-width: 800px;
+      width: 100%;
+      transform: translateZ(0); }
+      @media only screen and (min-width: 768px) {
+        .slideshow__slide-content {
+          padding: 50px; } }
+      @media only screen and (min-width: 1068px) {
+        .slideshow__slide-content {
+          padding: 70px 50px; } }
+    .slideshow__slide.content-size-large .slideshow__slide-content {
+      max-width: 1000px; }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-image {
+        height: auto; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-full {
+        height: 100vh; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-auto {
+        height: auto; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-350 {
+        height: 350px; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-400 {
+        height: 400px; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-450 {
+        height: 450px; } }
+    @media only screen and (max-width: 767px) {
+      .slideshow__slide.mobile-height-500 {
+        height: 500px; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-image {
+        height: auto; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-full {
+        height: 100vh; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-auto {
+        height: auto; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-450 {
+        height: 450px; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-550 {
+        height: 550px; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-650 {
+        height: 650px; } }
+    @media only screen and (min-width: 768px) {
+      .slideshow__slide.desktop-height-750 {
+        height: 750px; } }
+  @media only screen and (min-width: 768px) {
+    .slideshow.desktop-height-image .slideshow__slide {
+      padding-bottom: 0; } }
+  @media only screen and (max-width: 767px) {
+    .slideshow.mobile-height-image .slideshow__slide {
+      padding-bottom: 0; } }
+  @media only screen and (max-width: 767px) {
+    .slideshow.mobile-height-full .flickity-viewport {
+      height: calc(100vh - var(--announcement-height, 0px)); }
+      @supports (height: 100dvh) {
+        .slideshow.mobile-height-full .flickity-viewport {
+          height: calc(100dvh - var(--announcement-height, 0px)); } } }
+  @media only screen and (min-width: 768px) {
+    .slideshow.desktop-height-full .flickity-viewport {
+      height: calc(100vh - var(--announcement-height, 0px)); }
+      @supports (height: 100dvh) {
+        .slideshow.desktop-height-full .flickity-viewport {
+          height: calc(100dvh - var(--announcement-height, 0px)); } } }

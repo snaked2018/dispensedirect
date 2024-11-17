@@ -1,0 +1,20 @@
+{% if settings.cookie_notice %}
+<cookie-notice class="thb-cookie">
+	<div class="thb-cookie-text">
+  	{{ settings.cookie_notice_text }}
+	</div>
+	<button class="button-accept" title="{{ 'general.misc.i_accept' | t | escape }}">{{ 'general.misc.i_accept' | t }}</button>
+</cookie-notice>
+{% style %}
+.thb-cookie {
+	background-color: {{ settings.cookie_bg_color }};
+	color: {{ settings.cookie_text_color }};
+}
+.thb-cookie .button-accept,
+.thb-cookie .thb-cookie-text a {
+	color: {{ settings.cookie_text_color }};
+}
+{% endstyle %}
+
+<script src="{{ 'cookie-notice.min.js' | asset_url }}" defer="defer"></script>
+{% endif %}

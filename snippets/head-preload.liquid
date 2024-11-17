@@ -1,0 +1,13 @@
+<link rel="preload" as="style" href="{{ 'app.css' | asset_url }}">
+<link rel="preload" as="script" href="{{ 'vendor.min.js' | asset_url }}">
+<link rel="preload" as="script" href="{{ 'header.min.js' | asset_url }}">
+<link rel="preload" as="script" href="{{ 'app.min.js' | asset_url }}">
+{% if template contains 'product' -%}
+<link rel="preload" as="style" href="{{ 'productpage.css' | asset_url }}">
+{% liquid
+	if product.selected_or_first_available_variant.featured_media.preview_image
+		assign image = product.selected_or_first_available_variant.featured_media.preview_image
+		render 'responsive-preload', image: image, sizes: '320x0,640x0,960x0,1310x0'
+	endif
+-%}
+{% endif %}

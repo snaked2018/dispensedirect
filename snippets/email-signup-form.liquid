@@ -1,0 +1,48 @@
+<div class="thb_subscribe thb_subscribe_shortcode">
+	{% form 'customer', class: 'newsletter-form' %}
+		{% capture form_errors %}
+			{% if form.errors %}
+			<div class="form-notification error" id="Newsletter-error--{{ section.id }}">
+				{{ form.errors | default_errors }}
+			</div>
+			{% endif %}
+		{% endcapture %}
+		{% capture form_success %}
+			{%- if form.posted_successfully? -%}
+				<div class="form-notification success" id="Newsletter-success--{{ section.id }}">{{ 'subscribe.success' | t }}</div>
+			{%- endif -%}
+		{% endcapture %}
+		<fieldset>
+			<input id="contact_tags" name="contact[tags]" type="hidden" value="newsletter" />
+			<input
+				placeholder="{{ 'subscribe.placeholder' | t }}"
+				type="email"
+				id="contact_email"
+				name="contact[email]"
+				class="widget_subscribe large pill"
+				aria-required="true"
+				autocorrect="off"
+				autocapitalize="off"
+				autocomplete="email"
+				{% if form.errors %}
+					autofocus
+					aria-invalid="true"
+					aria-describedby="Newsletter-error--{{ section.id }}"
+				{% elsif form.posted_successfully? %}
+					aria-describedby="Newsletter-success--{{ section.id }}"
+				{% endif %}
+			>
+			<button class="widget_subscribe_btn submit" type="submit" aria-label="{{ 'subscribe.subscribe' | t }}">{% render 'svg-icons' with 'thb-search-submit' %}</button>
+		</fieldset>
+		{%- if settings.email_terms_conditions_enable -%}
+			<div class="thb_subscribe--terms">
+				<input type="checkbox" id="NewsletterTerms-{{ form.id }}" required>
+				<label for="NewsletterTerms-{{ form.id }}">
+					{{ 'subscribe.i_agree' | t }}
+				</label>
+			</div>
+		{%- endif -%}
+	{% endform %}
+</div>
+{{ form_success }}
+{{ form_errors }}

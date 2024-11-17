@@ -1,0 +1,96 @@
+{{ 'cart.css' | asset_url | stylesheet_tag }}
+{{ 'myaccount.css' | asset_url | stylesheet_tag }}
+<div class="page-padding has-bottom-padding">
+	<div class="thb-page-title">
+		<div class="row">
+			<div class="small-12 columns">
+				{% render 'breadcrumbs' %}
+		    <h1 class="thb-shop-title">{{ 'my_account.title' | t }}</h1>
+				<p>
+					<a href="{{ routes.account_logout_url }}" title="{{ 'my_account.log_out' | t | escape }}" class="myaccount-link">
+		      	{% render 'svg-icons' with 'thb-log-out' %}
+		      	{{ 'my_account.log_out' | t }}
+		    	</a>
+				</p>
+			</div>
+		</div>
+	</div>
+  <div class="row">
+    <div class="small-12 large-8 columns myaccount-content">
+      {%- if customer.orders.size > 0 -%}
+	      <table class="shop_table">
+	      	<thead>
+	      		<tr>
+	      			<th>{{ 'my_account.table.order' | t }}</th>
+	      			<th>{{ 'my_account.table.date' | t }}</th>
+	      			<th>{{ 'my_account.table.payment_status' | t }}</th>
+	      			<th>{{ 'my_account.table.fulfillment_status' | t }}</th>
+	      			<th>{{ 'my_account.table.total' | t }}</th>
+	      	  </tr>
+	        </thead>
+	        <tbody>
+	          {% for order in customer.orders %}
+						<tr>
+		          <td><a href="{{ order.customer_url }}">{{ order.name }}</a></td>
+		          <td>{{ order.created_at | time_tag: format: 'date' }}</td>
+		          <td>{{ order.financial_status_label }}</td>
+		          <td>{{ order.fulfillment_status_label }}</td>
+		          <td>{{ order.total_price | money_with_currency }}</td>
+						</tr>
+	          {% endfor %}
+	        </tbody>
+	      </table>
+			{%- endif -%}
+    </div>
+    <div class="small-12 large-4 columns">
+      <h4>{{ 'my_account.customer_details' | t }}</h4>
+      <div class="row">
+        <div class="small-12 medium-6 columns">
+          <label>First Name:</label>
+          <p>{{ customer.first_name }}</p>
+        </div>
+        <div class="small-12 medium-6 columns">
+          <label>Last Name:</label>
+          <p>{{ customer.last_name }}</p>
+        </div>
+				{% if customer.email %}
+        <div class="small-12 columns">
+          <label>E-mail:</label>
+          <p>{{ customer.email }}</p>
+        </div>
+				{% endif %}
+				{% if customer.phone %}
+        <div class="small-12 columns">
+          <label>Phone:</label>
+          <p>{{ customer.phone }}</p>
+        </div>
+				{% endif %}
+
+        <div class="small-12 columns">
+					{% if customer.default_address %}
+          <label>Default Address:</label>
+          <address>
+            {{ customer.default_address.address1 }}<br />
+          {% if customer.default_address.address2 != "" %}
+            {{ customer.default_address.address2 }}<br />
+          {% endif %}
+            {{ customer.default_address.city }}, {% if address.default_address.province_code %}{{ customer.default_address.province_code }}, {% endif %}{{ customer.default_address.country }}<br />
+            {{ customer.default_address.zip }}<br />
+            {{ customer.default_address.phone }}
+          </address>
+          <br />
+					{% endif %}
+					<a class="btn-text style4" href="{{ routes.account_addresses_url }}"><span>{{ 'my_account.view_addresses' | t }}</span>
+						<div class="arrow">
+							<div>
+								{% render 'svg-icons' with 'thb-button-arrow' %}
+								{% render 'svg-icons' with 'thb-button-arrow' %}
+							</div>
+						</div>
+					</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

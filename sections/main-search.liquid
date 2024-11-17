@@ -1,0 +1,95 @@
+{% assign collection_pagination_count = 12 %}
+
+{% capture description %}
+	{% assign search_phrase = search.terms | replace: '*', '' %}
+	{% if '' != search_phrase %}
+		<p>{{ 'search.search_results' | t: count: search.results_count, key: search_phrase }}</p>
+	{% endif %}
+{% endcapture %}
+<div class="thb-page-title">
+	<div class="row">
+		<div class="small-12 columns">
+				{% render 'breadcrumbs' %}
+				<h1 class="thb-shop-title">{{ 'search.title' | t }}</h1>
+				{{ description }}
+				<form role="search" method="get" class="searchform" action="{{ routes.search_url }}">
+	      	<fieldset>
+	      		<input type="search" class="search-field large pill" placeholder="{{ 'search.placeholder' | t | escape }}" value="{{ search.terms | replace: '*', '' }}" name="q" autocomplete="off">
+						<input type="hidden" name="options[prefix]" value="last">
+        		<button class="widget_subscribe_btn submit" type="submit">{% render 'svg-icons' with 'thb-search-submit' %}</button>
+	      	</fieldset>
+	      </form>
+		</div>
+	</div>
+</div>
+{% paginate search.results by collection_pagination_count %}
+<div class="row">
+	<div class="small-12 columns">
+  {% if search.results.size > 0 %}
+		{% render 'shop-bar', results: collection, paginate: paginate, collection: search, filtering: section.settings.enable_filtering, sorting: section.settings.enable_sorting %}
+		{% if section.settings.enable_filtering %}
+		{% render 'facets', results: search, show_counts: section.settings.show_counts %}
+		{% endif %}
+
+		<div id="ProductGridContainer">
+			<div id="product-grid" data-id="{{ section.id }}" class="products row">
+				{% for item in search.results %}
+					{%- case item.object_type -%}
+						{%- when 'product' -%}
+							{% render 'product-card' product: item, grid_item_width: 'small-6 medium-3' %}
+						{%- when 'article' -%}
+							<div class="small-12 medium-3 columns">
+								{%- render 'article-card', article: item, image_ratio: 'square', show_date: 1, show_excerpt: 1 -%}
+							</div>
+						{%- when 'page' -%}
+							<div class="small-12 medium-3 columns">
+							<article itemscope itemtype="http://schema.org/Article" class="post style1 type-post">
+								<div class="post-title entry-header">
+									<h5><a href="{{ item.url }}" title="{{ item.title | escape }}">{{ item.title }}</a></h5>
+								</div>
+								<div class="post-content">
+									<p>{{ item.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+								</div>
+							</article>
+						</div>
+					{%- endcase -%}
+				{% endfor %}
+			</div>
+  		{% render 'pagination', pagination: paginate %}
+		</div>
+  {% endif %}
+	</div>
+</div>
+{% endpaginate %}
+{% schema %}
+  {
+    "name": "Search results",
+		"tag": "section",
+  	"class": "spaced-section",
+    "settings": [
+	    {
+	      "type": "header",
+	      "content": "Filtering and sorting"
+	    },
+	    {
+	      "type": "checkbox",
+	      "id": "enable_filtering",
+	      "default": true,
+	      "label": "Enable filtering",
+	      "info": "Customize [filters](/admin/menus)"
+	    },
+	    {
+	      "type": "checkbox",
+	      "id": "enable_sorting",
+	      "default": true,
+	      "label": "Enable sorting"
+	    },
+			{
+	      "type": "checkbox",
+	      "id": "show_counts",
+	      "default": true,
+	      "label": "Show filter values count"
+	    }
+    ]
+  }
+{% endschema %}

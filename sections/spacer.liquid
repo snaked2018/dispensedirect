@@ -1,0 +1,44 @@
+{{ 'spacer.css' | asset_url | stylesheet_tag }}
+{%- liquid
+	assign spacer_mobile = section.settings.spacer_mobile
+	assign spacer_desktop = section.settings.spacer_desktop
+-%}
+<div class="row">
+	<div class="small-12 columns">
+		<div class="spacer" style="--spacer-mobile: {{ spacer_mobile | append: 'px' }}; --spacer-desktop: {{ spacer_desktop | append: 'px' }};"></div>
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Spacer",
+    "settings": [
+		{
+			"type": "range",
+			"id": "spacer_mobile",
+			"min": 0,
+			"max": 200,
+			"step": 5,
+			"unit": "px",
+			"label": "Mobile",
+			"default": 50,
+			"info": "Changes the section height in mobile screens."
+		},
+		{
+			"type": "range",
+			"id": "spacer_desktop",
+			"min": 0,
+			"max": 200,
+			"step": 5,
+			"unit": "px",
+			"label": "Desktop",
+			"default": 100,
+			"info": "Changes the section height in desktop screens."
+		}
+    ],
+    "presets": [
+		{
+			"name": "Spacer"
+		}
+    ]
+  }
+{% endschema %}

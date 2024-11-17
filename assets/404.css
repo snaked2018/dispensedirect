@@ -1,0 +1,31 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.error404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 0; }
+  @media only screen and (min-width: 768px) {
+    .error404 {
+      padding: 100px 0; } }
+  .error404 > .row {
+    width: 100%; }
+
+.content404 svg {
+  margin-bottom: 40px;
+  fill: var(--color-text); }
+
+.content404 h2 {
+  margin-bottom: 25px; }
+
+.content404 p {
+  font-size: 20px;
+  margin-bottom: 40px; }
+
+.content404 .searchform {
+  max-width: 340px;
+  margin: 0 auto 35px; }

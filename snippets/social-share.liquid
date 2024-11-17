@@ -1,0 +1,33 @@
+{%- liquid
+  assign share_facebook = settings.social_share_facebook
+  assign share_twitter = settings.social_share_twitter
+  assign share_pinterest = settings.social_share_pinterest
+  assign share_linkedin = settings.social_share_linkedin
+  assign share_whatsapp = settings.social_share_whatsapp
+-%}
+<social-share class="share-article">
+  <button class="thb_share" tabindex="0">
+    {% render 'svg-icons' with 'thb-share' %}
+    {{ 'general.misc.share_this' | t }}
+  </button>
+  <div class="icons">
+    <div class="inner">
+      {% if share_facebook %}
+      <a href="http://www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}" class="facebook social"><i class="thb-icon-facebook"></i></a>
+      {% endif %}
+      {% if share_twitter %}
+      <a href="https://twitter.com/intent/tweet?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}" class="twitter social "><i class="thb-icon-twitter"></i></a>
+      {% endif %}
+      {% if share_pinterest %}
+      <a href="http://pinterest.com/pin/create/link/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}&amp;description={{ share_title | url_param_escape }}" class="pinterest social" data-pin-no-hover="true"><i class="thb-icon-pinterest"></i></a>
+      {% endif %}
+      {% if share_linkedin %}
+      <a href="https://www.linkedin.com/cws/share?url={{ shop.url | append: share_permalink }}" class="linkedin social"><i class="thb-icon-linkedin"></i></a>
+      {% endif %}
+      {% if share_whatsapp %}
+      <a href="https://wa.me/?text={{ share_title | url_param_escape }}%20{{ shop.url | append: share_permalink }}" class="whatsapp social" data-action="share/whatsapp/share"><i class="thb-icon-whatsapp"></i></a>
+      {% endif %}
+    </div>
+  </div>
+</social-share>
+<script src="{{ 'social-share.min.js' | asset_url }}" defer="defer"></script>

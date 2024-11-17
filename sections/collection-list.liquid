@@ -1,0 +1,134 @@
+<div class="main-list-collections section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	<div class="row {% if section.settings.full_width %}full-width-row no-padding{% endif %} {{ 'media-aspect-' | append: section.settings.image_ratio }}">
+	  <div class="small-12 columns">
+			<ul class="row products {{ section.settings.padding }}">
+		    {% for block in section.blocks %}
+					{% assign grid_item_width = '' %}
+					{% case section.settings.collection_list_grid_num %}
+						{% when 2 %}
+							{% assign grid_item_width = 'small-6' %}
+						{% when 3 %}
+							{% assign grid_item_width = 'small-6 medium-4' %}
+						{% when 4 %}
+							{% assign grid_item_width = 'small-6 medium-3' %}
+						{% when 5 %}
+							{% assign grid_item_width = 'small-6 medium-1/5' %}
+						{% when 6 %}
+							{% assign grid_item_width = 'small-6 medium-4 large-2' %}
+						{% else %}
+							{% assign grid_item_width = 'small-6 medium-4' %}
+					{% endcase %}
+		      {% render 'collection-grid-item', grid_collection: collections[block.settings.collection], counts: section.settings.counts, grid_item_width: grid_item_width, media_aspect_ratio: section.settings.image_ratio, index: forloop.index %}
+		    {% endfor %}
+			</ul>
+	  </div>
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Collection list",
+    "settings": [
+			{
+	      "type": "select",
+	      "id": "image_ratio",
+	      "options": [
+	        {
+	          "value": "adapt",
+	          "label": "Adapt to image"
+	        },
+	        {
+	          "value": "portrait",
+	          "label": "Portrait"
+	        },
+	        {
+	          "value": "square",
+	          "label": "Square"
+	        }
+	      ],
+	      "default": "portrait",
+	      "label": "Image ratio",
+	      "info": "Add images by editing your collections. [Learn more](https://help.shopify.com/en/manual/products/collections)"
+	    },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Make section full width",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "counts",
+        "label": "Show product counts",
+        "default": false
+      },
+			{
+        "type": "range",
+        "id": "collection_list_grid_num",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "Number of columns on desktop",
+        "default": 4
+      },
+			{
+        "type": "select",
+        "id": "padding",
+        "label": "Column spacing",
+        "default": "",
+        "options": [
+          { "value": "", "label": "Large" },
+          { "value": "low-padding", "label": "Medium" },
+          { "value": "doublepixel-padding", "label": "Small" }
+        ]
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+             "type": "collection",
+             "id": "collection",
+             "label": "Collection"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Collection list",
+				"blocks": [
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					},
+					{
+						"type": "collection"
+					}
+				]
+      }
+    ]
+  }
+{% endschema %}

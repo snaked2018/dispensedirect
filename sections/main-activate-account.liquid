@@ -1,0 +1,77 @@
+{{ 'myaccount.css' | asset_url | stylesheet_tag }}
+<div class="row align-center">
+	<div class="small-12 columns">
+    <login-form class="thb-overflow-container">
+			<div class="thb-activate-form">
+				<h4>{{ 'my_account.activate_account.title' | t }}</h4>
+				<p>{{ 'my_account.activate_account.subtext' | t }}</p>
+				{%- form 'activate_customer_password' -%}
+			    {%- if form.errors -%}
+						<div class="form-notification error has-list" id="ActivateAccount-error">
+							{% render 'svg-icons' with 'thb-error' %} <ul>
+				        {%- for field in form.errors -%}
+				          <li>
+				            {%- if field == 'form' -%}
+				              {{ form.errors.messages[field] }}
+				            {%- else -%}
+				              <a href="#{{ field }}">
+				                {{ form.errors.translated_fields[field] | capitalize }}
+				                {{ form.errors.messages[field] }}
+				              </a>
+				            {%- endif -%}
+				          </li>
+				        {%- endfor -%}
+				      </ul>
+						</div>
+			    {%- endif -%}
+
+			    <div class="field">
+						<label for="password">
+							{{ 'my_account.activate_account.password' | t }}
+						</label>
+			      <input
+			        type="password"
+			        name="customer[password]"
+			        id="password"
+			        autocomplete="new-password"
+							class="full"
+			        placeholder="{{ 'my_account.activate_account.password' | t }}"
+			        {% if form.errors contains 'password' %}
+			          aria-invalid="true"
+			          aria-describedby="password-error"
+			        {% endif %}
+			      >
+			    </div>
+
+			    <div class="field">
+						<label for="password_confirmation">
+							{{ 'my_account.activate_account.password_confirm' | t }}
+						</label>
+			      <input
+			        type="password"
+			        name="customer[password_confirmation]"
+			        id="password_confirmation"
+			        autocomplete="new-password"
+							class="full"
+			        placeholder="{{ 'my_account.activate_account.password_confirm' | t }}"
+			        {% if form.errors contains 'password' %}
+			          aria-invalid="true"
+			          aria-describedby="password_confirmation-error"
+			        {% endif %}
+			      >
+			    </div>
+					<div class="account-activate-buttons">
+				    <button class="button accent">
+				      {{ 'my_account.activate_account.submit' | t }}
+				    </button>
+				    <button name="decline" class="button alt">
+				      {{ 'my_account.activate_account.cancel' | t }}
+				    </button>
+					</div>
+			  {%- endform -%}
+			</div>
+		</login-form>
+	</div>
+</div>
+
+<script src="{{ 'login-form.min.js' | asset_url }}" defer="defer"></script>

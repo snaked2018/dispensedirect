@@ -1,0 +1,40 @@
+{% liquid
+	assign grid_collection_image = nil
+	assign index = index | modulo: 6 | plus: 1
+%}
+{% if grid_collection == empty %}
+	{% assign grid_collection_url = '#' %}
+	{% assign grid_collection_title = 'general.misc.your_collection_name' | t %}
+	{% assign counts = false %}
+{% else %}
+	{% assign grid_collection_url = grid_collection.url %}
+	{% assign grid_collection_title = grid_collection.title %}
+	{% if grid_collection.featured_image %}
+		{% assign grid_collection_image = grid_collection.featured_image | image_url %}
+	{% endif %}
+{% endif %}
+{%- liquid
+	assign sizes = '320x320,640x640'
+  if grid_collection.featured_image and media_aspect_ratio == 'portrait'
+    assign sizes = '320x400,640x800'
+  elsif grid_collection.featured_image and media_aspect_ratio == 'adapt'
+    assign sizes = '320x0,640x0'
+  endif
+-%}
+
+<li class="{{- grid_item_width | strip | strip_newlines }} item columns product-category">
+	<a href="{{ grid_collection_url }}" class="thb-category-link" title="{{ grid_collection_title | escape }}">
+		<div class="product-category-image">
+			{% if grid_collection == empty %}
+				<div class="thb-placeholder">{{ 'collection-' | append: index | placeholder_svg_tag }}</div>
+			{% else %}
+				{% if grid_collection_image %}
+					{%- render 'responsive-image', image: grid_collection.featured_image, sizes: sizes -%}
+				{% else %}
+					<div class="thb-placeholder">{{ 'collection-' | append: index | placeholder_svg_tag }}</div>
+				{% endif %}
+			{% endif %}
+		</div>
+		<h2>{{ grid_collection_title | escape }}{% if counts %} ({{ grid_collection.all_products_count }}){% endif %}</h2>
+	</a>
+</li>

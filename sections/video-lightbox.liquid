@@ -1,0 +1,167 @@
+{%- liquid
+  assign video = section.settings.video_url
+  assign video_hosted = section.settings.video_hosted
+-%}
+<div class="section-image-video-lightbox {% if section.settings.parallax %}thb-parallax{% endif %} section-margin{% if section.settings.disable_top_spacing %} section-no-top-margin{% endif %}{% if section.settings.disable_bottom_spacing %} section-no-bottom-margin{% endif %}" id="section-image-video-lightbox-{{ section.id }}">
+	{{ 'video-lightbox.css' | asset_url | stylesheet_tag }}
+		{% if section.settings.bg_image %}
+			<img data-src="{{ section.settings.bg_image | image_url }}" alt="{{ section.settings.bg_image.alt | escape }}" width="{{ section.settings.bg_image.width | escape }}" height="{{ section.settings.bg_image.height }}" class="thb-parallax-image lazyload">
+			<noscript>
+			<img src="{{ section.settings.bg_image | image_url }}" alt="{{ section.settings.bg_image.alt | escape }}" width="{{ section.settings.bg_image.width }}" height="{{ section.settings.bg_image.height }}" class="thb-parallax-image" />
+			</noscript>
+		{% elsif video and video.preview_image %}
+			{% assign video_image = video.preview_image %}
+			<img data-src="{{ video_image | image_url }}" alt="{{ video_image.alt | escape }}" width="{{ video_image.width | escape }}" height="{{ video_image.height }}" class="thb-parallax-image lazyload">
+			<noscript>
+			<img src="{{ video_image | image_url }}" alt="{{ video_image.alt | escape }}" width="{{ video_image.width }}" height="{{ video_image.height }}" class="thb-parallax-image" />
+			</noscript>
+		{% else %}
+			{{ 'lifestyle-1' | placeholder_svg_tag: 'thb-parallax-image placeholder_svg_tag' }}
+		{% endif %}
+	<div class="row">
+		<div class="small-12 columns thb-light-column">
+			<div class="blog-post-wrapper text-center">
+				{% if section.settings.subtitle %}
+				<p class="h6 animation fade-in">{{ section.settings.subtitle }}</p>
+				{% endif %}
+				{% if section.settings.title %}
+				<p class="h2 animation fade-in">{{ section.settings.title }}</p>
+				{% endif %}
+				{% if blank != video %}
+				<div class="animation fade-in">
+					{{ 'video-lightbox-modal.css' | asset_url | stylesheet_tag }}
+					<modal-opener
+						class="video-lightbox-modal__opener no-js-hidden"
+						data-modal="#VideoLightbox-{{ section.id }}"
+					>
+						<button
+							id="VideoLightboxToggle-{{ section.id }}"
+							class="video-lightbox-modal__button"
+							type="button"
+							aria-haspopup="dialog"
+						>
+							{% render 'svg-icons' with 'thb-video-play' %}
+						</button>
+					</modal-opener>
+					<a href="{{ video.url }}" class="video-lightbox-modal__button no-js" target="_blank">
+						{%- render 'svg-icons' with 'thb-video-play' -%}
+					</a>
+					<modal-dialog id="VideoLightbox-{{ section.id }}" class="video-lightbox-modal">
+						<div
+							role="dialog"
+							aria-label="{{ section.settings.title }}"
+							aria-modal="true"
+							class="video-lightbox-modal__content"
+							tabindex="-1"
+						>
+							<button
+								id="ModalClose-{{ section.id }}"
+								type="button"
+								class="video-lightbox-modal__toggle"
+								aria-label="{{ 'general.close' | t }}"
+							>
+								{% render 'svg-icons' with 'thb-close' %}
+							</button>
+							<div class="video-lightbox-modal__content-info">
+								{%- if video_hosted == blank -%}
+									{%- if video.type == 'youtube' -%}
+										<iframe
+											data-src="https://www.youtube.com/embed/{{ video.id }}?enablejsapi=1"
+											class="js-youtube lazyload"
+											allow="autoplay; encrypted-media"
+											allowfullscreen
+										></iframe>
+									{%- else -%}
+										<iframe
+											data-src="https://player.vimeo.com/video/{{ video.id }}"
+											class="js-vimeo lazyload"
+											allow="autoplay; encrypted-media"
+											allowfullscreen
+										></iframe>
+									{%- endif -%}
+								{%- else -%}
+									{{ video_hosted | video_tag: autoplay: false, loop: false, controls: true }}
+								{%- endif -%}
+							</div>
+						</div>
+					</modal-dialog>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</div>
+{% if section.settings.parallax %}
+	<script src="{{ 'parallax.min.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+{% schema %}
+  {
+    "name": "Video lightbox",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background image",
+				"info": "1920 x 1080 px .jpg recommended."
+      },
+			{
+        "type": "checkbox",
+        "id": "parallax",
+        "default": true,
+        "label": "Enable parallax"
+      },
+			{
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subheading",
+        "default": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Heading"
+      },
+      {
+				"type": "video_url",
+        "id": "video_url",
+        "label": "Video URL",
+				"accept": [
+          "youtube",
+          "vimeo"
+        ],
+				"placeholder": "Use a YouTube or Vimeo URL",
+				"default": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+				"info": "Video plays in a lightbox."
+      },
+			{
+				"type": "video",
+				"id": "video_hosted",
+				"label": "Shopify-hosted video",
+				"info": "Overrides the Video URL setting."
+			},
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": true,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": true,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Video lightbox"
+      }
+    ]
+  }
+
+{% endschema %}

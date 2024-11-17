@@ -1,0 +1,99 @@
+{% liquid
+	if template == 'search'
+		assign total_count = collection.results_count
+	elsif template contains 'collection'
+		assign total_count = collection.products_count
+	endif
+%}
+<div class="shop_bar">
+  <div class="row">
+    <div class="small-5 medium-4 columns category_bar">
+			{%- if filtering -%}
+      <facets-toggle class="facets-toggle" id="thb-shop-filters">
+        {%- render 'svg-icons' with 'thb-filter' %}
+        {{ 'general.collection.filter' | t }}
+				{%- if total_active > 0 -%}<sup class="thb-filter-active-count" id="ActiveCount">{{ total_active }}</sup>{%- endif -%}
+      </facets-toggle>
+			{%- endif -%}
+    </div>
+    <div class="small-7 medium-8 columns ordering">
+			{%- if total_count > 0 -%}
+      {% assign pagination_start = paginate.current_page | minus: 1 | times: paginate.page_size | plus: 1 %}
+      {% assign pagination_end = paginate.current_page | times: paginate.page_size %}
+      <p id="ProductCount" class="north-result-count thb-filter-count">{{ 'general.collection.showing' | t }} {{ pagination_start }} - {{ pagination_end | at_most: total_count }} {{ 'general.collection.of' | t }} {{ total_count }} {{ 'general.collection.results' | t }}</p>
+			{%- endif -%}
+			{% if sorting %}
+				<facet-filters-form>
+					<form id="FacetFiltersForm-bar" class="facets__form north-ordering">
+						{%- if results.terms -%}
+							<input type="hidden" name="q" value="{{ results.terms | escape }}">
+							<input name="options[prefix]" type="hidden" value="last">
+						{%- endif -%}
+						{% if results.current_vendor or results.current_type %}
+							<input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+						{% endif %}
+						{%- for filter in results.filters -%}
+							{%- if filter.param_name == 'filter.v.availability' and filter.values[0].active -%}
+								<input type="hidden"
+									name="{{ filter.values[0].param_name }}"
+									value="1"
+								>
+							{%- else -%}
+								{%- case filter.type -%}
+									{% when 'boolean' or 'list' %}
+										{%- for value in filter.values -%}
+											{%- if value.active -%}
+												<input type="hidden"
+													name="{{ value.param_name }}"
+													value="{{ value.value }}"
+												>
+											{%- endif -%}
+										{%- endfor -%}
+									{% when 'price_range' %}
+										{%- liquid
+											assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,UYU,VES,VND' | split: ','
+											assign uses_comma_decimals = false
+											if currencies_using_comma_decimals contains cart.currency.iso_code
+												assign uses_comma_decimals = true
+											endif
+										-%}
+										{%- if filter.min_value.value -%}
+											<input type="hidden"
+												name="{{ filter.min_value.param_name }}"
+												{%- if uses_comma_decimals -%}
+													value="{{ filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+												{%- else -%}
+													value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"
+												{%- endif %}
+											/>
+										{%- endif -%}
+										{%- if filter.max_value.value -%}
+											<input type="hidden"
+												name="{{ filter.max_value.param_name }}"
+												{%- if uses_comma_decimals -%}
+													value="{{ filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.' }}"
+												{%- else -%}
+													value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"
+												{%- endif %}
+											/>
+										{%- endif -%}
+								{%- endcase -%}
+							{%- endif -%}
+						{% endfor %}
+						<div class="select">
+							<label for="sort_by" class="visually-hidden">{{ 'general.collection.sort' | t }}</label>
+							<select id="sort_by" name="sort_by" class="orderby">
+								{% for option in collection.sort_options %}
+									<option value="{{ option.value }}" {% if option.value == collection.sort_by %}selected{% endif %} >{{ option.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<noscript>
+							<button type="submit" class="button">{{ 'general.collection.sort' | t }}</button>
+						</noscript>
+					</form>
+				</facet-filters-form>
+			{% endif %}
+    </div>
+  </div>
+</div>

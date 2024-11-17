@@ -1,0 +1,432 @@
+{%- liquid
+	assign parent_class = ''
+	if section.settings.full_width
+		assign parent_class = 'full-width-row no-padding'
+	endif
+-%}
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	{{ 'image-with-text.css' | asset_url | stylesheet_tag }}
+	<div class="row section-image-with-text section-image-with-text-{{ section.settings.style | escape }} section-image-with-text-{{ section.settings.height | escape }} {{ parent_class | escape }} {{ section.settings.text_alignment | escape }}" id="section-image-with-text-{{ section.id }}">
+		<div class="small-12 columns">
+	    <div class="row no-padding row-o-content-middle row-direction-{{ section.settings.direction | escape }}">
+	      <div class="small-12 medium-6 columns content-side">
+	        <div class="content-side-inner">
+	          {% for block in section.blocks %}
+							{% if block.type == 'title' %}
+								{% if block.settings.title != blank %}
+									<{{ block.settings.heading_size }} class="{{ block.settings.animation | escape }}" id="section-image-with-text-{{ block.id }}" {{ block.shopify_attributes }}>{{ block.settings.title }}</{{ block.settings.heading_size }}>
+								{% endif %}
+								{% if block.settings.color != blank %}
+									{% style %}
+										#section-image-with-text-{{ block.id }} {
+											color: {{ block.settings.color }};
+										}
+									{% endstyle %}
+								{% endif %}
+							{% endif %}
+	            {% if block.type == 'text' %}
+	              <div class="{{ block.settings.animation | escape }} rte" id="section-image-with-text-{{ block.id }}" {{ block.shopify_attributes }}>
+	                {{ block.settings.text }}
+	              </div>
+								{% if block.settings.color != blank %}
+									{% style %}
+										#section-image-with-text-{{ block.id }},
+										#section-image-with-text-{{ block.id }} a {
+											color: {{ block.settings.color }};
+										}
+									{% endstyle %}
+								{% endif %}
+	            {% endif %}
+							{% if block.type == 'mini-text' %}
+	              <div class="{{ block.settings.animation | escape }} small-text rte" id="section-image-with-text-{{ block.id }}" {{ block.shopify_attributes }}>
+	                {{ block.settings.text }}
+	              </div>
+								{% if block.settings.color != blank %}
+									{% style %}
+										#section-image-with-text-{{ block.id }},
+										#section-image-with-text-{{ block.id }} a {
+											color: {{ block.settings.color }};
+										}
+									{% endstyle %}
+								{% endif %}
+	            {% endif %}
+	            {% if block.type == 'button' %}
+								{% if block.settings.button_text != blank %}
+	                <a class="btn small {{ block.settings.button_style | escape }} {{ block.settings.animation | escape }} {{ block.settings.button_color | escape }}" href="{{ block.settings.button_link }}" role="button" title="{{ block.settings.button_text | escape }}" {{ block.shopify_attributes }}>{{ block.settings.button_text }}</a>
+								{% endif %}
+	            {% endif %}
+	            {% if block.type == 'image' %}
+	              {% if block.settings.image %}
+	                <img data-src="{{ block.settings.image.src | image_url }}" alt="{{ block.settings.image.alt | escape }}" class="lazyload {% if block.settings.retina %}retina_size{% endif %}" width="{{ block.settings.image.width | escape }}" height="{{ block.settings.image.height | escape }}" {{ block.shopify_attributes }} />
+									<noscript>
+										<img src="{{ block.settings.image.src | image_url }}" alt="{{ block.settings.image.alt | escape }}" class="lazyload {% if block.settings.retina %}retina_size{% endif %}" width="{{ block.settings.image.width | escape }}" height="{{ block.settings.image.height | escape }}" {{ block.shopify_attributes }} />
+									</noscript>
+	              {% endif %}
+	            {% endif %}
+	            {% if block.type == 'space' %}
+	              <div style="height: {{ block.settings.height | append: 'px' }}" {{ block.shopify_attributes }}></div>
+	            {% endif %}
+	          {% endfor %}
+	        </div>
+	      </div>
+	      <div class="small-12 medium-6 columns image-side">
+					<div class="image-side-holder">
+		        {% if section.settings.image %}
+		          {% assign small_width = section.settings.image.src.height | times: '320x370' | divided_by: section.settings.image.src.width %}
+		          {% assign master_width = section.settings.image.src.height | append: 'x' | append: section.settings.image.src.width %}
+		          {% assign width = '670x370' | append: small_width | append: ',' | append: master_width %}
+		          {% render 'responsive-image', image: section.settings.image, sizes: width %}
+						{% else %}
+							{{ 'image' | placeholder_svg_tag }}
+						{% endif %}
+					</div>
+	      </div>
+	    </div>
+	  </div>
+  {% style %}
+		#section-image-with-text-{{ section.id }} .content-side {
+			{% if section.settings.bg_color %}
+			background: {{ section.settings.bg_color }};
+			{% endif %}
+		}
+  {% endstyle %}
+</div>
+</div>
+{% schema %}
+  {
+    "name": "Image with text",
+    "settings": [
+			{
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image",
+        "info": "1340 x 900 px .jpg recommended."
+      },
+			{
+	      "type": "select",
+	      "id": "height",
+	      "options": [
+	        {
+	          "value": "adapt",
+	          "label": "Adapt to image"
+	        },
+	        {
+	          "value": "small",
+	          "label": "Small"
+	        },
+	        {
+	          "value": "large",
+	          "label": "Large"
+	        }
+	      ],
+	      "default": "adapt",
+	      "label": "Image height"
+	    },
+			{
+         "type": "checkbox",
+         "id": "full_width",
+         "label": "Make section full width",
+         "default": false
+      },
+			{
+         "type": "select",
+         "id": "direction",
+         "label": "Desktop Layout",
+         "options": [
+           { "value": "image-right", "label": "Text first" },
+           { "value": "image-left", "label": "Image first" }
+         ],
+         "info": "Image first is the default mobile layout.",
+         "default": "image-right"
+      },
+			{
+         "type": "select",
+         "id": "text_alignment",
+         "label": "Content alignment",
+         "options": [
+           { "value": "text-center", "label": "Center" },
+           { "value": "text-left", "label": "Left" },
+           { "value": "text-right", "label": "Right" }
+         ],
+         "default": "text-center"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background"
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+			{
+				"type": "title",
+				"name": "Heading",
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Heading",
+						"default": "Image with text"
+					},
+					{
+						"type": "select",
+						"id": "heading_size",
+						"label": "Size",
+						"options": [
+							{
+								"value": "h1",
+								"label": "Extra Large"
+							},
+							{
+								"value": "h2",
+								"label": "Large"
+							},
+							{
+								"value": "h3",
+								"label": "Medium"
+							},
+							{
+								"value": "h4",
+								"label": "Small"
+							}
+						],
+						"default": "h2"
+					},
+					{
+		        "type": "color",
+		        "id": "color",
+		        "label": "Color",
+		        "default": "#151515"
+		      },
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+				]
+			},
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+            "info": "Select image"
+          },
+          {
+            "type": "checkbox",
+            "id": "retina",
+            "label": "Enable retina",
+            "default": true,
+            "info": "Image will be displayed at half the size, making it look crisp on retina screens."
+          },
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Content",
+            "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
+          },
+					{
+		        "type": "color",
+		        "id": "color",
+		        "label": "Color",
+		        "default": "#444444"
+		      },
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+        ]
+      },
+			{
+        "type": "mini-text",
+        "name": "Small text",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Content",
+            "default": "<p><strong>Store Hours</strong><br>Monday-Saturday 11am–7pm ET<br>Sunday 11am–6pm ET</p>"
+          },
+					{
+		        "type": "color",
+		        "id": "color",
+		        "label": "Color",
+		        "default": "#444444"
+		      },
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "button",
+        "name": "Button",
+        "settings": [
+					{
+						"id": "button_text",
+						"type": "text",
+						"label": "Label",
+						"default": "Shop Now",
+						"info": "Leave the label blank to hide the button."
+					},
+					{
+						"id": "button_link",
+						"type": "url",
+						"label": "Link"
+					},
+					{
+						"type": "select",
+						"id": "button_style",
+						"label": "Style",
+						"default": "pill alt",
+						"options": [
+							{ "value": "", "label": "Regular" },
+							{ "value": "alt", "label": "Outline" },
+							{ "value": "pill alt", "label": "Pill outline" },
+							{ "value": "border-fill", "label": "Fill animation" }
+						]
+					},
+					{
+						"type": "select",
+						"id": "button_color",
+						"label": "Color",
+						"default": "",
+						"options": [
+							{ "value": "", "label": "Black" },
+							{ "value": "white", "label": "White" }
+						]
+					},
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "space",
+        "name": "Empty space",
+        "settings": [
+          {
+            "type": "range",
+            "id": "height",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Height",
+            "default": 50
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with text",
+				"blocks": [
+					{
+						"type": "title"
+					},
+					{
+						"type": "text"
+					},
+					{
+						"type": "button"
+					}
+				]
+      }
+    ]
+  }
+{% endschema %}

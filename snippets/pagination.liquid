@@ -1,0 +1,8 @@
+{%- if pagination.pages > 1 -%}
+{{ 'pagination.css' | asset_url | stylesheet_tag }}
+<nav class="pagination {{ class }}">
+	<div class="page-numbers nav-links">
+		{{ pagination | default_pagination: next: 'Next →', previous: '← Prev' }}
+	</div>
+</nav>
+{%- endif -%}

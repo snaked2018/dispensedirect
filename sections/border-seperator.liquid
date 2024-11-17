@@ -1,0 +1,61 @@
+<div class="section-margin{% if section.settings.disable_top_spacing %} section-no-top-margin{% endif %}{% if section.settings.disable_bottom_spacing %} section-no-bottom-margin{% endif %}">
+	<div class="row {% if section.settings.full_width %}full-width-row no-padding{% endif %}">
+	  <div class="small-12 columns">
+	    <div style="width: 100%;background: {{ section.settings.border_color }}; height: {{ section.settings.height | append: 'px' }}"></div>
+	  </div>
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Border separator",
+    "settings": [
+      {
+        "type": "color",
+        "id": "border_color",
+        "label": "Color",
+        "default": "#efefef"
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+      {
+        "type": "range",
+        "id": "height",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Height",
+        "default": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "full_width",
+        "label": "Make section full width",
+        "default": false
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Border separator"
+      }
+    ]
+  }
+{% endschema %}

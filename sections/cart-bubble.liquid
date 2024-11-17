@@ -1,0 +1,7 @@
+<a href="{{ routes.cart_url }}" id="cart-drawer-toggle" data-target="open-cart">{% render 'svg-icons' with 'thb-cart' %} <span class="float_count">
+	{%- if cart.item_count > 99 -%}
+		{%- render 'svg-icons' with 'thb-asterisk' -%}
+	{%- else -%}
+	{{ cart.item_count }}
+	{%- endif -%}
+</span></a>

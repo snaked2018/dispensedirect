@@ -1,0 +1,81 @@
+{% if section.settings.global_notification %}
+	{%- liquid
+		assign show_global_notification = true
+		if section.settings.global_notification_homepage_only
+			if template == 'index'
+				assign show_global_notification = true
+			else
+				assign show_global_notification = false
+			endif
+		endif -%}
+	{% if show_global_notification %}
+	<announcement-bar class="thb-global-notification">
+		{%- if section.settings.global_notification_link != blank -%}
+		<a href="{{ section.settings.global_notification_link | escape }}" class="thb-global-notification-link"></a>
+		{%- endif -%}
+		<div class="row">
+			<div class="small-12 columns">
+				<p>{{ section.settings.global_notification_text }}</p>
+			</div>
+		</div>
+		{% if section.settings.global_notification_close %}
+		<button class="thb-notification-close" title="{{ 'general.close' | t }}">{% render 'svg-icons' with 'thb-close' %}</button>
+		{% endif %}
+
+		{% style %}
+			{% if settings.global_notification_bg_color != blank %}
+	    .thb-global-notification {
+	      background: {{ settings.global_notification_bg_color }};
+	    }
+			{% endif %}
+
+			{% if settings.global_notification_text_color != blank %}
+		    .thb-global-notification {
+		      color: {{ settings.global_notification_text_color }};
+		    }
+				.thb-global-notification .thb-notification-close svg {
+					fill: {{ settings.global_notification_text_color }};
+				}
+				{% endif %}
+	  {% endstyle %}
+	</announcement-bar>
+	<script src="{{ 'announcement-bar.min.js' | asset_url }}" defer="defer"></script>
+	{% endif %}
+{% endif %}
+{% schema %}
+{
+	"name": "Announcement bar",
+	"class": "announcement-section",
+	"settings": [
+		{
+			"type": "checkbox",
+			"id": "global_notification",
+			"label": "Enable announcement bar",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "global_notification_close",
+			"label": "Allow users to close announcement",
+			"default": true
+		},
+		{
+			"type": "checkbox",
+			"id": "global_notification_homepage_only",
+			"label": "Show on home page only",
+			"default": false
+		},
+		{
+			"type": "text",
+			"id": "global_notification_text",
+			"label": "Text",
+			"default": "Welcome to our store"
+		},
+		{
+			"id": "global_notification_link",
+			"type": "url",
+			"label": "Link"
+		}
+	]
+}
+{% endschema %}

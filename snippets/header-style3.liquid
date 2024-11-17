@@ -1,0 +1,43 @@
+{%- liquid
+	assign full_width = header_settings.full_width
+	assign transparent_header = header_settings.transparent_header
+	assign header_shadow = header_settings.header_shadow
+-%}
+<theme-header class="header style3 {{ header_shadow }}{% if template == 'index' and transparent_header %} light-title fixed{% endif %}">
+  <div class="row align-center {% if full_width %}full-width-row{% endif %}">
+		<div class="small-12 columns">
+			<div class="header-grid">
+		    <div class="hide-for-large toggle-holder">
+					<button class="mobile-toggle" title="{{ 'general.misc.toggle_mobile_menu' | t | escape }}">
+						<span></span>
+						<span></span>
+						<span></span>
+					</button>
+				</div>
+	      <div class="logo-holder">
+	        {% if header_settings.logo %}
+	          <a class="logolink" href="{{ routes.root_url }}">
+							<img src="{{ header_settings.logo | image_url }}" alt="{{ header_settings.logo.alt | default: shop.name | escape }}" class="logoimg bg--light" width="{{ header_settings.logo.width }}" height="{{ header_settings.logo.height }}" loading="lazy">
+							{%- liquid
+								if header_settings.logo_light != blank
+									assign light_logo = header_settings.logo_light
+								else
+									assign light_logo = header_settings.logo
+								endif
+							-%}
+		          <img src="{{ light_logo | image_url }}" alt="{{ shop.name }}" class="logoimg bg--dark" width="{{ header_settings.logo.width }}" height="{{ header_settings.logo.height }}" loading="lazy">
+	          </a>
+	        {% else %}
+	          <a class="logolink text" href="{{ routes.root_url }}">
+	            {{ shop.name }}
+	          </a>
+	        {% endif %}
+	      </div>
+	      <nav class="menu-holder show-for-large">
+	        {% render 'header-full-menu', header_settings: header_settings, blocks: blocks %}
+	      </nav>
+		    {% render 'header-secondary' %}
+			</div>
+		</div>
+  </div>
+</theme-header>

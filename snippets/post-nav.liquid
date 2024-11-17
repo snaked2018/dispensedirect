@@ -1,0 +1,45 @@
+{% assign current_found = false %}
+{% assign done = false %}
+
+{% for a in blog.articles %}
+	{% if current_found and done == false %}
+		{% assign next_article = a %}
+		{% assign done = true %}
+	{% endif %}
+	{% unless done %}
+		{% if a.id == article.id %}
+			{% assign current_found = true %}
+		{% else %}
+			{% assign prev_article = a %}
+		{% endif %}
+	{% endunless %}
+{% endfor %}
+{% if article_show_nav %}
+<div class="thb_post_nav">
+  <div class="row full-width-row">
+    <div class="small-4 medium-5 columns">
+      {% if prev_article %}
+        <a href="{{ prev_article.url }}" class="post_nav_link prev">
+          {% render 'svg-icons' with 'post-nav-prev' %}
+          <strong>{{ 'general.misc.previous_article' | t }}</strong>
+          <span>{{ prev_article.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+    <div class="small-4 medium-2 columns center_link">
+			{% if article_show_share_buttons %}
+        {% render 'social-share', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+      {% endif %}
+    </div>
+    <div class="small-4 medium-5 columns">
+      {% if next_article %}
+        <a href="{{ next_article.url }}" class="post_nav_link next">
+          {% render 'svg-icons' with 'post-nav-next' %}
+          <strong>{{ 'general.misc.next_article' | t }}</strong>
+          <span>{{ next_article.title }}</span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}

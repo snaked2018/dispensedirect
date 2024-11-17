@@ -1,0 +1,246 @@
+{%- liquid
+	assign mobile_swipe = section.settings.mobile_swipe
+	assign image_ratio = section.settings.image_ratio
+	assign show_date = section.settings.show_date
+	assign show_excerpt = section.settings.show_excerpt
+	assign animation = section.settings.animation
+	assign text_color = section.settings.text_color
+	assign heading_color = section.settings.heading_color
+	assign bg_color = section.settings.bg_color
+-%}
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}{% if section.settings.bg_color != blank and section.settings.bg_color != 'rgba(0,0,0,0)' %} section-padding{% endif %}" id="section-featured-blog-{{ section.id }}">
+	<div class="row">
+	  <div class="small-12 columns">
+	    <div class="row text-center align-center">
+	      <div class="small-12 medium-7 large-5 columns item">
+	        {% if section.settings.title %}
+	        <h2 class="animation bottom-to-top">{{ section.settings.title }}</h2>
+	        {% endif %}
+	        {% if section.settings.text != blank %}
+	        <div class="animation bottom-to-top text-center rte">
+	          {{ section.settings.text }}
+	          <div class="vc_empty_space" style="height: 30px"></div>
+	        </div>
+	        {% endif %}
+	      </div>
+	    </div>
+			<div class="blog-posts{% if mobile_swipe %} swipe-on-mobile{% endif %}">
+		    <div class="row align-stretch">
+					{% if section.settings.blog and blogs[section.settings.blog].articles.size > 0 %}
+			      {% for article in blogs[section.settings.blog].articles limit: section.settings.post_limit %}
+			      <div class="small-12 medium-6 large-4 columns item">
+			        {%- render 'article-card', article: article, image_ratio: image_ratio, show_date: show_date, show_excerpt: show_excerpt, animation: animation -%}
+			      </div>
+			      {% endfor %}
+					{% else %}
+						{% assign placeholder_array = "1,2,3,4,5,6" | split: ',' %}
+						{% for item in placeholder_array limit: section.settings.post_limit %}
+							<div class="small-12 medium-6 large-4 columns item">
+				        <article itemscope itemtype="http://schema.org/Article" class="post style1 type-post {{ animation }}">
+				          <figure class="post-gallery aspect-ratio" style="--ratio-percent: 100%;">
+				            <a href="#">
+											<div class="thb-placeholder">
+												{{ 'image' | placeholder_svg_tag }}
+											</div>
+				            </a>
+				          </figure>
+				          <div class="post-title entry-header">
+				            <h4><a href="#" title="{{ 'general.misc.your_article_name' | t | escape }}">{{ 'general.misc.your_article_name' | t }}</a></h4>
+				          </div>
+									{% if section.settings.show_date %}
+				          <aside class="post-meta">{{ 'now' | date: "%B %d, %Y" }}</aside>
+									{% endif %}
+									{% if section.settings.show_excerpt %}
+				          <div class="post-excerpt">
+				            <p>{{ 'general.misc.article_excerpt' | t }}</p>
+				          </div>
+									{% endif %}
+				        </article>
+				      </div>
+						{% endfor %}
+			    {% endif %}
+		    </div>
+			</div>
+			{%- if section.settings.blog != blank and section.settings.show_view_all and section.settings.post_limit < section.settings.blog.articles_count -%}
+				<div class="text-center">
+		      <div class="vc_empty_space" style="height: 20px"></div>
+		      <a class="btn {{ section.settings.button_style | escape }} animation bottom-to-top" href="{{ section.settings.blog.url }}"><span>{{ 'general.view_all' | t }}</span></a>
+		    </div>
+      {%- endif -%}
+	  </div>
+	</div>
+	{% style %}
+    {% if bg_color != blank %}
+			#section-featured-blog-{{ section.id }} {
+      	background: {{ section.settings.bg_color }};
+			}
+    {% endif %}
+
+		{% if heading_color != blank %}
+			#section-featured-blog-{{ section.id }} {
+				--color-heading: {{ heading_color }};
+			}
+		{% endif %}
+		{% if text_color != blank %}
+			#section-featured-blog-{{ section.id }} {
+				--color-text: {{ text_color }};
+				--color-link: {{ text_color }};
+				--color-text-rgb: {{ text_color | color_extract: 'red' }}, {{ text_color | color_extract: 'green' }}, {{ text_color | color_extract: 'blue' }};
+			}
+		{% endif %}
+  {% endstyle %}
+</div>
+
+{% schema %}
+  {
+    "name": "Blog posts",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blog posts"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Add a short description on your brand news</p>"
+      },
+      {
+         "type": "blog",
+         "id": "blog",
+         "label": "Blog"
+      },
+			{
+	      "type": "range",
+	      "id": "post_limit",
+	      "min": 2,
+	      "max": 6,
+	      "step": 1,
+	      "default": 3,
+	      "label": "Number of blog posts to show"
+	    },
+			{
+				"type": "checkbox",
+				"id": "mobile_swipe",
+				"default": true,
+				"label": "Enable swipe on mobile"
+			},
+			{
+        "type": "select",
+        "id": "image_ratio",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "Adapt to image"
+          },
+          {
+            "value": "portrait",
+            "label": "Portrait"
+          },
+          {
+            "value": "square",
+            "label": "Square"
+          },
+					{
+            "value": "landscape",
+            "label": "Landscape"
+          }
+        ],
+        "default": "landscape",
+        "label": "Image ratio"
+      },
+			{
+        "type": "select",
+        "id": "animation",
+        "label": "Loading animation",
+        "default": "",
+        "options": [
+          { "value": "", "label": "None" },
+          { "value": "animation right-to-left", "label": "Right to left" },
+          { "value": "animation left-to-right", "label": "Left to right" },
+          { "value": "animation right-to-left-long", "label": "Right to left long" },
+          { "value": "animation left-to-right-long", "label": "Left to right long" },
+          { "value": "animation bottom-to-top", "label": "Bottom to top" },
+          { "value": "animation top-to-bottom", "label": "Top to bottom" },
+          { "value": "animation scale", "label": "Scale" },
+          { "value": "animation fade-in", "label": "Fade" }
+        ]
+      },
+			{
+				"type": "checkbox",
+				"id": "show_date",
+				"default": true,
+				"label": "Show date"
+			},
+			{
+				"type": "checkbox",
+				"id": "show_excerpt",
+				"default": true,
+				"label": "Show excerpt"
+			},
+	    {
+	      "type": "checkbox",
+	      "id": "show_view_all",
+	      "default": true,
+	      "label": "Enable \"View all\" button if blog includes more blog posts than shown"
+	    },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "View all button style",
+        "default": "pill alt",
+        "options": [
+					{ "value": "", "label": "Regular" },
+					{ "value": "pill alt", "label": "Pill outline" },
+					{ "value": "border-fill", "label": "Fill animation" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background",
+				"default": "#ffffff"
+      },
+			{
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading",
+				"default": "#151515"
+      },
+			{
+        "type": "color",
+        "id": "text_color",
+        "label": "Text",
+				"default": "#444444"
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Blog posts"
+      }
+    ]
+  }
+
+{% endschema %}

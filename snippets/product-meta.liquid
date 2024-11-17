@@ -1,0 +1,28 @@
+<div class="product_meta">
+  {% if product_meta_collections %}
+    {% if product.collections %}
+    <span class="posted_in">{{ 'products.product.collections' | t }}
+      {% for collection in product.collections %}
+        {{ collection.title | link_to: collection.url }}{% unless forloop.last %}, {% endunless %}
+      {% endfor %}
+    </span>
+    {% endif %}
+  {% endif %}
+  {% if product_meta_tags %}
+    {% if product.tags %}
+    <span class="tagged_as">{{ 'products.product.tags' | t }}
+      {{ product.tags | join: ", " }}
+    </span>
+    {% endif %}
+  {% endif %}
+  {% if product_meta_vendors %}
+    {% if product.vendor %}
+    <span class="tagged_as">{{ 'products.product.vendor' | t }} <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a></span>
+    {% endif %}
+  {% endif %}
+	{% if product_meta_sku %}
+    {% if product.selected_or_first_available_variant.sku %}
+    <span class="tagged_as">{{ 'products.product.sku' | t }} <span class="sku" id="sku-{{ section_id }}">{{ product.selected_or_first_available_variant.sku }}</span></span>
+    {% endif %}
+  {% endif %}
+</div>

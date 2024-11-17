@@ -1,0 +1,336 @@
+<div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
+	<div class="row">
+	  <div class="small-12 columns">
+	    <div class="rich-text text-{{ section.settings.text_alignment }} text-position-{{ section.settings.text_position }} text-width-{{ section.settings.text_width }}" id="section-rich-text-{{ section.id }}">
+				{% for block in section.blocks %}
+					{% if block.type == 'image' %}
+						{% if block.settings.image %}
+							{% render 'responsive-image', image: block.settings.image, retina: block.settings.retina %}
+						{% else %}
+							<div class="thb-placeholder">
+								{{ 'image' | placeholder_svg_tag }}
+							</div>
+						{% endif %}
+					{% endif %}
+					{% if block.type == 'heading' %}
+						{% if block.settings.title != blank %}
+						<{{ block.settings.heading_size | escape }} class="{{ block.settings.animation | escape }}">{{ block.settings.title }}</{{ block.settings.heading_size | escape }}>
+
+					  {% style %}
+					    #section-rich-text-{{ section.id }} {{ block.settings.heading_size | escape }} {
+					      {% if block.settings.title_color != blank %}
+					      color: {{ block.settings.title_color }};
+					      {% endif %}
+					    }
+					  {% endstyle %}
+						{% endif %}
+					{% endif %}
+					{% if block.type == 'text' %}
+						{% if block.settings.text != blank %}
+						<div class="{{ block.settings.animation | escape }} rte">
+							{{ block.settings.text | newline_to_br }}
+							{{ block.settings.custom_liquid }}
+							{% style %}
+								{% if block.settings.text_color != blank %}
+						    #section-rich-text-{{ section.id }} p,
+								#section-rich-text-{{ section.id }} p a {
+						      color: {{ block.settings.text_color }};
+						    }
+								{% endif %}
+						  {% endstyle %}
+						</div>
+						{% endif %}
+					{% endif %}
+					{% if block.type == 'button' %}
+						{% if block.settings.button_text != blank %}
+							<div class="text-center">
+								<div class="vc_empty_space" style="height: 20px"></div>
+								<a class="btn {{ block.settings.button_style }} animation bottom-to-top" href="{{ block.settings.button_link }}" role="button" title="{{ block.settings.button_text }}"><span>{{ block.settings.button_text }}</span></a>
+							</div>
+				  	{% endif %}
+					{% endif %}
+					{%- if block.type == 'custom_liquid' -%}
+    				{{ block.settings.custom_liquid }}
+					{% endif %}
+				{% endfor %}
+	    </div>
+	  </div>
+	</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Rich text",
+		"class": "rich-text-section",
+    "settings": [
+			{
+				"type": "select",
+				"id": "text_width",
+				"label": "Content width",
+				"options": [
+					{
+						"value": "small",
+						"label": "Small"
+					},
+					{
+						"value": "medium",
+						"label": "Medium"
+					},
+					{
+						"value": "large",
+						"label": "Large"
+					}
+				],
+				"default": "medium"
+			},
+			{
+				"type": "select",
+				"id": "text_position",
+				"label": "Content position",
+				"options": [
+					{
+						"value": "left",
+						"label": "Left"
+					},
+					{
+						"value": "center",
+						"label": "Center"
+					},
+					{
+						"value": "right",
+						"label": "Right"
+					}
+				],
+				"default": "center"
+			},
+			{
+				"type": "select",
+				"id": "text_alignment",
+				"label": "Content alignment",
+				"options": [
+					{
+						"value": "left",
+						"label": "Left"
+					},
+					{
+						"value": "center",
+						"label": "Center"
+					},
+					{
+						"value": "right",
+						"label": "Right"
+					}
+				],
+				"default": "center"
+			},
+			{
+				"type": "header",
+				"content": "Spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+		"blocks": [
+			{
+				"type": "image",
+				"name": "Image",
+				"settings": [
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image",
+						"info": "216 x 216 px .png recommended."
+					},
+					{
+						"type": "checkbox",
+						"id": "retina",
+						"label": "Enable retina",
+						"default": true,
+						"info": "Image will be displayed at half the size, making it look crisp on retina screens."
+					},
+					{
+						"type": "select",
+						"id": "animation",
+						"label": "Loading animation",
+						"default": "",
+						"options": [
+							{ "value": "", "label": "None" },
+							{ "value": "animation right-to-left", "label": "Right to left" },
+							{ "value": "animation left-to-right", "label": "Left to right" },
+							{ "value": "animation right-to-left-long", "label": "Right to left long" },
+							{ "value": "animation left-to-right-long", "label": "Left to right long" },
+							{ "value": "animation bottom-to-top", "label": "Bottom to top" },
+							{ "value": "animation top-to-bottom", "label": "Top to bottom" },
+							{ "value": "animation scale", "label": "Scale" },
+							{ "value": "animation fade-in", "label": "Fade" }
+						]
+					}
+				]
+			},
+			{
+				"type": "heading",
+				"name": "Heading",
+				"settings": [
+					{
+						"type": "text",
+						"id": "title",
+						"label": "Text",
+						"default": "Talk about your brand"
+					},
+					{
+		        "type": "select",
+		        "id": "heading_size",
+		        "label": "Size",
+		        "options": [
+		          {
+		            "value": "h1",
+		            "label": "Extra Large"
+		          },
+							{
+		            "value": "h2",
+		            "label": "Large"
+		          },
+							{
+		            "value": "h3",
+		            "label": "Medium"
+		          },
+							{
+		            "value": "h4",
+		            "label": "Small"
+		          }
+		        ],
+		        "default": "h2"
+		      },
+					{
+						"type": "color",
+						"id": "title_color",
+						"label": "Color",
+						"default": "#151515"
+					},
+					{
+						"type": "select",
+						"id": "animation",
+						"label": "Loading animation",
+						"default": "",
+						"options": [
+							{ "value": "", "label": "None" },
+							{ "value": "animation right-to-left", "label": "Right to left" },
+							{ "value": "animation left-to-right", "label": "Left to right" },
+							{ "value": "animation right-to-left-long", "label": "Right to left long" },
+							{ "value": "animation left-to-right-long", "label": "Left to right long" },
+							{ "value": "animation bottom-to-top", "label": "Bottom to top" },
+							{ "value": "animation top-to-bottom", "label": "Top to bottom" },
+							{ "value": "animation scale", "label": "Scale" },
+							{ "value": "animation fade-in", "label": "Fade" }
+						]
+					}
+				]
+			},
+      {
+        "type": "text",
+        "name": "Text",
+        "settings": [
+					{
+						"type": "richtext",
+						"id": "text",
+						"label": "Content",
+						"default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+					},
+					{
+						"type": "liquid",
+						"id": "custom_liquid",
+						"label": "Custom liquid",
+						"info": "Add app snippets or other Liquid code to create advanced customizations."
+					},
+					{
+						"type": "color",
+						"id": "text_color",
+						"label": "Color",
+						"default": "#444444"
+					},
+					{
+						"type": "select",
+						"id": "animation",
+						"label": "Loading animation",
+						"default": "",
+						"options": [
+							{ "value": "", "label": "None" },
+							{ "value": "animation right-to-left", "label": "Right to left" },
+							{ "value": "animation left-to-right", "label": "Left to right" },
+							{ "value": "animation right-to-left-long", "label": "Right to left long" },
+							{ "value": "animation left-to-right-long", "label": "Left to right long" },
+							{ "value": "animation bottom-to-top", "label": "Bottom to top" },
+							{ "value": "animation top-to-bottom", "label": "Top to bottom" },
+							{ "value": "animation scale", "label": "Scale" },
+							{ "value": "animation fade-in", "label": "Fade" }
+						]
+					}
+        ]
+      },
+			{
+        "type": "button",
+        "name": "Button",
+        "settings": [
+					{
+						"id": "button_text",
+						"type": "text",
+						"label": "Label",
+						"default": "Learn More",
+						"info": "Leave the label blank to hide the button."
+					},
+					{
+						"id": "button_link",
+						"type": "url",
+						"label": "Link"
+					},
+					{
+						"type": "select",
+						"id": "button_style",
+						"label": "Style",
+						"default": "border-fill",
+						"options": [
+							{ "value": "", "label": "Regular" },
+							{ "value": "pill alt", "label": "Pill outline" },
+							{ "value": "border-fill", "label": "Fill animation" }
+						]
+					}
+        ]
+      },
+			{
+				"type": "custom_liquid",
+				"name": "Custom liquid",
+				"settings": [
+					{
+						"type": "liquid",
+						"id": "custom_liquid",
+						"label": "Custom liquid",
+						"info": "Add app snippets or other Liquid code to create advanced customizations."
+					}
+				]
+			}
+    ],
+    "presets": [
+      {
+        "name": "Rich text",
+				"blocks": [
+	        {
+	          "type": "heading"
+	        },
+	        {
+	          "type": "text"
+	        }
+	      ]
+      }
+    ]
+  }
+{% endschema %}

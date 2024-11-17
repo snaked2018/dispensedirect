@@ -1,0 +1,88 @@
+{{ 'myaccount.css' | asset_url | stylesheet_tag }}
+<div class="row align-center">
+	<div class="small-12 columns">
+	  <login-form class="thb-overflow-container">
+			<ul class="login-page-form">
+				<li><a href="{{ routes.account_login_url }}">{{ 'my_account.login' | t }}</a></li>
+				{% if shop.customer_accounts_enabled %}
+				<li><a href="{{ routes.account_register_url }}" class="active">{{ 'my_account.register' | t }}</a></li>
+				{% endif %}
+			</ul>
+	    <div class="thb-form-container register-active">
+	      <div class="thb-login-form">
+	        {% form 'customer_login' %}
+	          {% capture page_errors %}
+	            {% if form.errors %}
+	            <div class="form-notification error">
+	              {{ form.errors | default_errors }}
+	            </div>
+	            {% endif %}
+	          {% endcapture %}
+	          <div class="form-row">
+	            <label for="customer_email">{{ 'my_account.email' | t }}</label>
+	            <input type="email" name="customer[email]" />
+	          </div>
+	          <div class="form-row">
+	            <label for="customer_password">{{ 'my_account.password' | t }}</label>
+	            <input type="password" name="customer[password]" />
+	          </div>
+	          <div class="form-row align-middle">
+	            <input type="submit" value="{{ 'my_account.signin' | t }}" />
+	            <a href="#" class="forget-password-toggle">{{ 'my_account.forgot' | t }}</a>
+	          </div>
+	        {% endform %}
+	        {% form 'recover_customer_password', class: 'lost-password-form' %}
+	          {% capture page_errors %}
+	            {% if form.errors %}
+	            <div class="form-notification error">
+	              {{ form.errors | default_errors }}
+	            </div>
+	            {% endif %}
+	          {% endcapture %}
+	          <div class="form-row">
+	            <label for="customer_email">{{ 'my_account.email' | t }}</label>
+	            <input type="email" name="email" />
+	          </div>
+	          <div class="form-row align-middle">
+	            <input type="submit" value="{{ 'my_account.recover' | t }}" />
+	            <a href="#" class="forget-password-toggle">{{ 'my_account.cancel' | t }}</a>
+	          </div>
+	        {% endform %}
+	      </div>
+	      {% if shop.customer_accounts_enabled %}
+	      <div class="thb-register-form">
+	        {% form 'create_customer' %}
+						{% if form.errors %}
+						<div class="form-notification error">
+							{{ form.errors | default_errors }}
+						</div>
+						{% endif %}
+	          <div class="form-row row">
+	            <div class="small-12 medium-6 columns">
+	              <label for="first_name">{{ 'my_account.first_name' | t }}</label>
+	              <input type="text" value="" name="customer[first_name]" size="30" />
+	            </div>
+	            <div class="small-12 medium-6 columns">
+	              <label for="last_name">{{ 'my_account.last_name' | t }}</label>
+	              <input type="text" value="" name="customer[last_name]" size="30" />
+	            </div>
+	          </div>
+	          <div class="form-row">
+	            <label for="email">{{ 'my_account.email' | t }}</label>
+	            <input type="email" value="" name="customer[email]" size="30" />
+	          </div>
+	          <div class="form-row">
+	            <label for="password">{{ 'my_account.password' | t }}</label>
+	            <input type="password" value="" name="customer[password]" size="30" />
+	          </div>
+	          <div class="form-row">
+	            <input type="submit" value="{{ 'my_account.register' | t }}" />
+	          </div>
+	        {% endform %}
+	      </div>
+	      {% endif %}
+	    </div>
+	  </login-form>
+	</div>
+</div>
+<script src="{{ 'login-form.min.js' | asset_url }}" defer="defer"></script>

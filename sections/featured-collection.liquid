@@ -1,0 +1,235 @@
+{%- liquid
+	assign text_color = section.settings.text_color
+	assign heading_color = section.settings.heading_color
+	assign bg_color = section.settings.bg_color
+  if section.settings.collection.all_products_count > section.settings.products_num
+    assign more_in_collection = true
+  endif
+-%}
+<div class="section-margin{% if section.settings.disable_top_spacing %} section-no-top-margin{% endif %}{% if section.settings.disable_bottom_spacing %} section-no-bottom-margin{% endif %}{% if section.settings.bg_color != blank and section.settings.bg_color != 'rgba(0,0,0,0)' %} section-padding{% endif %}" id="section-products-{{ section.id }}">
+  {% if section.settings.title != blank or section.settings.text != blank %}
+  <div class="row text-center align-center">
+    <div class="small-12 medium-7 large-5 columns item">
+      {% if section.settings.title != blank %}
+      <h2 class="animation bottom-to-top">{{ section.settings.title }}</h2>
+      {% endif %}
+      {% if section.settings.text != blank %}
+      <div class="animation bottom-to-top text-center rte">
+        {{ section.settings.text }}
+        <div class="vc_empty_space" style="height: 30px"></div>
+      </div>
+			{% else %}
+				<div class="vc_empty_space" style="height: 30px"></div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+	<div class="row">
+    <div class="small-12 columns">
+			<div class="products row">
+				{% assign grid_item_width = '' %}
+				{% case section.settings.products_grid_num %}
+					{% when 1 %}
+						{% assign grid_item_width = 'small-12' %}
+					{% when 2 %}
+						{% assign grid_item_width = 'small-6' %}
+					{% when 3 %}
+						{% assign grid_item_width = 'small-6 medium-4' %}
+					{% when 4 %}
+						{% assign grid_item_width = 'small-6 medium-3' %}
+					{% when 5 %}
+						{% assign grid_item_width = 'small-6 medium-1/5' %}
+					{% when 6 %}
+						{% assign grid_item_width = 'small-6 medium-4 large-2' %}
+					{% else %}
+						{% assign grid_item_width = 'small-6 medium-3' %}
+				{% endcase %}
+			  {% if section.settings.collection != blank %}
+					{% for product in section.settings.collection.products limit: section.settings.products_num %}
+						{% render 'product-card' product: product, grid_item_width: grid_item_width, animation: section.settings.animation %}
+					{% endfor %}
+				{% else %}
+					{% for i in (1..section.settings.products_num) %}
+						{% liquid
+							assign index = forloop.index | modulo: 6 | plus: 1
+							assign placeholder_size = '100'
+							if settings.image_ratio == 'portrait'
+								assign placeholder_size = '120'
+							elsif settings.image_ratio == 'adapt'
+								assign placeholder_size = '100'
+							endif
+						%}
+						<div class="product {{ grid_item_width | strip_newlines }} thb-listing-{{ settings.products_style | escape }} columns {{ section.settings.animation | escape }}">
+							<figure class="product_thumbnail" style="--ratio-percent: {{ placeholder_size }}%;">
+								<a href="#">
+									<div class="thb-placeholder">
+										{{ 'product-' | append: index | placeholder_svg_tag }}
+									</div>
+								</a>
+							</figure>
+							<h3><a href="#" title="{{ 'general.misc.your_product_name' | t | escape }}">{{ 'general.misc.your_product_name' | t }}</a></h3>
+							<div class="product_after_title">
+								<div class="product_after_shop_loop_price">
+									<span class="price"><span class="amount">$186.00</span></span>
+								</div>
+								<div class="product_after_shop_loop_buttons">
+									<a href="#" class="add_to_cart_button">
+										{{ 'products.product.out_of_stock' | t }}
+									</a>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
+		</div>
+	</div>
+  {%- if section.settings.show_view_all and more_in_collection -%}
+  <div class="text-center">
+    <a class="btn {{ section.settings.button_style | escape }} animation bottom-to-top" href="{{ section.settings.collection.url }}"><span>{{ 'general.view_all' | t }}</span></a>
+  </div>
+  {% endif %}
+
+  {% style %}
+		{% if bg_color != blank %}
+	    #section-products-{{ section.id }} {
+	      background: {{ bg_color }};
+	    }
+		{% endif %}
+		{% if heading_color != blank %}
+			#section-products-{{ section.id }} {
+				--color-heading: {{ heading_color }};
+			}
+		{% endif %}
+		{% if text_color != blank %}
+			#section-products-{{ section.id }} {
+				--color-link: {{ text_color }};
+				--color-text: {{ text_color }};
+				--color-price: {{ text_color }};
+				--color-text-rgb: {{ text_color | color_extract: 'red' }}, {{ text_color | color_extract: 'green' }}, {{ text_color | color_extract: 'blue' }};
+			}
+
+		{% endif %}
+  {% endstyle %}
+</div>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Collection"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Describe your featured collection here</p>"
+      },
+      {
+         "type": "collection",
+         "id": "collection",
+         "label": "Collection"
+      },
+      {
+        "type": "range",
+        "id": "products_num",
+        "min": 2,
+        "max": 24,
+        "step": 1,
+        "label": "Maximum products to show",
+        "default": 4
+      },
+			{
+        "type": "range",
+        "id": "products_grid_num",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "Products per row",
+        "default": 4
+      },
+			{
+	      "type": "checkbox",
+	      "id": "show_view_all",
+	      "default": true,
+	      "label": "Enable \"View all\" button if collection has more products than shown"
+	    },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "View all button style",
+        "default": "pill alt",
+        "options": [
+					{ "value": "", "label": "Regular" },
+					{ "value": "pill alt", "label": "Pill outline" },
+					{ "value": "border-fill", "label": "Fill animation" }
+        ]
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "bg_color",
+        "label": "Background",
+				"default": "#ffffff"
+      },
+			{
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading",
+				"default": "#151515"
+      },
+			{
+        "type": "color",
+        "id": "text_color",
+        "label": "Text",
+				"default": "#444444"
+      },
+			{
+        "type": "select",
+        "id": "animation",
+        "label": "Loading animation",
+        "default": "",
+        "options": [
+          { "value": "", "label": "None" },
+          { "value": "animation right-to-left", "label": "Right to left" },
+          { "value": "animation left-to-right", "label": "Left to right" },
+          { "value": "animation right-to-left-long", "label": "Right to left long" },
+          { "value": "animation left-to-right-long", "label": "Left to right long" },
+          { "value": "animation bottom-to-top", "label": "Bottom to top" },
+          { "value": "animation top-to-bottom", "label": "Top to bottom" },
+          { "value": "animation scale", "label": "Scale" },
+          { "value": "animation fade-in", "label": "Fade" }
+        ]
+      },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Featured collection"
+      }
+    ]
+  }
+
+{% endschema %}

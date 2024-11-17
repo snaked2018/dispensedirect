@@ -1,0 +1,107 @@
+{{ 'divider.css' | asset_url | stylesheet_tag }}
+{%- liquid
+	assign divider = section.settings.divider
+	assign divider_height_mobile = section.settings.divider_height_mobile
+	assign divider_height_desktop = section.settings.divider_height_desktop
+	assign divider_background = section.settings.divider_background
+	assign divider_foreground = section.settings.divider_foreground
+-%}
+<svg-divider class="divider divider--{{ divider }}" style="--divider-height-mobile: {{ divider_height_mobile | append: 'px' }}; --divider-height-desktop: {{ divider_height_desktop | append: 'px' }}; --divider-background: {{ divider_background }}; --divider-foreground: {{ divider_foreground }};">
+	{%- render 'svg-dividers', divider: divider -%}
+</svg-divider>
+<script src="{{ 'divider.min.js' | asset_url }}" defer="defer"></script>
+{% schema %}
+  {
+    "name": "Divider",
+    "settings": [
+			{
+				"type": "select",
+				"id": "divider",
+				"options": [
+					{
+						"value": "wave",
+						"label": "Wave"
+					},
+					{
+						"value": "wave-2",
+						"label": "Wave 2"
+					},
+					{
+						"value": "wave-3",
+						"label": "Wave 3"
+					},
+					{
+						"value": "wave-inverse",
+						"label": "Wave inversed"
+					},
+					{
+						"value": "circle",
+						"label": "Circle"
+					},
+					{
+						"value": "circle-inverse",
+						"label": "Circle inversed"
+					},
+					{
+						"value": "triangle",
+						"label": "Triangle"
+					},
+					{
+						"value": "tilt-right",
+						"label": "Tilt right"
+					},
+					{
+						"value": "tilt-left",
+						"label": "Tilt left"
+					}
+				],
+				"default": "wave",
+				"label": "Divider shape"
+			},
+			{
+				"type": "range",
+				"id": "divider_height_mobile",
+				"min": 0,
+				"max": 200,
+				"step": 5,
+				"unit": "px",
+				"label": "Mobile",
+				"default": 50,
+				"info": "Changes the section height in mobile screens."
+			},
+			{
+				"type": "range",
+				"id": "divider_height_desktop",
+				"min": 0,
+				"max": 200,
+				"step": 5,
+				"unit": "px",
+				"label": "Desktop",
+				"default": 100,
+				"info": "Changes the section height in desktop screens."
+			},
+			{
+				"type": "header",
+				"content": "Colors"
+			},
+			{
+				"type": "color",
+				"id": "divider_background",
+				"label": "Background",
+				"default": "#ffffff"
+			},
+			{
+				"type": "color",
+				"id": "divider_foreground",
+				"label": "Foreground",
+				"default": "#151515"
+			}
+    ],
+    "presets": [
+      {
+        "name": "Divider"
+      }
+    ]
+  }
+
+{% endschema %}

@@ -1,0 +1,9 @@
+<div class="cart-empty text-center">
+  <div class="section">
+    <figure>
+      {% render 'svg-icons' with 'thb-cart-empty' %}
+    </figure>
+    <p class="cart-empty">{{ 'general.cart.empty' | t }}</p>
+    <p class="return-to-shop"><a class="button" href="{{ routes.all_products_collection_url }}">{{ 'general.cart.return' | t }}</a></p>
+  </div>
+</div>

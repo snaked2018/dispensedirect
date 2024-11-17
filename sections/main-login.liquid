@@ -1,0 +1,122 @@
+{{ 'myaccount.css' | asset_url | stylesheet_tag }}
+{%- liquid
+	if section.settings.enable_shop_login_button == false
+		assign hide_shop_login_button = true
+	endif
+-%}
+<div class="row align-center">
+	<div class="small-12 columns">
+    <login-form class="thb-overflow-container">
+  		<ul class="login-page-form">
+  			<li><a href="{{ routes.account_login_url }}" class="active">{{ 'my_account.login' | t }}</a></li>
+  			{% if shop.customer_accounts_enabled %}
+  			<li><a href="{{ routes.account_register_url }}">{{ 'my_account.register' | t }}</a></li>
+  			{% endif %}
+  		</ul>
+      <div class="thb-form-container {% unless shop.customer_accounts_enabled %}no-register{% endunless %}">
+        <div class="thb-login-form">
+          {% form 'customer_login' %}
+						{% if form.errors %}
+						<div class="form-notification error">
+							{{ form.errors | default_errors }}
+						</div>
+						{% endif %}
+            <div class="form-row">
+              <label for="customer_email">{{ 'my_account.email' | t }}</label>
+              <input type="email" name="customer[email]" />
+            </div>
+            <div class="form-row">
+              <label for="customer_password">{{ 'my_account.password' | t }}</label>
+              <input type="password" name="customer[password]" />
+            </div>
+            <div class="form-row align-middle{%- if shop.features.login_with_shop_classic_customer_accounts? %}{% unless hide_shop_login_button %}{% endunless %} sign-in-with-shop-provider{%- endif -%}">
+              <input type="submit" value="{{ 'my_account.signin' | t }}" />
+              {%- if shop.features.login_with_shop_classic_customer_accounts? -%}
+								{%- unless hide_shop_login_button -%}
+									<p>
+										{{ 'my_account.alternate_provider_separator' | t }}
+									</p>
+								{%- endunless -%}
+								{{ shop | login_button: hide_button: hide_shop_login_button }}
+						  {%- endif -%}
+            </div>
+            
+            <div class="form-row align-middle">
+              <a href="#" class="forget-password-toggle">{{ 'my_account.forgot' | t }}</a>
+            </div>
+          {% endform %}
+          {% form 'recover_customer_password', class: 'lost-password-form' %}
+            {%- assign recover_success = form.posted_successfully? -%}
+            {%- if recover_success == true -%}
+              <div class="form-notification">
+                {% render 'svg-icons' with 'thb-success' %} {{ 'my_account.recover_password.success' | t }}
+              </div>
+            {%- endif -%}
+						{% if form.errors %}
+						<div class="form-notification error">
+							{{ form.errors | default_errors }}
+						</div>
+						{% endif %}
+            <div class="form-row">
+              <label for="customer_email">{{ 'my_account.email' | t }}</label>
+              <input type="email" name="email" />
+            </div>
+            <div class="form-row align-middle">
+              <input type="submit" value="{{ 'my_account.recover' | t }}" />
+              <a href="#" class="forget-password-toggle">{{ 'my_account.cancel' | t }}</a>
+            </div>
+          {% endform %}
+        </div>
+        {% if shop.customer_accounts_enabled %}
+        <div class="thb-register-form">
+          {% form 'create_customer' %}
+						{% if form.errors %}
+						<div class="form-notification error">
+							{{ form.errors | default_errors }}
+						</div>
+						{% endif %}
+            <div class="form-row row">
+              <div class="small-12 medium-6 columns">
+                <label for="first_name">{{ 'my_account.first_name' | t }}</label>
+                <input type="text" value="" name="customer[first_name]" size="30" />
+              </div>
+              <div class="small-12 medium-6 columns">
+                <label for="last_name">{{ 'my_account.last_name' | t }}</label>
+                <input type="text" value="" name="customer[last_name]" size="30" />
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="email">{{ 'my_account.email' | t }}</label>
+              <input type="email" value="" name="customer[email]" size="30" />
+            </div>
+            <div class="form-row">
+              <label for="password">{{ 'my_account.password' | t }}</label>
+              <input type="password" value="" name="customer[password]" size="30" />
+            </div>
+            <div class="form-row">
+              <input type="submit" value="{{ 'my_account.register' | t }}" />
+            </div>
+          {% endform %}
+        </div>
+        {% endif %}
+      </div>
+    </login-form>
+  </div>
+</div>
+<script src="{{ 'login-form.min.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+{
+  "name": "Login",
+  "tag": "section",
+  "class": "section-customer-login",
+	"settings": [
+		{
+      "type": "checkbox",
+      "id": "enable_shop_login_button",
+      "label": "Enable Sign in with Shop",
+      "default": true
+    }
+	]
+}
+{% endschema %}

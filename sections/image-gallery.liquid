@@ -1,0 +1,182 @@
+{% case section.settings.grid_num %}
+  {% when 2 %}
+    {% assign grid_item_width = 'small-6' %}
+  {% when 3 %}
+    {% assign grid_item_width = 'small-6 medium-4' %}
+  {% when 4 %}
+    {% assign grid_item_width = 'small-6 medium-3' %}
+  {% when 5 %}
+    {% assign grid_item_width = 'small-6 medium-1/5' %}
+  {% when 6 %}
+    {% assign grid_item_width = 'small-6 medium-4 large-2' %}
+  {% else %}
+    {% assign grid_item_width = 'small-6 medium-4' %}
+{% endcase %}
+{%- liquid
+	assign sizes = '320x320,640x640'
+  if section.settings.image_ratio == 'portrait'
+    assign sizes = '320x400,640x800'
+  elsif section.settings.image_ratio == 'adapt'
+    assign sizes = '320x0,640x0'
+	elsif section.settings.image_ratio == 'landscape'
+    assign sizes = '320x240,640x480'
+  endif
+
+-%}
+{{ 'image-gallery.css' | asset_url | stylesheet_tag }}
+<div class="section-margin{% if section.settings.disable_top_spacing %} section-no-top-margin{% endif %}{% if section.settings.disable_bottom_spacing %} section-no-bottom-margin{% endif %} {{ 'media-aspect-' | append: section.settings.image_ratio }}">
+	<div class="row section-image-gallery" id="section-image-grid-{{ section.id }}">
+	  <div class="small-12 columns">
+	    <div class="row low-padding">
+	      {% for block in section.blocks %}
+	        <div class="{{ grid_item_width | escape }} columns text-center" {{ block.shopify_attributes }}>
+	          <div class="image-gallery-image {{ block.settings.animation | escape }}">
+							<div class="cover-bg">
+	              {% if block.settings.image %}
+	                {%- render 'responsive-image', image: block.settings.image, sizes: sizes -%}
+								{% else %}
+									{{ 'image' | placeholder_svg_tag: 'placeholder_svg_tag' }}
+								{% endif %}
+							</div>
+							<div class="image-gallery-overlay" style="--overlay-bg: rgba({{ block.settings.overlay_color | color_extract: 'red' }}, {{ block.settings.overlay_color | color_extract: 'green' }}, {{ block.settings.overlay_color | color_extract: 'blue' }}, {{ block.settings.overlay_opacity | divided_by: 100.0 }})"></div>
+	            {% if block.settings.link_text != blank %}
+							<a{% if block.settings.link == blank %} role="link" aria-disabled="true"{% else %} href="{{ block.settings.link }}"{% endif %} title="{{ block.settings.link_text }}" class="image-gallery-link"><span>{{ block.settings.link_text }}</span></a>
+	            {% endif %}
+	          </div>
+	        </div>
+	      {% endfor %}
+	    </div>
+	  </div>
+	</div>
+</div>
+{% schema %}
+  {
+    "name": "Image gallery",
+    "settings": [
+			{
+        "type": "range",
+        "id": "grid_num",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "Images per row",
+        "default": 3
+      },
+			{
+	      "type": "select",
+	      "id": "image_ratio",
+	      "options": [
+	        {
+	          "value": "adapt",
+	          "label": "Adapt to image"
+	        },
+	        {
+	          "value": "portrait",
+	          "label": "Portrait"
+	        },
+					{
+	          "value": "landscape",
+	          "label": "Landscape"
+	        },
+	        {
+	          "value": "square",
+	          "label": "Square"
+	        }
+	      ],
+	      "default": "adapt",
+	      "label": "Image ratio"
+	    },
+			{
+        "type": "header",
+        "content": "Spacing"
+      },
+			{
+				"type": "checkbox",
+				"id": "disable_top_spacing",
+				"default": false,
+				"label": "Remove top spacing"
+			},
+			{
+				"type": "checkbox",
+				"id": "disable_bottom_spacing",
+				"default": false,
+				"label": "Remove bottom spacing"
+			}
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+						"info": "640 x 640 .jpg recommended."
+          },
+					{
+		        "type": "color",
+		        "id": "overlay_color",
+		        "label": "Overlay",
+		        "default": "#000000"
+		      },
+					{
+						"type": "range",
+						"id": "overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Overlay opacity",
+						"default": 20
+					},
+					{
+            "id": "link_text",
+            "type": "text",
+            "label": "Button label",
+            "default": "SHOP NOW",
+						"info": "Leave the label blank to hide the button."
+          },
+          {
+            "id": "link",
+            "type": "url",
+            "label": "Button link"
+          },
+          {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "",
+            "options": [
+              { "value": "", "label": "None" },
+              { "value": "animation right-to-left", "label": "Right to left" },
+              { "value": "animation left-to-right", "label": "Left to right" },
+              { "value": "animation right-to-left-long", "label": "Right to left long" },
+              { "value": "animation left-to-right-long", "label": "Left to right long" },
+              { "value": "animation bottom-to-top", "label": "Bottom to top" },
+              { "value": "animation top-to-bottom", "label": "Top to bottom" },
+              { "value": "animation scale", "label": "Scale" },
+              { "value": "animation fade-in", "label": "Fade" }
+            ]
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image gallery",
+				"blocks": [
+					{
+						"type": "image"
+					},
+					{
+						"type": "image"
+					},
+					{
+						"type": "image"
+					}
+				]
+      }
+    ]
+  }
+{% endschema %}

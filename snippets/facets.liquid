@@ -1,0 +1,227 @@
+<link rel="stylesheet" href="{{ 'sidebar.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>
+<link rel="stylesheet" href="{{ 'sidebar.css' | asset_url }}" media="all">
+</noscript>
+{%- liquid
+	assign has_price_filter = results.filters | where: "type", "price_range"
+
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+<div id="side-filters" class="side-panel" role="dialog">
+	<header>
+		<h6>{{ 'general.collection.filter' | t }}</h6>
+		<button class="thb-close" title="Close">{% render 'svg-icons' with 'thb-close' %}</button>
+	</header>
+	<div class="side-panel-content">
+		<facet-filters-form class="facets">
+			<form id="FacetFiltersForm" class="facets__form">
+				{%- if results.terms -%}
+					<input type="hidden" name="q" value="{{ results.terms | escape }}">
+					<input name="options[prefix]" type="hidden" value="last">
+				{%- endif -%}
+				{%- unless results.filters == empty -%}
+					{%- for filter in results.filters -%}
+						{% case filter.type %}
+							{% when 'boolean' or 'list' %}
+								{%- assign label = filter.label | downcase | replace: ' ', '-' | escape -%}
+								{%- assign filter_name = filter.label | downcase | escape -%}
+								<collapsible-row class="widget widget_layered_nav{% if forloop.last %} last-widget{% endif %}" data-index="{{ forloop.index }}">
+									<details class="thb-filter js-filter" open>
+										<summary class="thb-filter-title h6">{{ filter.label | escape }} <span></span></summary>
+										{%- liquid
+											if filter_name contains 'color' or filter_name contains 'colour' or filter_name contains 'couleur' or filter_name contains 'farbe'
+												assign filter_name = 'color'
+											endif
+
+											# Additional swatch variant options set inside theme settings
+											assign color_swatches_variant_option = settings.color_swatches_variant_option | downcase | split: ', '
+
+											if color_swatches_variant_option contains slug
+												assign filter_name = 'color'
+											endif
+
+											if filter.presentation == 'swatch'
+												assign filter_name = 'color'
+											endif
+										-%}
+										<ul class="{{ filter.type | escape }}-{{ filter_name }} collapsible__content">
+											{%- liquid
+												assign custom_colors = settings.color_swatches | newline_to_br | split: '<br />'
+												assign key_array = ''
+												assign val_array = ''
+
+												for color in custom_colors
+													assign key = color | split: ':' | first | rstrip
+													assign key_value = color | split: ':' | last | lstrip
+													assign key_array = key_array | append: ',' | append: key
+													assign val_array = val_array | append: ',' | append: key_value
+												endfor
+
+												assign key_array = key_array | remove_first: ',' | strip_newlines | downcase | split: ','
+												assign val_array = val_array | remove_first: ',' | split: ','
+
+												assign sorted_values = filter.values
+												# Keep the selected values grouped together when operator is AND
+												if filter.operator == 'AND'
+													assign active_filter_values = filter.values | where: 'active', true
+													assign inactive_filter_values = filter.values | where: 'active', false
+													assign sorted_values = active_filter_values | concat: inactive_filter_values
+												endif
+											-%}
+											{%- for value in sorted_values -%}
+												<li>
+													<input type="checkbox"
+														name="{{ value.param_name }}"
+														value="{{ value.value }}"
+														id="Filter-{{ label }}-{{ forloop.index }}"
+														{% if value.active %}checked{% endif %}
+														{% if value.count == 0 and value.active == false %}disabled{% endif %}
+													>
+													{%- if filter.presentation == 'swatch' -%}
+														{%- liquid
+															assign bg_value = empty
+															assign color_value = value.swatch.color
+
+															if value.swatch.image
+																assign bg_value = value.swatch.image | image_url: width: 40
+															endif
+
+														-%}
+														<label
+															for="Filter-{{ label }}-{{ forloop.index }}"
+															class="facet-checkbox facet-checkbox--presentation{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}"
+															style="--bg-color: {{ color_value }}; --option-color-image:url('{{ bg_value }}');"
+														>
+															{{ value.label | escape }}
+														</label>
+													{%- else -%}
+														{%- liquid
+															assign color_value = value.value | downcase | escape
+																
+															for custom_color in key_array
+																if custom_color == color_value
+																	assign color_value = val_array[forloop.index0]
+																endif
+															endfor
+															assign bg_value = false
+															if color_value contains '.'
+																assign bg_value = color_value | file_url
+																assign color_value = 'var(--bg-body)'
+															endif
+														-%}
+														<label
+															for="Filter-{{ label }}-{{ forloop.index }}"
+															class="facet-checkbox{% if value.count == 0 and value.active == false %} facet-checkbox--disabled{% endif %}"
+															style="--bg-color: {{ color_value | replace: ' ', '-' | downcase | escape }}; {%- if bg_value -%} --option-color-image: url('{{ bg_value | escape }}');{%- endif -%}"
+															>
+															{{ value.label | escape }}
+														</label>
+													{%- endif -%}
+													{% if show_counts %}
+													<span class="count">{{ value.count }}</span>
+													{% endif %}
+												</li>
+											{%- endfor -%}
+										</ul>
+									</details>
+								</collapsible-row >
+							{% when 'price_range' %}
+							<collapsible-row class="widget widget_price_filter{% if forloop.last %} last-widget{% endif %}" data-index="{{ forloop.index }}">
+								<details class="thb-filter js-filter" open>
+									<summary class="thb-filter-title h6">{{ filter.label | escape }} <span></span></summary>
+									<div class="{{ filter.type | escape }}-{{ filter.label | downcase | escape }} collapsible__content">
+										{% liquid
+											assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+											assign uses_comma_decimals = false
+											if currencies_using_comma_decimals contains cart.currency.iso_code
+												assign uses_comma_decimals = true
+											endif
+
+											assign max_value = nil
+											assign min_value = nil
+
+											if uses_comma_decimals
+												if filter.max_value.value
+
+													assign max_value = filter.max_value.value | money_without_currency | replace: '.', ''
+												endif
+												if filter.min_value.value
+													assign min_value = filter.min_value.value | money_without_currency | replace: '.', ''
+												endif
+												assign range_max = filter.range_max | money_without_currency | replace: '.', ''
+											else
+												if filter.max_value.value
+													assign max_value = filter.max_value.value | money_without_currency | replace: ',', ''
+												endif
+												if filter.min_value.value
+													assign min_value = filter.min_value.value | money_without_currency | replace: ',', ''
+												endif
+												assign range_max = filter.range_max | money_without_currency | strip_html | replace: ',', '' | divided_by: 1.00
+											endif
+
+										%}
+										<price-slider class="price_slider_wrapper">
+											<div
+												class="price_slider"
+												data-min-value="{{ min_value }}"
+												data-min-name="filter.v.price.gte"
+												data-min="0"
+												data-max-value="{{ max_value }}"
+												data-max-name="filter.v.price.lte"
+												data-max="{{ range_max }}">
+											</div>
+											<div class="price_slider_amount no-js-visible">
+												<div class="price_slider_amount__single">
+													<span class="field-currency">{{ cart.currency.symbol }}</span>
+													<input class="field__input field__input_min"
+														name="{{ filter.min_value.param_name }}"
+														id="Filter-{{ filter.label | escape }}-GTE"
+														value="{{ min_value }}"
+														type="text"
+														placeholder="0"
+													/>
+												</div>
+												<div class="price_slider_amount__single">
+													<span class="field-currency">{{ cart.currency.symbol }}</span>
+													<input class="field__input field__input_max"
+														name="{{ filter.max_value.param_name }}"
+														id="Filter-{{ filter.label | escape }}-LTE"
+														value="{{ max_value }}"
+														type="text"
+														placeholder="{{ filter.range_max | money_without_currency }}"
+													/>
+												</div>
+											</div>
+											<div class="price_label no-js-hidden">
+												{{ 'general.collection.price' | t }} <div class="from"><span class="field-currency">{{ cart.currency.symbol }}</span><span class="price-slider--amount"></span></div> &mdash; <div class="to"><span class="field-currency">{{ cart.currency.symbol }}</span><span class="price-slider--amount"></span></div>
+											</div>
+										</price-slider>
+									</div>
+								</details>
+							</collapsible-row>
+						{% endcase %}
+					{%- endfor -%}
+				{%- else -%}
+					<p>{{ 'general.collection.no_filters_available' | t }}</p>
+				{%- endunless -%}
+				<div class="side-panel-footer">
+					<a href="{{ results_url }}" class="button alt filter-clear">{{ 'general.collection.clear' | t }}</a>
+					<noscript>
+						<a class="button alt filter-clear" href="{{ routes.all_products_collection_url }}">{{ 'general.collection.clear' | t }}</a>
+					</noscript>
+					<button class="button filter-apply">{{ 'general.collection.apply' | t }}</button>
+				</div>
+			</form>
+		</facets-filters-form>
+	</div>
+</div>
+{%- if has_price_filter.size > 0  -%}
+{{ 'nouislider.min.js' | asset_url | script_tag }}
+{%- endif  -%}
+{{ 'facets.min.js' | asset_url | script_tag }}
+{{ 'collapsible-row.min.js' | asset_url | script_tag }}

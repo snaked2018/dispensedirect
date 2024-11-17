@@ -1,0 +1,74 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.section-image-with-text .content-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start; }
+  .section-image-with-text .content-side .content-side-inner {
+    width: 100%;
+    padding: 10% 18%; }
+    .section-image-with-text .content-side .content-side-inner > img {
+      margin-bottom: 30px; }
+
+.section-image-with-text .image-side-holder {
+  position: relative; }
+  .section-image-with-text .image-side-holder img,
+  .section-image-with-text .image-side-holder svg {
+    display: block;
+    max-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; }
+  .section-image-with-text .image-side-holder svg {
+    background: #f5f5f5; }
+
+.section-image-with-text.section-image-with-text-small .image-side-holder {
+  height: 310px; }
+  @media only screen and (min-width: 768px) {
+    .section-image-with-text.section-image-with-text-small .image-side-holder {
+      height: 370px; } }
+
+.section-image-with-text.section-image-with-text-large .image-side-holder {
+  height: 430px; }
+  @media only screen and (min-width: 768px) {
+    .section-image-with-text.section-image-with-text-large .image-side-holder {
+      height: 550px; } }
+
+.section-image-with-text.section-image-with-text-adapt .image-side-holder {
+  height: auto;
+  padding-bottom: 0; }
+  .section-image-with-text.section-image-with-text-adapt .image-side-holder img,
+  .section-image-with-text.section-image-with-text-adapt .image-side-holder svg {
+    position: static; }
+
+.section-image-with-text .small-text p {
+  font-size: 0.875rem; }
+
+.section-image-with-text .row-direction-image-right .content-side {
+  order: 2; }
+  @media only screen and (min-width: 768px) {
+    .section-image-with-text .row-direction-image-right .content-side {
+      order: 1; } }
+
+.section-image-with-text .row-direction-image-right .image-side {
+  order: 1; }
+  @media only screen and (min-width: 768px) {
+    .section-image-with-text .row-direction-image-right .image-side {
+      order: 2; } }
+
+.section-image-with-text .row-direction-image-left .content-side {
+  order: 2; }
+
+.section-image-with-text .row-direction-image-left .image-side {
+  order: 1; }
+
+.section-image-with-text.section-image-with-text-style2 .content-side {
+  font-size: 20px; }

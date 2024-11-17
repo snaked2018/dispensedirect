@@ -1,0 +1,37 @@
+{%- if predictive_search.performed -%}
+	{%- if predictive_search.resources.queries.size > 0 -%}
+		<div class="query-suggestions">
+			<label>{{ 'search.suggestions' | t }}</label> 
+			{%- for query in predictive_search.resources.queries -%}
+		    <a href="{{ query.url }}" class="predictive-search__item link link--text" tabindex="-1">{{ query.styled_text }}</a>{% unless forloop.last %}, {% endunless %}
+		  {%- endfor -%}
+	</div>
+	{%- endif -%}
+  {%- if predictive_search.resources.products.size > 0 -%}
+    <ul class="product_list_widget row small-up-1 medium-up-2">
+
+			{%- liquid
+				assign count = settings.header_search_suggestions_num
+				assign results = predictive_search.resources.products | slice: 0, count
+			%}
+      {%- for product in results -%}
+        <li class="column autocomplete-suggestion">
+					<a href="{{ product.url }}" class="mini_cart_item">
+						{% if product.featured_image %}
+							{%- render 'responsive-image', image: product.featured_image, sizes: '168x0' -%}
+						{% else %}
+							<div class="thb-placeholder" style="width: 75px; height:75px;">
+								{{ 'product-1' | placeholder_svg_tag }}
+							</div>
+						{% endif %}
+						<div class="mini_cart_item_content">
+							<h3>{{ product.title | highlight: predictive_search.terms }}</h3>
+							{% render 'product-price', product: product %}
+						</div>
+					</a>
+				</li>
+      {%- endfor -%}
+			<div class="thb-search-btn"><a href="{{ routes.search_url }}" class="btn alt small">{{ 'search.view_all' | t }}</a></div>
+    </ul>
+  {%- endif -%}
+{%- endif -%}

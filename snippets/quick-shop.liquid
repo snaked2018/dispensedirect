@@ -1,0 +1,23 @@
+{% if settings.quick_shop and template != 'cart' %}
+  <quick-shop>
+    <button class="quick-shop">{{ 'general.quick_shop' | t }}</button>
+    <nav id="Quick-Drawer" class="side-panel">
+      <header>
+        <h6>{{ 'general.quick_shop' | t }}</h6>
+        <button class="thb-close" title="{{ 'general.close' | t }}">{% render 'svg-icons' with 'thb-close' %}</button>
+      </header>
+      <div class="side-panel-content">
+        <div class="product_container">
+          {%- if settings.quick_shop_collection -%}
+          <div class="products row">
+            {%- for product in collections[settings.quick_shop_collection].products -%}
+              {%- render 'product-card' product: product, grid_item_width: 'small-6' -%}
+            {%- endfor -%}
+          </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </nav>
+  </quick-shop>
+	<script src="{{ 'quick-shop.min.js' | asset_url }}" async></script>
+{% endif %}

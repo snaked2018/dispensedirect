@@ -1,0 +1,47 @@
+/*------------------------------------------------------------------
+Variables
+*/
+/*------------------------------------------------------------------
+Re-usable Styles
+*/
+.pagination {
+  padding: 0 0 40px;
+  color: var(--color-text); }
+  @media only screen and (min-width: 768px) {
+    .pagination {
+      padding-bottom: 70px; } }
+  .pagination .nav-links {
+    list-style: none;
+    display: block;
+    text-align: center;
+    margin: 0; }
+    .pagination .nav-links span {
+      display: inline-block;
+      text-align: center; }
+  .pagination .page.current {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 0 5px; }
+    @media only screen and (min-width: 768px) {
+      .pagination .page.current {
+        padding: 0 10px; } }
+  .pagination a {
+    display: block;
+    font-weight: 400;
+    padding: 0 5px; }
+    @media only screen and (min-width: 768px) {
+      .pagination a {
+        padding: 0 10px; } }
+    .pagination a.next {
+      margin-left: 15px; }
+      @media only screen and (min-width: 768px) {
+        .pagination a.next {
+          margin-left: 30px; } }
+    .pagination a.prev {
+      margin-right: 15px; }
+      @media only screen and (min-width: 768px) {
+        .pagination a.prev {
+          margin-right: 30px; } }
+    .pagination a.current {
+      color: var(--color-text);
+      text-decoration: underline; }
