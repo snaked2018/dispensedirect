@@ -670,6 +670,12 @@
         "info": "https://vimeo.com/shopify"
       },
       {
+        "type": "text",
+        "id": "social_linkedin_link",
+        "label": "Linkedin",
+        "info": "https://linkedin.com"
+      },
+      {
         "type": "header",
         "content": "Social sharing options"
       },

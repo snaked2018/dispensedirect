@@ -48,7 +48,9 @@ Utilities
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; }
+    object-fit: cover;
+    background: #ccc6bd;
+    border-radius: 20px;} 
   .multicolumn--image a {
     display: block; }
   .multicolumn--image.media-aspect--square {

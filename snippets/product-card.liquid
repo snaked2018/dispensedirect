@@ -49,11 +49,11 @@
   {%- endif -%}
   <h3><a href="{{ product.url | within: collection }}" title="{{ product.title | escape }}">{{ product.title }}</a></h3>
   {%- assign current_variant = product.selected_or_first_available_variant -%}
-  <div class="product_after_title{%- if settings.enable_quick_add %} quick_add_active{%- endif %}">
+  <div class="product_after_title">
     <div class="product_after_shop_loop_price">
        {% render 'product-price', product: product %}
     </div>
-    {%- if settings.enable_quick_add -%}
+    {% comment %} {%- if settings.enable_quick_add -%}
     <div class="product_after_shop_loop_buttons">
       <a href="{{ product.url | within: collection }}" class="add_to_cart_button{% if product.variants.size == 1 and product.available %} product-card--add-to-cart-button-simple{% endif %}{% unless product.available %} outofstock{% endunless %}" data-id="{{ current_variant.id }}" data-product-id="{{ product.selected_or_first_available_variant.id }}">
         {%- if product.available -%}
@@ -69,7 +69,22 @@
         {%- endif -%}
       </a>
     </div>
-    {%- endif -%}
+    {%- endif -%} {% endcomment %}
+    <div>
+      <a href="{{ product.url | within: collection }}" class="add_to_cart_button{% if product.variants.size == 1 and product.available %} product-card--add-to-cart-button-simple{% endif %}{% unless product.available %} outofstock{% endunless %}" data-id="{{ current_variant.id }}" data-product-id="{{ product.selected_or_first_available_variant.id }}">
+        {%- if product.available -%}
+          {%- if product.metafields.theme.preorder -%}
+            {{ 'products.product.pre_order' | t }}
+          {%- elsif product.variants.size == 1 %}
+            {{ 'products.product.add_to_cart' | t }}
+          {% else %}
+            {{ 'products.product.select_options' | t }}
+          {% endif %}
+        {%- else -%}
+          {{ 'products.product.out_of_stock' | t }}
+        {%- endif -%}
+      </a>
+    </div>
   </div>
 	{%- if settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
 	  {%- assign rating = product.metafields.reviews.rating.value.rating | divided_by: product.metafields.reviews.rating.value.scale_max | times: 100 | append: '%' -%}

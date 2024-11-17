@@ -1,0 +1,149 @@
+{% schema %}
+    {
+      "name": "Image Block Accordion",
+      "settings": [],
+      "blocks": [
+        {
+          "type": "section",
+          "name": "Block Accordion",
+          "settings": [
+            {
+              "type": "text",
+              "label": "Block Title",
+              "id": "title",
+              "default": "Title here"
+            },
+            {
+              "type": "textarea",
+              "label": "Block Description",
+              "id": "description",
+              "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+            },
+            {
+              "type": "image_picker",
+              "label": "Select Image",
+              "id": "image_url"
+            }
+          ]
+        }
+      ],
+      "presets": [
+        {
+          "name": "Image Block Accordion",
+          "category": "Custom"
+        }
+      ]
+    }
+    {% endschema %}
+    
+    <div class="custom-container">
+        <div class="custom-details">
+          {% for block in section.blocks %}
+            <div class="custom-details-item" data-image="{{ block.settings.image_url | img_url: 'master' }}">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          {% endfor %}
+        </div>
+        <div class="custom-image-container">
+          <!-- The image source will be dynamically updated via JavaScript -->
+          <img src="{{ section.blocks[0].settings.image_url }}" alt="Default Image" id="dynamic-image">
+        </div>
+      </div>
+      
+      <style>
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+      
+        body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          background-color: #f4f4f4;
+        }
+      
+        .custom-container {
+          display: flex;
+          gap: 20px;
+          width: 90%;
+          max-width: 1200px;
+          margin: auto;
+        }
+      
+        .custom-details {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 20px;
+        }
+      
+        .custom-details-item {
+          padding: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          background-color: #fff;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        }
+      
+        .custom-details-item:hover {
+          background-color: #f0f8ff;
+        }
+      
+        .custom-image-container {
+          flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 700px;
+        }
+      
+        .custom-image-container img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 5px;
+        }
+      
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+          .custom-container {
+            flex-direction: column;
+            margin: auto;
+          }
+      
+          .custom-image-container {
+            order: 2; /* Ensures image comes after the details */
+            margin-top: 20px; /* Add spacing between details and image */
+          }
+        }
+      </style>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const detailsItems = document.querySelectorAll('.custom-details-item');
+          const imageElement = document.getElementById('dynamic-image');
+          let savedImage = imageElement.src;
+      
+          detailsItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+              const newImage = item.getAttribute('data-image');
+              imageElement.src = newImage;
+            });
+      
+            item.addEventListener('mouseleave', () => {
+              savedImage = imageElement.src;
+            });
+          });
+      
+          document.querySelector('.custom-container').addEventListener('mouseleave', () => {
+            imageElement.src = savedImage;
+          });
+        });
+      </script>
+      

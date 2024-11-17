@@ -1,3 +1,4 @@
+{{ 'product-template.css' | asset_url | stylesheet_tag }}
 {%- liquid
 	assign collection_pagination_count = section.settings.collection_product_count | plus: 0
 	assign grid_size = section.settings.collection_grid_num

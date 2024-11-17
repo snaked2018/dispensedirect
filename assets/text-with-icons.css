@@ -37,10 +37,10 @@ Utilities
       grid-template-columns: repeat(3, minmax(200px, 300px)); } }
   @media only screen and (min-width: 768px) {
     .text-with-icons.icon-columns-4 .text-with-icons__inner {
-      grid-template-columns: repeat(2, minmax(200px, 300px)); } }
+      grid-template-columns: repeat(2, minmax(100px, 250px)); } }
   @media only screen and (min-width: 1068px) {
     .text-with-icons.icon-columns-4 .text-with-icons__inner {
-      grid-template-columns: repeat(4, minmax(200px, 300px)); } }
+      grid-template-columns: repeat(4, minmax(100px, 250px)); } }
   @media only screen and (min-width: 768px) {
     .text-with-icons.icon-columns-5 .text-with-icons__inner {
       grid-template-columns: repeat(3, minmax(200px, 300px)); } }
