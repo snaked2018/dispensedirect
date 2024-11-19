@@ -1,1 +1,657 @@
-{"sections":{"rich-text":{"type":"rich-text","blocks":{"image_APAwnN":{"type":"image","settings":{"image":"shopify://shop_images/Dispense_Direct_-_Plant_Powered_Artwork.png","retina":true,"animation":"animation left-to-right"}},"heading":{"type":"heading","settings":{"title":"Online Dispensary,","heading_size":"h1","title_color":"#051235","animation":"animation left-to-right"}},"image_X8ijg6":{"type":"image","settings":{"image":"shopify://shop_images/11.svg","retina":false,"animation":"animation bottom-to-top"}},"text":{"type":"text","settings":{"text":"<p>Get the medicine you need, when you need it.</p>","custom_liquid":"","text_color":"#051235","animation":""}},"button_9yKjKY":{"type":"button","settings":{"button_text":"Become a Dispense Direct Patient","button_link":"shopify://pages/upload-your-script","button_style":"pill alt"}}},"block_order":["image_APAwnN","heading","image_X8ijg6","text","button_9yKjKY"],"custom_css":[],"settings":{"text_width":"medium","text_position":"center","text_alignment":"center","disable_top_spacing":false,"disable_bottom_spacing":false}},"multicolumn_URg6Yn":{"type":"multicolumn","blocks":{"block_VCDqhy":{"type":"block","settings":{"image":"shopify://shop_images/8_c0d2d533-4df3-47c7-9dfa-ef15788f7bbd.svg","image_link":"","title":"Fast","text":"<p>Free express shipping for orders over $50</p><h6><em>*Excludes alternative medicine</em></h6>","text_alignment":"text-center","button-text":"","button-link":"","animation":"animation scale","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}},"block_443x8y":{"type":"block","settings":{"image":"shopify://shop_images/3_58e1c2f9-618a-46eb-bdc2-4abb5b2e7708.svg","image_link":"","title":"Accessible","text":"<p>Putting patients first</p>","text_alignment":"text-center","button-text":"","button-link":"","animation":"animation scale","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}},"block_kTLC3J":{"type":"block","settings":{"image":"shopify://shop_images/5_edaf2958-038c-4a6a-8361-2ed1ed0a47ee.svg","image_link":"","title":"Affordable","text":"<p>Never pay more than RRP. No hidden dispensing fees</p>","text_alignment":"text-center","button-text":"","button-link":"","animation":"animation scale","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}},"block_LV8dYy":{"type":"block","settings":{"image":"shopify://shop_images/6_fe7f646d-fe8e-4f58-9a04-23860d767593.svg","image_link":"","title":"Reliable","text":"<p>Same-day dispatch across Australia for orders placed by 2pm (AEST)</p>","text_alignment":"text-center","button-text":"","button-link":"","animation":"animation scale","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}}},"block_order":["block_VCDqhy","block_443x8y","block_kTLC3J","block_LV8dYy"],"settings":{"full_width":false,"padding":"pixel-padding","image_ratio":"square","mobile_swipe":true,"disable_top_spacing":false,"disable_bottom_spacing":false}},"custom_text_with_icons_Q4Vjea":{"type":"custom-text-with-icons","blocks":{"section_dNhWBR":{"type":"section","settings":{"title":"Wide range of high quality products","icon":"heart"}},"section_hC97gU":{"type":"section","settings":{"title":"Reliable product availability","icon":"ruler"}},"section_76Bzd4":{"type":"section","settings":{"title":"Simple, secure payment platform","icon":"ruler"}},"section_kxbWk6":{"type":"section","settings":{"title":"Same-day dispatch across Australia for orders placed by 2pm (AEST)","icon":"ruler"}}},"block_order":["section_dNhWBR","section_hC97gU","section_76Bzd4","section_kxbWk6"],"settings":{"num_images":4}},"text_with_icons_RJq4Jr":{"type":"text-with-icons","blocks":{"icon_HRQK9k":{"type":"icon","settings":{"icon":"check_mark","heading":"Wide range of high quality products","text":""}},"icon_8FeyLX":{"type":"icon","settings":{"icon":"price_tag","heading":"Reliable product availability","text":""}},"icon_B4ffeT":{"type":"icon","settings":{"icon":"lock","heading":"Simple, secure payment platform","text":""}},"icon_xVgBgD":{"type":"icon","settings":{"icon":"truck","heading":"Same-day dispatch across Australia for orders placed by 2pm (AEST)","text":""}}},"block_order":["icon_HRQK9k","icon_8FeyLX","icon_B4ffeT","icon_xVgBgD"],"disabled":true,"settings":{"text_alignment":"left","icon_position":"left","icon_size":"medium","heading_size":"large","mobile_swipe":false,"color_bg":"#fafafa","color_heading":"#02091b","color_text":"#02091b","disable_top_spacing":false,"disable_bottom_spacing":false}},"image_with_text_overlay_GgiLtQ":{"type":"image-with-text-overlay","settings":{"bg_image":"shopify://shop_images/Direct_to_your_door_1920_x_1080_px_1.svg","bg_image_mobile":"shopify://shop_images/375_x_550_px_12.svg","parallax":false,"desktop_height":"desktop-height-450","mobile_height":"mobile-height-350","vertical_alignment":"content-middle","text_alignment":"center","overlay_color":"#000000","overlay_opacity":0,"disable_top_spacing":true,"disable_bottom_spacing":true}},"custom_accordion_XArKk3":{"type":"custom-accordion","blocks":{"section_xGwhkA":{"type":"section","settings":{"color":"#1a82c4","title":"01. Send us your scripts","description":"<p><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>","image_url":"shopify://shop_images/old-woman-with-computer_a7a4dabf-3db8-42b1-a94f-bdc989ef7e03.png"}},"section_iakEYt":{"type":"section","settings":{"color":"#1a82c4","title":"Title here","description":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>","image_url":"shopify://shop_images/young-woman-with-computer_d2e4a3a3-0772-4e94-93fd-046281fb4ea2.png"}},"section_9aeKeJ":{"type":"section","settings":{"color":"#1a82c4","title":"Title here","description":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>","image_url":"shopify://shop_images/old-doctor-with-computer_1bd8b40a-439e-427b-821f-1dd5ca0e2cf7.png"}}},"block_order":["section_xGwhkA","section_iakEYt","section_9aeKeJ"],"settings":{}},"testimonials_hmPhEz":{"type":"testimonials","blocks":{"quote_L6WgcF":{"type":"quote","settings":{"text":"<h3><strong>Step 1</strong> </h3><h3><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></h3>","author":""}},"quote_fxt8z3":{"type":"quote","settings":{"text":"<h3><strong>Step 2</strong></h3><h3>Our team will set you up with a Dispense Direct account and you will receive a welcome email. You can follow the link to access our online ordering portal</h3>","author":""}},"quote_FGNdJt":{"type":"quote","settings":{"text":"<h3><strong>Step 3</strong></h3><h3>A friendly pharmacist will contact you to talk through your medications and answer any questions you may have. You will also be guided through our ordering portal</h3>","author":""}},"quote_mR89J9":{"type":"quote","settings":{"text":"<h3><strong>Step 4</strong></h3><h3>Review which items you would like to order, confirm your shipping details and pay for your order securely</h3>","author":""}},"quote_M9MVDw":{"type":"quote","settings":{"text":"<h3><strong>Step 5</strong></h3><h3>Your order will be dispatched same-day*, and can be tracked via express post straight to your door</h3><h6><em>*Same-day dispatch is available on orders placed by 2pm (AEST) that day</em></h6>","author":""}},"quote_mqHkbE":{"type":"quote","settings":{"text":"<h3><strong>Step 6</strong></h3><h3>If you have repeats on your script, simply log back into the portal to manage your scripts and place your next order</h3>","author":""}}},"block_order":["quote_L6WgcF","quote_fxt8z3","quote_FGNdJt","quote_mR89J9","quote_M9MVDw","quote_mqHkbE"],"disabled":true,"custom_css":[],"settings":{"style":"style1","autoplay":true,"autoplay_length":4,"text_size":"text-small","color_bg":"rgba(0,0,0,0)","color_text":"#051235","disable_top_spacing":false,"disable_bottom_spacing":false}},"multicolumn_MVN6XP":{"type":"multicolumn","blocks":{"block_fUPbe7":{"type":"block","settings":{"image_link":"","title":"Patient Order","text":"<p>Existing patients can log into the portal to place repeat orders. </p><p></p>","text_alignment":"text-center","button-text":"Patient login","button-link":"https://medevolve.com.au/","animation":"animation fade-in","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}},"block_4dQmmk":{"type":"block","settings":{"image_link":"","title":"New Patient","text":"<p>Complete our new patient form to gain access to the patient portal.</p><p></p>","text_alignment":"text-center","button-text":"Upload your script","button-link":"shopify://pages/upload-your-script","animation":"animation fade-in","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}},"block_b6YUYk":{"type":"block","settings":{"image_link":"","title":"Need Help?","text":"<p>Our friendly staff are available to answer any of your queries.</p><p></p>","text_alignment":"text-center","button-text":"Get in touch","button-link":"shopify://pages/our-pharmacists-are-here-to-help","animation":"animation fade-in","heading_color":"#051235","text_color":"#051235","bg_color":"rgba(0,0,0,0)"}}},"block_order":["block_fUPbe7","block_4dQmmk","block_b6YUYk"],"settings":{"full_width":false,"padding":"","image_ratio":"adapt","mobile_swipe":false,"disable_top_spacing":true,"disable_bottom_spacing":true}},"scrolling_text_qax8k4":{"type":"scrolling-text","blocks":{"text_Fh3wMA":{"type":"text","settings":{"image":"shopify://shop_images/Humacology_Logo.png","text":"","link":"","outline_text":false}},"text_HR6kxc":{"type":"text","settings":{"image":"shopify://shop_images/Aura-Logo_500c5d45-defc-4dac-8024-560698037b6c.png","text":"","link":"","outline_text":false}},"text_MRctEC":{"type":"text","settings":{"image":"shopify://shop_images/ANTG-Logo-White-background-768x768_69f1a02b-4a3f-4ef8-a31d-752d0cfe9cfc.png","text":"","link":"","outline_text":false}},"text_eL8f47":{"type":"text","settings":{"image":"shopify://shop_images/x72Ct8d3pBTF5D7EC4GupJ.png","text":"","link":"","outline_text":false}},"text_3yNeCG":{"type":"text","settings":{"image":"shopify://shop_images/logo.png","text":"","link":"","outline_text":false}},"text_CXpCjk":{"type":"text","settings":{"image":"shopify://shop_images/logo.webp","text":"","link":"","outline_text":false}},"text_3wcnGJ":{"type":"text","settings":{"image":"shopify://shop_images/Beacon-Medical-Logo_WEB_No-padding-300x282.png","text":"","link":"","outline_text":false}},"text_3t7fPr":{"type":"text","settings":{"image":"shopify://shop_images/littlegreenpharma-logo.png","text":"","link":"","outline_text":false}},"text_GtFQHM":{"type":"text","settings":{"image":"shopify://shop_images/get_company_logo.png","text":"","link":"","outline_text":false}},"text_rPE9An":{"type":"text","settings":{"image":"shopify://shop_images/Kind-2_32c21ec7-5ee9-4478-80e1-397c11519a74.png","text":"","link":"","outline_text":false}},"text_HpiJFD":{"type":"text","settings":{"image":"shopify://shop_images/Medcan_Logo_no_Leaf-PNG.png","text":"","link":"","outline_text":false}},"text_NrbxNa":{"type":"text","settings":{"image":"shopify://shop_images/MP-PRIMARY2_398d3bab-a8c3-4039-af44-717f329de59d.png","text":"","link":"","outline_text":false}},"text_tD8MxF":{"type":"text","settings":{"image":"shopify://shop_images/csm_StorzBickel_hp_764e44bd93.png","text":"","link":"","outline_text":false}}},"block_order":["text_Fh3wMA","text_HR6kxc","text_MRctEC","text_eL8f47","text_3yNeCG","text_CXpCjk","text_3wcnGJ","text_3t7fPr","text_GtFQHM","text_rPE9An","text_HpiJFD","text_NrbxNa","text_tD8MxF"],"settings":{"height":"height-300","full_width":true,"direction":"left","speed":"30s","text_size":16,"text_uppercase":false,"image_size":"small","color_bg":"#d7d2cb","color_text":"#151515","overlay_color":"#000000","overlay_opacity":0,"disable_top_spacing":true,"disable_bottom_spacing":true}},"testimonials_hVKeYh":{"type":"testimonials","blocks":{"quote_ENkxFb":{"type":"quote","settings":{"text":"<h5>What fantastic service. These guys have gone above and beyond to source my product and get it to me. Fantastic communication, follow up and support. I would give more stars if I could.</h5>","author":"Judy Wallace, Google","image":"shopify://shop_images/Untitled_design_13.png"}},"quote_h3khkJ":{"type":"quote","settings":{"text":"<h5>So rarely do you see a business that is the business of making life easier, not harder and NEVER have I seen it in a pharmacy before!I cannot recommend Dispense Direct enough.Super easy, super fast, super efficient and SUPER FRIENDLY! Well done.</h5>","author":"Dee Riley, Google","image":"shopify://shop_images/Untitled_design_13.png"}},"quote_9KVNiY":{"type":"quote","settings":{"text":"<h5>The staff at Dispense Direct go out of their way to help you and provide invaluable advice. They provide relevant information and will go that extra mile to help!</h5>","author":"Rodney Suffolk, Google","image":"shopify://shop_images/Untitled_design_13.png"}},"quote_eMP46q":{"type":"quote","settings":{"text":"<h5>Brilliant company. I've never had better service anywhere.<br/>Every time I order my medicine, it's literally in the post to me within like 12 business hours and it's normally in my hands within 48 hrs of ordering. That's not once or twice, that's dozens of times. Problem? They call/message promptly to sort it out. I can not fault them and go out of my way to give them all my business.</h5>","author":"Dylan Hughes, Google","image":"shopify://shop_images/Untitled_design_13.png"}}},"block_order":["quote_ENkxFb","quote_h3khkJ","quote_9KVNiY","quote_eMP46q"],"settings":{"style":"style2","autoplay":true,"autoplay_length":3,"text_size":"text-small","color_bg":"rgba(0,0,0,0)","color_text":"#051235","disable_top_spacing":true,"disable_bottom_spacing":true}}},"order":["rich-text","multicolumn_URg6Yn","custom_text_with_icons_Q4Vjea","text_with_icons_RJq4Jr","image_with_text_overlay_GgiLtQ","custom_accordion_XArKk3","testimonials_hmPhEz","multicolumn_MVN6XP","scrolling_text_qax8k4","testimonials_hVKeYh"]} 
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "image_APAwnN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Dispense_Direct_-_Plant_Powered_Artwork.png",
+            "retina": true,
+            "animation": "animation left-to-right"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Online Dispensary,",
+            "heading_size": "h1",
+            "title_color": "#051235",
+            "animation": "animation left-to-right"
+          }
+        },
+        "image_X8ijg6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/11.svg",
+            "retina": false,
+            "animation": "animation bottom-to-top"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Get the medicine you need, when you need it.</p>",
+            "custom_liquid": "",
+            "text_color": "#051235",
+            "animation": ""
+          }
+        },
+        "button_9yKjKY": {
+          "type": "button",
+          "settings": {
+            "button_text": "Become a Dispense Direct Patient",
+            "button_link": "shopify://pages/upload-your-script",
+            "button_style": "pill alt"
+          }
+        }
+      },
+      "block_order": [
+        "image_APAwnN",
+        "heading",
+        "image_X8ijg6",
+        "text",
+        "button_9yKjKY"
+      ],
+      "custom_css": [],
+      "settings": {
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "multicolumn_URg6Yn": {
+      "type": "multicolumn",
+      "blocks": {
+        "block_VCDqhy": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/8_c0d2d533-4df3-47c7-9dfa-ef15788f7bbd.svg",
+            "image_link": "",
+            "title": "Fast",
+            "text": "<p>Free express shipping for orders over $50</p><h6><em>*Excludes alternative medicine</em></h6>",
+            "text_alignment": "text-center",
+            "button-text": "",
+            "button-link": "",
+            "animation": "animation scale",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "block_443x8y": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/3_58e1c2f9-618a-46eb-bdc2-4abb5b2e7708.svg",
+            "image_link": "",
+            "title": "Accessible",
+            "text": "<p>Putting patients first</p>",
+            "text_alignment": "text-center",
+            "button-text": "",
+            "button-link": "",
+            "animation": "animation scale",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "block_kTLC3J": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/5_edaf2958-038c-4a6a-8361-2ed1ed0a47ee.svg",
+            "image_link": "",
+            "title": "Affordable",
+            "text": "<p>Never pay more than RRP. No hidden dispensing fees</p>",
+            "text_alignment": "text-center",
+            "button-text": "",
+            "button-link": "",
+            "animation": "animation scale",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "block_LV8dYy": {
+          "type": "block",
+          "settings": {
+            "image": "shopify://shop_images/6_fe7f646d-fe8e-4f58-9a04-23860d767593.svg",
+            "image_link": "",
+            "title": "Reliable",
+            "text": "<p>Same-day dispatch across Australia for orders placed by 2pm (AEST)</p>",
+            "text_alignment": "text-center",
+            "button-text": "",
+            "button-link": "",
+            "animation": "animation scale",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "block_VCDqhy",
+        "block_443x8y",
+        "block_kTLC3J",
+        "block_LV8dYy"
+      ],
+      "settings": {
+        "full_width": false,
+        "padding": "pixel-padding",
+        "image_ratio": "square",
+        "mobile_swipe": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "custom_text_with_icons_Q4Vjea": {
+      "type": "custom-text-with-icons",
+      "blocks": {
+        "section_dNhWBR": {
+          "type": "section",
+          "settings": {
+            "title": "Wide range of high quality products",
+            "icon": "heart"
+          }
+        },
+        "section_hC97gU": {
+          "type": "section",
+          "settings": {
+            "title": "Reliable product availability",
+            "icon": "ruler"
+          }
+        },
+        "section_76Bzd4": {
+          "type": "section",
+          "settings": {
+            "title": "Simple, secure payment platform",
+            "icon": "ruler"
+          }
+        },
+        "section_kxbWk6": {
+          "type": "section",
+          "settings": {
+            "title": "Same-day dispatch across Australia for orders placed by 2pm (AEST)",
+            "icon": "ruler"
+          }
+        }
+      },
+      "block_order": [
+        "section_dNhWBR",
+        "section_hC97gU",
+        "section_76Bzd4",
+        "section_kxbWk6"
+      ],
+      "settings": {
+        "num_images": 4
+      }
+    },
+    "text_with_icons_RJq4Jr": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon_HRQK9k": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_mark",
+            "heading": "Wide range of high quality products",
+            "text": ""
+          }
+        },
+        "icon_8FeyLX": {
+          "type": "icon",
+          "settings": {
+            "icon": "price_tag",
+            "heading": "Reliable product availability",
+            "text": ""
+          }
+        },
+        "icon_B4ffeT": {
+          "type": "icon",
+          "settings": {
+            "icon": "lock",
+            "heading": "Simple, secure payment platform",
+            "text": ""
+          }
+        },
+        "icon_xVgBgD": {
+          "type": "icon",
+          "settings": {
+            "icon": "truck",
+            "heading": "Same-day dispatch across Australia for orders placed by 2pm (AEST)",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_HRQK9k",
+        "icon_8FeyLX",
+        "icon_B4ffeT",
+        "icon_xVgBgD"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "left",
+        "icon_position": "left",
+        "icon_size": "medium",
+        "heading_size": "large",
+        "mobile_swipe": false,
+        "color_bg": "#fafafa",
+        "color_heading": "#02091b",
+        "color_text": "#02091b",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "image_with_text_overlay_GgiLtQ": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "bg_image": "shopify://shop_images/Direct_to_your_door_1920_x_1080_px_1.svg",
+        "bg_image_mobile": "shopify://shop_images/375_x_550_px_12.svg",
+        "parallax": false,
+        "desktop_height": "desktop-height-450",
+        "mobile_height": "mobile-height-350",
+        "vertical_alignment": "content-middle",
+        "text_alignment": "center",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "custom_accordion_XArKk3": {
+      "type": "custom-accordion",
+      "blocks": {
+        "section_xGwhkA": {
+          "type": "section",
+          "settings": {
+            "color": "#1a82c4",
+            "title": "01. Send us your scripts",
+            "description": "<p><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>",
+            "image_url": "shopify://shop_images/old-woman-with-computer_a7a4dabf-3db8-42b1-a94f-bdc989ef7e03.png"
+          }
+        },
+        "section_iakEYt": {
+          "type": "section",
+          "settings": {
+            "color": "#1a82c4",
+            "title": "Title here",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "image_url": "shopify://shop_images/young-woman-with-computer_d2e4a3a3-0772-4e94-93fd-046281fb4ea2.png"
+          }
+        },
+        "section_9aeKeJ": {
+          "type": "section",
+          "settings": {
+            "color": "#1a82c4",
+            "title": "Title here",
+            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "image_url": "shopify://shop_images/old-doctor-with-computer_1bd8b40a-439e-427b-821f-1dd5ca0e2cf7.png"
+          }
+        }
+      },
+      "block_order": [
+        "section_xGwhkA",
+        "section_iakEYt",
+        "section_9aeKeJ"
+      ],
+      "settings": {}
+    },
+    "testimonials_hmPhEz": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_L6WgcF": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 1</strong> </h3><h3><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></h3>",
+            "author": ""
+          }
+        },
+        "quote_fxt8z3": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 2</strong></h3><h3>Our team will set you up with a Dispense Direct account and you will receive a welcome email. You can follow the link to access our online ordering portal</h3>",
+            "author": ""
+          }
+        },
+        "quote_FGNdJt": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 3</strong></h3><h3>A friendly pharmacist will contact you to talk through your medications and answer any questions you may have. You will also be guided through our ordering portal</h3>",
+            "author": ""
+          }
+        },
+        "quote_mR89J9": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 4</strong></h3><h3>Review which items you would like to order, confirm your shipping details and pay for your order securely</h3>",
+            "author": ""
+          }
+        },
+        "quote_M9MVDw": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 5</strong></h3><h3>Your order will be dispatched same-day*, and can be tracked via express post straight to your door</h3><h6><em>*Same-day dispatch is available on orders placed by 2pm (AEST) that day</em></h6>",
+            "author": ""
+          }
+        },
+        "quote_mqHkbE": {
+          "type": "quote",
+          "settings": {
+            "text": "<h3><strong>Step 6</strong></h3><h3>If you have repeats on your script, simply log back into the portal to manage your scripts and place your next order</h3>",
+            "author": ""
+          }
+        }
+      },
+      "block_order": [
+        "quote_L6WgcF",
+        "quote_fxt8z3",
+        "quote_FGNdJt",
+        "quote_mR89J9",
+        "quote_M9MVDw",
+        "quote_mqHkbE"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "style": "style1",
+        "autoplay": true,
+        "autoplay_length": 4,
+        "text_size": "text-small",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#051235",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "multicolumn_MVN6XP": {
+      "type": "multicolumn",
+      "blocks": {
+        "block_fUPbe7": {
+          "type": "block",
+          "settings": {
+            "image_link": "",
+            "title": "Patient Order",
+            "text": "<p>Existing patients can log into the portal to place repeat orders. </p><p></p>",
+            "text_alignment": "text-center",
+            "button-text": "Patient login",
+            "button-link": "https://medevolve.com.au/",
+            "animation": "animation fade-in",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "block_4dQmmk": {
+          "type": "block",
+          "settings": {
+            "image_link": "",
+            "title": "New Patient",
+            "text": "<p>Complete our new patient form to gain access to the patient portal.</p><p></p>",
+            "text_alignment": "text-center",
+            "button-text": "Upload your script",
+            "button-link": "shopify://pages/upload-your-script",
+            "animation": "animation fade-in",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        },
+        "block_b6YUYk": {
+          "type": "block",
+          "settings": {
+            "image_link": "",
+            "title": "Need Help?",
+            "text": "<p>Our friendly staff are available to answer any of your queries.</p><p></p>",
+            "text_alignment": "text-center",
+            "button-text": "Get in touch",
+            "button-link": "shopify://pages/our-pharmacists-are-here-to-help",
+            "animation": "animation fade-in",
+            "heading_color": "#051235",
+            "text_color": "#051235",
+            "bg_color": "rgba(0,0,0,0)"
+          }
+        }
+      },
+      "block_order": [
+        "block_fUPbe7",
+        "block_4dQmmk",
+        "block_b6YUYk"
+      ],
+      "settings": {
+        "full_width": false,
+        "padding": "",
+        "image_ratio": "adapt",
+        "mobile_swipe": false,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "scrolling_text_qax8k4": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text_Fh3wMA": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Humacology_Logo.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_HR6kxc": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Aura-Logo_500c5d45-defc-4dac-8024-560698037b6c.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_MRctEC": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/ANTG-Logo-White-background-768x768_69f1a02b-4a3f-4ef8-a31d-752d0cfe9cfc.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_eL8f47": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/x72Ct8d3pBTF5D7EC4GupJ.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_3yNeCG": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/logo.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_CXpCjk": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/logo.webp",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_3wcnGJ": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Beacon-Medical-Logo_WEB_No-padding-300x282.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_3t7fPr": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/littlegreenpharma-logo.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_GtFQHM": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/get_company_logo.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_rPE9An": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Kind-2_32c21ec7-5ee9-4478-80e1-397c11519a74.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_HpiJFD": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/Medcan_Logo_no_Leaf-PNG.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_NrbxNa": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/MP-PRIMARY2_398d3bab-a8c3-4039-af44-717f329de59d.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        },
+        "text_tD8MxF": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/csm_StorzBickel_hp_764e44bd93.png",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
+        }
+      },
+      "block_order": [
+        "text_Fh3wMA",
+        "text_HR6kxc",
+        "text_MRctEC",
+        "text_eL8f47",
+        "text_3yNeCG",
+        "text_CXpCjk",
+        "text_3wcnGJ",
+        "text_3t7fPr",
+        "text_GtFQHM",
+        "text_rPE9An",
+        "text_HpiJFD",
+        "text_NrbxNa",
+        "text_tD8MxF"
+      ],
+      "settings": {
+        "height": "height-300",
+        "full_width": true,
+        "direction": "left",
+        "speed": "30s",
+        "text_size": 16,
+        "text_uppercase": false,
+        "image_size": "small",
+        "color_bg": "#d7d2cb",
+        "color_text": "#151515",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    },
+    "testimonials_hVKeYh": {
+      "type": "testimonials",
+      "blocks": {
+        "quote_ENkxFb": {
+          "type": "quote",
+          "settings": {
+            "text": "<h5>What fantastic service. These guys have gone above and beyond to source my product and get it to me. Fantastic communication, follow up and support. I would give more stars if I could.</h5>",
+            "author": "Judy Wallace, Google",
+            "image": "shopify://shop_images/Untitled_design_13.png"
+          }
+        },
+        "quote_h3khkJ": {
+          "type": "quote",
+          "settings": {
+            "text": "<h5>So rarely do you see a business that is the business of making life easier, not harder and NEVER have I seen it in a pharmacy before!I cannot recommend Dispense Direct enough.Super easy, super fast, super efficient and SUPER FRIENDLY! Well done.</h5>",
+            "author": "Dee Riley, Google",
+            "image": "shopify://shop_images/Untitled_design_13.png"
+          }
+        },
+        "quote_9KVNiY": {
+          "type": "quote",
+          "settings": {
+            "text": "<h5>The staff at Dispense Direct go out of their way to help you and provide invaluable advice. They provide relevant information and will go that extra mile to help!</h5>",
+            "author": "Rodney Suffolk, Google",
+            "image": "shopify://shop_images/Untitled_design_13.png"
+          }
+        },
+        "quote_eMP46q": {
+          "type": "quote",
+          "settings": {
+            "text": "<h5>Brilliant company. I've never had better service anywhere.<br/>Every time I order my medicine, it's literally in the post to me within like 12 business hours and it's normally in my hands within 48 hrs of ordering. That's not once or twice, that's dozens of times. Problem? They call/message promptly to sort it out. I can not fault them and go out of my way to give them all my business.</h5>",
+            "author": "Dylan Hughes, Google",
+            "image": "shopify://shop_images/Untitled_design_13.png"
+          }
+        }
+      },
+      "block_order": [
+        "quote_ENkxFb",
+        "quote_h3khkJ",
+        "quote_9KVNiY",
+        "quote_eMP46q"
+      ],
+      "settings": {
+        "style": "style2",
+        "autoplay": true,
+        "autoplay_length": 3,
+        "text_size": "text-small",
+        "color_bg": "rgba(0,0,0,0)",
+        "color_text": "#051235",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": true
+      }
+    }
+  },
+  "order": [
+    "rich-text",
+    "multicolumn_URg6Yn",
+    "custom_text_with_icons_Q4Vjea",
+    "text_with_icons_RJq4Jr",
+    "image_with_text_overlay_GgiLtQ",
+    "custom_accordion_XArKk3",
+    "testimonials_hmPhEz",
+    "multicolumn_MVN6XP",
+    "scrolling_text_qax8k4",
+    "testimonials_hVKeYh"
+  ]
+}
