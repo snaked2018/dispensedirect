@@ -1,9 +1,11 @@
 <div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}" id="section-accordion-{{ section.id }}">
 	<div class="row accordion-row-container">
 	  <!-- Image Container (left or right side) -->
+	  {% if section.settings.image != blank %}
 	  <div class="accordion-image-container" style="order:{% if section.settings.image_position == 'left' %}0{% elsif section.settings.image_position == 'right' %}1{% endif %}">
 		<img src="{{ section.settings.image | img_url: 'master' }}" alt="Accordion Image">
 	  </div>
+	  {% endif %}
   
 	  <!-- Accordion Container -->
 	  <div class="columns">
