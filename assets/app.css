@@ -4235,7 +4235,7 @@ Shop
       z-index: 20;
       bottom: 24px;
       left: 50%;
-      max-width: calc(100% - 20px);
+      max-width: calc(100% - 20px); 
       transform: translateX(-50%);
       text-align: center;
       border-radius: 16px;
@@ -4247,15 +4247,15 @@ Shop
       color: rgba(var(--color-text-rgb), 0.6);
       letter-spacing: 0.1em;
       line-height: 1.1;
-      margin-bottom: 10px;
+      margin-bottom: 10px ;
       word-break: break-word; }
     .products .product h3 {
-      font-size: 16px;
+      font-size: 16px !important;
       font-weight: 400;
       margin: 0 0 5px;
       line-height: 1.5;
       word-break: break-word;
-      height: 50px !important;
+      height: 60px !important;
       margin-bottom: 10px !important;}
     .products .product .star-rating {
       margin-bottom: 0; }
@@ -4563,7 +4563,7 @@ Shortcodes
       margin-bottom: 0; }
   .north-hero .thb-parallax-image {
     position: absolute;
-    object-fit: cover;
+    object-fit: contain;
     top: 0;
     left: 0;
     width: 100%;
@@ -4763,4 +4763,10 @@ h2.title-style2 {
 }
 .thb-full-menu li.active.menu-item-has-children > a:before {
   transform: scaleX(1.2) !important;
+}
+@media(max-width:768px){
+  .products .product h3 {
+    font-size: 14px !important;
+    height: 60px !important;
+  }
 }

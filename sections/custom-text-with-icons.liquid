@@ -1,0 +1,261 @@
+	
+	<div class="text-icons-slider">
+		<div class="text-icons-slide-track">
+		  {% for block in section.blocks %}
+			<div class="text-icons-slide">
+			  {% if block.settings.image != blank %}
+				<img data-src="{{ block.settings.image | image_url }}" alt="{{ block.settings.title }}" width="250" height="100" class="lazyload" />
+				<noscript>
+				  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.title }}" width="250" height="100" />
+				</noscript>
+			  {% endif %}
+			  {% if block.settings.icon != 'none' %}
+				{% render 'svg-icons-inline', icon: block.settings.icon %}
+			  {% elsif block.settings.icon_image != blank %}
+				<img src="{{ block.settings.icon_image | image_url }}" alt="Icon Image" width="32" height="32" />
+			  {% endif %}
+			  <p class="text-icons-title">{{ block.settings.title }}</p>
+			</div>
+		  {% endfor %}
+		  {% for block in section.blocks %}
+			<!-- Duplicate the blocks for infinite scroll -->
+			<div class="text-icons-slide">
+			  {% if block.settings.image != blank %}
+				<img data-src="{{ block.settings.image | image_url }}" alt="{{ block.settings.title }}" width="250" height="100" class="lazyload" />
+				<noscript>
+				  <img src="{{ block.settings.image | image_url }}" alt="{{ block.settings.title }}" width="250" height="100" />
+				</noscript>
+			  {% endif %}
+			  {% if block.settings.icon != 'none' %}
+				{% render 'svg-icons-inline', icon: block.settings.icon %}
+			  {% elsif block.settings.icon_image != blank %}
+				<img src="{{ block.settings.icon_image | image_url }}" alt="Icon Image" width="32" height="32" />
+			  {% endif %}
+			  <p class="text-icons-title">{{ block.settings.title }}</p>
+			</div>
+		  {% endfor %}
+		</div>
+	  </div>
+	  
+	<style>
+		.text-icons-slider {
+		background: white;
+		box-shadow: 0 10px 20px -5px rgba(0, 0, 0, .125);
+		height: 100px;
+		margin: 0;
+		overflow: hidden;
+		position: relative;
+		width: 100%;
+		}
+
+		.text-icons-slider::before,
+		.text-icons-slider::after {
+		content: "";
+		height: 100px;
+		position: absolute;
+		width: 400px;
+		z-index: 2;
+		/* background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%); */
+		}
+
+		.text-icons-slider::after {
+		right: 0;
+		top: 0;
+		transform: rotateZ(180deg);
+		}
+
+		.text-icons-slider::before {
+		left: 0;
+		top: 0;
+		}
+
+		.text-icons-slide-track {
+		animation: scroll 40s linear infinite;
+		display: flex;
+		width: 3200px; /* Fixed width: 4 blocks * 400px * 2 */
+		}
+
+		.text-icons-title {
+		font-size: 18px;
+		font-weight: bold;
+		text-align: start;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		gap: 10px;
+		margin: 0
+		}
+
+		.text-icons-slide svg {
+		width: 50px;
+		height: 100%;
+		align-items: center;
+		justify-content: center;
+		display: flex;
+		}
+
+		.text-icons-slide img{
+		width: 100px;
+		height: 100px;
+		padding: 10px 0;
+		}
+
+		.text-icons-slide {
+		display: grid;
+		align-items: center;
+		height: 100px;
+		width: 400px;
+		grid-template-columns: 70px 320px;
+		grid-gap: 0;
+		text-align: start;
+		}
+
+		.text-icons-slide-track {
+		animation: scroll 40s linear infinite;
+		display: flex;
+		width: calc(400px * 8); /* Adjust based on your content */
+		animation-play-state: running; /* Default state */
+	}
+
+	@keyframes scroll {
+		0% { transform: translateX(0); }
+		100% { transform: translateX(-50%); } /* Adjust based on content width */
+	}
+
+	</style>
+	
+	{% schema %}
+		{
+		  "name": "Slider Text with Icons",
+		  "settings": [
+			{
+			  "type": "range",
+			  "label": "Number of images",
+			  "id": "num_images",
+			  "min": 1,
+			  "max": 4,
+			  "step": 1,
+			  "default": 4
+			}
+		  ],
+		  "max_blocks": 4,
+		  "blocks": [
+			{
+			  "type": "section",
+			  "name": "Image with Title",
+			  "settings": [
+				{
+				  "type": "text",
+				  "label": "Title",
+				  "id": "title",
+				  "default": "Image Title"
+				},
+				{
+				  "type": "select",
+				  "label": "Icon",
+				  "id": "icon",
+				  "options": [
+					{ "value": "none", "label": "None" },
+					{ "value": "apple", "label": "Apple" },
+					{ "value": "banana", "label": "Banana" },
+					{ "value": "bottle", "label": "Bottle" },
+					{ "value": "box", "label": "Box" },
+					{ "value": "carrot", "label": "Carrot" },
+					{ "value": "chat_bubble", "label": "Chat bubble" },
+					{ "value": "check_mark", "label": "Check mark" },
+					{ "value": "clipboard", "label": "Clipboard" },
+					{ "value": "dairy", "label": "Dairy" },
+					{ "value": "dairy_free", "label": "Dairy free" },
+					{ "value": "dryer", "label": "Dryer" },
+					{ "value": "eye", "label": "Eye" },
+					{ "value": "fire", "label": "Fire" },
+					{ "value": "gluten_free", "label": "Gluten free" },
+					{ "value": "heart", "label": "Heart" },
+					{ "value": "iron", "label": "Iron" },
+					{ "value": "leaf", "label": "Leaf" },
+					{ "value": "leather", "label": "Leather" },
+					{ "value": "lightning_bolt", "label": "Lightning bolt" },
+					{ "value": "lipstick", "label": "Lipstick" },
+					{ "value": "lock", "label": "Lock" },
+					{ "value": "map_pin", "label": "Map pin" },
+					{ "value": "nut_free", "label": "Nut free" },
+					{ "value": "pants", "label": "Pants" },
+					{ "value": "paw_print", "label": "Paw print" },
+					{ "value": "pepper", "label": "Pepper" },
+					{ "value": "perfume", "label": "Perfume" },
+					{ "value": "plane", "label": "Plane" },
+					{ "value": "plant", "label": "Plant" },
+					{ "value": "price_tag", "label": "Price tag" },
+					{ "value": "question_mark", "label": "Question mark" },
+					{ "value": "recycle", "label": "Recycle" },
+					{ "value": "return", "label": "Return" },
+					{ "value": "ruler", "label": "Ruler" },
+					{ "value": "serving_dish", "label": "Serving dish" },
+					{ "value": "shirt", "label": "Shirt" },
+					{ "value": "shoe", "label": "Shoe" },
+					{ "value": "silhouette", "label": "Silhouette" },
+					{ "value": "snowflake", "label": "Snowflake" },
+					{ "value": "star", "label": "Star" },
+					{ "value": "stopwatch", "label": "Stopwatch" },
+					{ "value": "truck", "label": "Truck" },
+					{ "value": "washing", "label": "Washing" }
+				  ],
+				  "default": "ruler"
+				},
+				{
+				  "type": "image_picker",
+				  "id": "icon_image",
+				  "label": "Icon Image"
+				}
+			  ]
+			}
+		  ],
+		  "presets": [
+			{
+			  "name": "Slider Text with Icons",
+			  "category": "Custom"
+			}
+		  ]
+		}
+		{% endschema %}
+
+<script>
+	document.addEventListener('DOMContentLoaded', function () {
+		const sliderTrack = document.querySelector('.text-icons-slide-track');
+		const slider = document.querySelector('.text-icons-slider');
+		const mediaQuery = window.matchMedia('(max-width: 767px)');
+	
+		// Set default state based on screen size
+		function setSliderState() {
+			if (mediaQuery.matches) {
+				// Mobile: infinite slide
+				sliderTrack.style.animation = 'scroll 40s linear infinite';
+				slider.removeEventListener('mouseover', pauseScroll);
+				slider.removeEventListener('mouseout', resumeScroll);
+			} else {
+				// Desktop: slide on hover
+				sliderTrack.style.animation = 'none'; // Disable animation initially
+				slider.addEventListener('mouseover', resumeScroll);
+				slider.addEventListener('mouseout', pauseScroll);
+			}
+		}
+	
+		// Pause animation
+		function pauseScroll() {
+			sliderTrack.style.animationPlayState = 'paused';
+		}
+	
+		// Resume animation
+		function resumeScroll() {
+			sliderTrack.style.animation = 'scroll 40s linear infinite';
+			sliderTrack.style.animationPlayState = 'running';
+		}
+	
+		// Initialize the slider behavior
+		setSliderState();
+	
+		// Listen for window resize to adapt behavior
+		mediaQuery.addEventListener('change', setSliderState);
+	});
+	</script>
+	

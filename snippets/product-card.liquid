@@ -15,9 +15,8 @@
 		if featured_media
 			assign ratio = featured_media.aspect_ratio
 		endif
-  endif
+  endif -%}
 
--%}
 <product-card class="product {{ grid_item_width | strip_newlines }} thb-listing-{{ settings.products_style | escape }} columns {{ animation | escape }}"  {{ block.shopify_attributes }}>
   <figure class="product_thumbnail{% if settings.products_hover_image %} thb_hover{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
     {%- render 'product-badge', product: product -%}
@@ -68,23 +67,32 @@
           {{ 'products.product.out_of_stock' | t }}
         {%- endif -%}
       </a>
-    </div>
+    </div>    
     {%- endif -%} {% endcomment %}
     <div>
-      <a href="{{ product.url | within: collection }}" class="add_to_cart_button{% if product.variants.size == 1 and product.available %} product-card--add-to-cart-button-simple{% endif %}{% unless product.available %} outofstock{% endunless %}" data-id="{{ current_variant.id }}" data-product-id="{{ product.selected_or_first_available_variant.id }}">
-        {%- if product.available -%}
-          {%- if product.metafields.theme.preorder -%}
-            {{ 'products.product.pre_order' | t }}
-          {%- elsif product.variants.size == 1 %}
-            {{ 'products.product.add_to_cart' | t }}
-          {% else %}
-            {{ 'products.product.select_options' | t }}
-          {% endif %}
-        {%- else -%}
-          {{ 'products.product.out_of_stock' | t }}
-        {%- endif -%}
-      </a>
+      <button 
+        class="add_to_cart_trigger_button add_to_cart_button"
+        data-id="{{ current_variant.id }}" 
+        data-product-id="{{ product.selected_or_first_available_variant.id }}"
+        data-available="{{ product.available }}" 
+        data-handle="{{ product.url }}" 
+        data-preorder="{{ product.metafields.theme.preorder }}"
+        data-variants="{{ product.variants.size }}" 
+      >
+      {%- if product.available -%}
+        {%- if product.metafields.theme.preorder -%}
+          {{ 'products.product.pre_order' | t }}
+        {%- elsif product.variants.size == 1 %}
+          {{ 'products.product.add_to_cart' | t }}
+        {% else %}
+          {{ 'products.product.select_options' | t }}
+        {% endif %}
+      {%- else -%}
+        {{ 'products.product.out_of_stock' | t }}
+      {%- endif -%}
+      </button>
     </div>
+      
   </div>
 	{%- if settings.show_products_rating and product.metafields.reviews.rating.value != blank -%}
 	  {%- assign rating = product.metafields.reviews.rating.value.rating | divided_by: product.metafields.reviews.rating.value.scale_max | times: 100 | append: '%' -%}

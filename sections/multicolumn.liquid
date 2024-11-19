@@ -17,88 +17,73 @@
 	endcase
 -%}
 {{ 'multicolumn.css' | asset_url | stylesheet_tag }}
+{{ 'https://unpkg.com/swiper/swiper-bundle.min.css' | stylesheet_tag }}
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 <div class="section-margin {% if disable_top_spacing %}section-no-top-margin{% endif %} {% if disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
-	<div class="row align-center {% if full_width %}full-width-row no-padding{% endif %}" id="multicolumn-{{ section.id }}">
-	  <div class="small-12 columns">
-			<div class="multicolumn{% if mobile_swipe %} swipe-on-mobile{% endif %}">
-		    <div class="row {{ padding }}">
-		      {% for block in section.blocks limit: 4 %}
-		        <div class="{{ grid_item_width | escape }} columns {{ block.settings.text_alignment }} horizontal-textbox {{ block.settings.animation }}" id="block-{{ block.id }}" {{ block.shopify_attributes }}>
-		          <div class="horizontal-textbox-inner">
-								{%- if block.settings.image != blank -%}
-									{%- liquid
-										assign image = block.settings.image
-										assign height = image.src.height
-										assign image_link = block.settings.image_link
-										case image_ratio
-											when 'adapt'
-												assign ratio = image.aspect_ratio
-												assign percent_ratio = 100 | divided_by: ratio | append: '%'
-											when 'square'
-												assign ratio = 1
-												assign height = image.src.width
-											when 'portrait'
-												assign ratio = 0.8
-												assign height = image.src.width | times: ratio
-										endcase
-										assign master_width = image.src.width | append: 'x' | append: height
-									-%}
-									<div class="multicolumn--image media-aspect--{{ image_ratio }}" style="--var-media-aspect-ratio: {{ percent_ratio }}">
-										{% if image_link != blank %}
-											<a href="{{ image_link }}">
-										{% endif %}
-										{%- render 'responsive-image', image: image, sizes: master_width -%}
-										{% if image_link != blank %}
-											</a>
-										{% endif %}
-									</div>
-	              {%- endif -%}
-								{% if block.settings.title != blank %}
-		            	<h4>{{ block.settings.title }}</h4>
-								{% endif %}
-								<div class="rte">
-									{{ block.settings.text }}
-								</div>
-		            {% if block.settings.button-text != blank %}
-		            <div class="vc_empty_space" style="height: 20px"></div>
-		            <a class="btn-text" href="{{ block.settings.button-link | escape }}" title="{{ block.settings.button-text | escape }}"><span>{{ block.settings.button-text }}</span>
-		              <div class="arrow">
-		                <div>
-		                  {% render 'svg-icons' with 'thb-button-arrow' %}
-		                  {% render 'svg-icons' with 'thb-button-arrow' %}
-		                </div>
-		              </div>
-		            </a>
-		            {% endif %}
-		          </div>
-							{% style %}
-								#block-{{ block.id }} .horizontal-textbox-inner {
-									{% if block.settings.bg_color %}
-									background: {{ block.settings.bg_color }};
-									{% endif %}
-								}
-								{% if block.settings.text_color != blank %}
-								#block-{{ block.id }} .horizontal-textbox-inner p,
-								#block-{{ block.id }} .horizontal-textbox-inner a {
-									color: {{ block.settings.text_color }};
-								}
-								#block-{{ block.id }} .horizontal-textbox-inner .btn-text .arrow svg path{
-									fill: {{ block.settings.text_color }};
-								}
-								{% endif %}
-								{% if block.settings.heading_color != blank %}
-								#block-{{ block.id }} .horizontal-textbox-inner h4 {
-									color: {{ block.settings.heading_color }};
-								}
-								{% endif %}
-							{% endstyle %}
-		        </div>
-		      {% endfor %}
-		    </div>
-			</div>
-	  </div>
-	</div>
+  <div class="row align-center {% if full_width %}full-width-row no-padding{% endif %}" id="multicolumn-{{ section.id }}">
+    <div class="small-12 columns">
+      <div class="multicolumn{% if mobile_swipe %} swipe-on-mobile{% endif %}">
+        <div class="swiper-container multicolumn-swiper">
+          <div class="swiper-wrapper">
+            {% for block in section.blocks limit: 4 %}
+            <div class="swiper-slide {{ grid_item_width | escape }} {{ block.settings.text_alignment }} horizontal-textbox {{ block.settings.animation }}" id="block-{{ block.id }}" {{ block.shopify_attributes }}>
+              <div class="horizontal-textbox-inner">
+                {%- if block.settings.image != blank -%}
+                {%- liquid
+                  assign image = block.settings.image
+                  assign height = image.src.height
+                  assign image_link = block.settings.image_link
+                  case image_ratio
+                    when 'adapt'
+                      assign ratio = image.aspect_ratio
+                      assign percent_ratio = 100 | divided_by: ratio | append: '%'
+                    when 'square'
+                      assign ratio = 1
+                      assign height = image.src.width
+                    when 'portrait'
+                      assign ratio = 0.8
+                      assign height = image.src.width | times: ratio
+                  endcase
+                  assign master_width = image.src.width | append: 'x' | append: height
+                -%}
+                <div class="multicolumn--image media-aspect--{{ image_ratio }}" style="--var-media-aspect-ratio: {{ percent_ratio }}">
+                  {% if image_link != blank %}
+                  <a href="{{ image_link }}">
+                  {% endif %}
+                  {%- render 'responsive-image', image: image, sizes: master_width -%}
+                  {% if image_link != blank %}
+                  </a>
+                  {% endif %}
+                </div>
+                {%- endif -%}
+                {% if block.settings.title != blank %}
+                <h4>{{ block.settings.title }}</h4>
+                {% endif %}
+                <div class="rte">
+                  {{ block.settings.text }}
+                </div>
+                {% if block.settings.button-text != blank %}
+                <div class="vc_empty_space" style="height: 20px"></div>
+                <a class="btn-text" href="{{ block.settings.button-link | escape }}" title="{{ block.settings.button-text | escape }}"><span>{{ block.settings.button-text }}</span>
+                  <div class="arrow">
+                    <div>
+                      {% render 'svg-icons' with 'thb-button-arrow' %}
+                      {% render 'svg-icons' with 'thb-button-arrow' %}
+                    </div>
+                  </div>
+                </a>
+                {% endif %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
 {% schema %}
   {
     "name": "Multicolumn",
@@ -274,3 +259,24 @@
     ]
   }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Only initialize Swiper if the screen width is 768px or less (mobile)
+    if (window.innerWidth <= 768) {
+      var swiper = new Swiper('.multicolumn-swiper', {
+        slidesPerView: 1, // Default for mobile
+        spaceBetween: 20,
+        loop: true, // Enable infinite loop
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+      });
+    }
+  });
+</script>

@@ -1,53 +1,21 @@
-{% schema %}
-    {
-      "name": "Image Block Accordion",
-      "settings": [],
-      "blocks": [
-        {
-          "type": "section",
-          "name": "Block Accordion",
-          "settings": [
-            {
-              "type": "text",
-              "label": "Block Title",
-              "id": "title",
-              "default": "Title here"
-            },
-            {
-              "type": "textarea",
-              "label": "Block Description",
-              "id": "description",
-              "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            },
-            {
-              "type": "image_picker",
-              "label": "Select Image",
-              "id": "image_url"
-            }
-          ]
-        }
-      ],
-      "presets": [
-        {
-          "name": "Image Block Accordion",
-          "category": "Custom"
-        }
-      ]
-    }
-    {% endschema %}
-    
+
     <div class="custom-container">
         <div class="custom-details">
           {% for block in section.blocks %}
             <div class="custom-details-item" data-image="{{ block.settings.image_url | img_url: 'master' }}">
-              <h3>{{ block.settings.title }}</h3>
-              <p>{{ block.settings.description }}</p>
+              <div></div>
+              <div class="custom-details-item-details">
+                <h3 style="color: {{ block.settings.color }};">{{ block.settings.title }}</h3>
+              {{ block.settings.description }}
+              </div>
             </div>
           {% endfor %}
         </div>
         <div class="custom-image-container">
-          <!-- The image source will be dynamically updated via JavaScript -->
-          <img src="{{ section.blocks[0].settings.image_url }}" alt="Default Image" id="dynamic-image">
+          <img 
+            src="{{ section.blocks[0].settings.image_url | img_url: 'master' }}" 
+            alt="Default Image" 
+            id="dynamic-image">
         </div>
       </div>
       
@@ -56,6 +24,19 @@
           margin: 0;
           padding: 0;
           box-sizing: border-box;
+        }
+
+        .custom-details-item * {
+          margin: 0
+        }
+
+        .custom-details-item-details p a {
+          color: #1A82C4;
+          text-decoration: underline;
+        }
+
+        .custom-details-item-details h3 {
+          font-weight: 700;
         }
       
         body {
@@ -102,12 +83,15 @@
           justify-content: center;
           align-items: center;
           height: 700px;
+          transition: all 0.3s;
         }
       
         .custom-image-container img {
           max-width: 100%;
           height: auto;
           border-radius: 5px;
+          opacity: 0;
+          transition: opacity 0.3s ease-in-out;
         }
       
         /* Mobile Styles */
@@ -118,32 +102,87 @@
           }
       
           .custom-image-container {
-            order: 2; /* Ensures image comes after the details */
-            margin-top: 20px; /* Add spacing between details and image */
+            order: 2;
+            margin-top: 20px;
           }
         }
       </style>
+
+{% schema %}
+  {
+    "name": "Image Block Accordion",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "section",
+        "name": "Block Accordion",
+        "settings": [
+          {
+          "type": "color",
+          "id": "color",
+          "label": "Title Color",
+          "default": "#1A82C4"
+          },
+          {
+            "type": "text",
+            "label": "Block Title",
+            "id": "title",
+            "default": "Title here"
+          },
+          {
+            "type": "richtext",
+            "label": "Block Description",
+            "id": "description",
+            "default": "<p>Add customer reviews and testimonials to showcase your store’s happy customers.</p>"
+          },
+          {
+            "type": "image_picker",
+            "label": "Select Image",
+            "id": "image_url"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image Block Accordion",
+        "category": "Custom"
+      }
+    ]
+  }
+  {% endschema %}      
       
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const detailsItems = document.querySelectorAll('.custom-details-item');
-          const imageElement = document.getElementById('dynamic-image');
-          let savedImage = imageElement.src;
-      
-          detailsItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-              const newImage = item.getAttribute('data-image');
-              imageElement.src = newImage;
-            });
-      
-            item.addEventListener('mouseleave', () => {
-              savedImage = imageElement.src;
-            });
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const detailsItems = document.querySelectorAll('.custom-details-item');
+        const imageElement = document.getElementById('dynamic-image');
+        let currentImage = imageElement.src;
+        imageElement.style.opacity = 1;
+        detailsItems.forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            const newImage = item.getAttribute('data-image');
+            if (newImage) {
+              imageElement.style.opacity = 0;
+              setTimeout(() => {
+                imageElement.src = newImage;
+                imageElement.style.opacity = 1;
+              }, 300);
+            }
           });
-      
-          document.querySelector('.custom-container').addEventListener('mouseleave', () => {
-            imageElement.src = savedImage;
+          item.addEventListener('mouseleave', () => {
+            const lastHoveredImage = item.getAttribute('data-image');
+            if (lastHoveredImage) {
+              currentImage = lastHoveredImage;
+            }
           });
         });
+
+        document.querySelector('.custom-container').addEventListener('mouseleave', () => {
+          imageElement.style.opacity = 0;
+          setTimeout(() => {
+            imageElement.src = currentImage;
+            imageElement.style.opacity = 1;
+          }, 300);
+        });
+      });
       </script>
-      

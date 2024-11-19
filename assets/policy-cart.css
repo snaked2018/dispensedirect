@@ -1,0 +1,102 @@
+.policy-cart-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+  }
+  
+  .policy-cart-modal-inner {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 340px;
+    max-width: 370px;
+  }
+
+  #policyCheckbox {
+    width: 30px;
+    height: 30px;
+    margin: 0;
+  }
+
+  .checkbox-container label {
+    margin: 0;
+  }
+
+  .agreement-wrapper p {
+    line-height: 20px;
+  }
+  
+  .modal-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+}
+  
+  .btn-confirm {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #1a82c4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-close {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #dedede;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #confirmPolicyBtn:disabled {
+    background-color: #ccc;
+    color: #777;
+    border: 1px solid #ddd;
+    cursor: not-allowed;
+  }
+  
+  #confirmPolicyBtn:not(:disabled) {
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+    cursor: pointer;
+  }
+  
+  #confirmPolicyBtn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    width: 100%;
+  }
+.notification {
+    position: fixed;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 16px;
+    transition: top 0.5s ease;
+    z-index: 100;
+    }
+
+    .slide-in {
+    top: 100px;
+    }

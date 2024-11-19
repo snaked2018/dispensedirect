@@ -1,0 +1,150 @@
+{{ 'policy-cart.css' | asset_url | stylesheet_tag }}
+
+<div class="policy-cart-modal" id="policyModal" style="display: none;">
+  <div class="policy-cart-modal-inner">
+    <div class="agreement-wrapper">
+      <h4>Important Notice:</h4>
+      <p>PLEASE READ THE CONDITIONS BELOW AND CHECK THE BOX TO ENABLE PURCHASE OF THIS PRODUCT.</p>
+      <h4>Pharmacist Only Medicine</h4>
+      <p>After you purchase this medicine you will need to contact a pharmacist within 2 business days on 0000000 to determine if this product is appropriate for you.</p>
+      <p>If you don't call, the product will be deleted from your order and the balance of your order will be dispatched.</p>
+      <div class="checkbox-container" style="margin: 15px 0; display: flex; gap: 10px; align-items: center; justify-content: center;">
+        <input type="checkbox" id="policyCheckbox">
+        <label for="policyCheckbox">I agree with the terms and conditions of ordering this product.</label>
+      </div>
+      <div class="modal-buttons">
+        <button type="submit" name="add" id="confirmPolicyBtn" class="btn-confirm" disabled>
+          {{ "products.product.add_to_cart" | t }}
+        </button>
+        <div id="spinner" style="display: none;">Loading...</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const policyModal = document.getElementById('policyModal');
+  const policyCheckbox = document.getElementById('policyCheckbox');
+  const confirmPolicyBtn = document.getElementById('confirmPolicyBtn');
+  const checkboxContainer = document.querySelector('.checkbox-container');
+  const spinner = document.getElementById('spinner');
+  const successNotification = document.getElementById('successNotification');
+  let isProcessing = false;
+  let productData = null;
+
+  // Function to update the button based on checkbox state
+  function updateConfirmPolicyBtn() {
+    if (productData) {
+      const { available, preorder, variants, productId } = productData;
+      let buttonText = '';
+
+      if (!available) {
+        buttonText = '{{ "products.product.out_of_stock" | t }}';
+      } else if (preorder) {
+        buttonText = '{{ "products.product.pre_order" | t }}';
+      } else if (variants === '1') {
+        buttonText = '{{ "products.product.add_to_cart" | t }}';
+      } else {
+        buttonText = '{{ "products.product.select_options" | t }}';
+      }
+
+      confirmPolicyBtn.textContent = buttonText;
+
+      // Show/hide checkbox depending on conditions
+      if (buttonText !== '{{ "products.product.add_to_cart" | t }}') {
+        checkboxContainer.style.display = 'none';
+        confirmPolicyBtn.removeAttribute('disabled');
+      } else {
+        checkboxContainer.style.display = 'flex';
+        confirmPolicyBtn.setAttribute('disabled', 'true');
+      }
+    }
+  }
+
+  document.body.addEventListener('click', function (event) {
+    if (event.target.classList.contains('add_to_cart_trigger_button')) {
+      if (isProcessing) return;
+
+      isProcessing = true;
+      setTimeout(() => (isProcessing = false), 500);
+
+      productData = {
+        id: event.target.getAttribute('data-id'),
+        productId: event.target.getAttribute('data-product-id'),
+        handle: event.target.getAttribute('data-handle'),
+        available: event.target.getAttribute('data-available') === 'true',
+        preorder: event.target.getAttribute('data-preorder') === 'true',
+        variants: event.target.getAttribute('data-variants')
+      };
+
+      // Reset checkbox and button state when opening a new modal
+      policyCheckbox.checked = false; // Reset checkbox state
+      confirmPolicyBtn.setAttribute('disabled', 'true'); // Disable button initially
+
+      updateConfirmPolicyBtn();
+      policyModal.style.display = 'flex';
+    }
+  });
+
+  policyCheckbox.addEventListener('change', function () {
+    if (policyCheckbox.checked) {
+      confirmPolicyBtn.removeAttribute('disabled');
+    } else {
+      confirmPolicyBtn.setAttribute('disabled', 'true');
+    }
+  });
+
+  confirmPolicyBtn.addEventListener('click', function () {
+    if (policyCheckbox.checked) {
+      if (productData && productData.id) {
+        confirmPolicyBtn.style.display = 'none';
+        spinner.style.display = 'block';
+
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: productData.id, quantity: 1 })
+        })
+        .then(response => response.json())
+        .then(data => {
+          confirmPolicyBtn.textContent = 'Added to Cart';
+          showSuccessNotification();
+
+          setTimeout(() => {
+            policyModal.style.display = 'none';
+            productData = null;
+            confirmPolicyBtn.style.display = 'block';
+            spinner.style.display = 'none';
+            window.location.reload(); // Refresh the page after adding to cart
+          }, 1000);
+        })
+        .catch(error => {
+          console.error('Error adding product to cart:', error);
+          spinner.style.display = 'none';
+          confirmPolicyBtn.style.display = 'block';
+        });
+      }
+    } else {
+      window.location.href = `${productData.handle}`; // Use the product handle for redirection
+    }
+  });
+
+  function showSuccessNotification() {
+    successNotification.style.display = 'block';
+    successNotification.classList.add('slide-in');
+    setTimeout(() => {
+      successNotification.classList.remove('slide-in');
+      successNotification.style.display = 'none';
+    }, 3000);
+  }
+
+  window.addEventListener('click', function (e) {
+    if (e.target === policyModal) {
+      policyModal.style.display = 'none';
+      productData = null;
+    }
+  });
+});
+
+</script>

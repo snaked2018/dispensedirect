@@ -1,4 +1,5 @@
 {{ 'product-template.css' | asset_url | stylesheet_tag }}
+{{ 'policy-cart.css' | asset_url | stylesheet_tag }}
 {%- liquid
 	assign collection_pagination_count = section.settings.collection_product_count | plus: 0
 	assign grid_size = section.settings.collection_grid_num
@@ -19,6 +20,13 @@
 		endif
 	endfor
 -%}
+
+{% comment %} Policy gate before adding items to cart {% endcomment %}
+{%- render 'policy-modal', product: product -%}
+<div id="successNotification" class="notification" style="display: block;">
+  Product added to cart!
+</div>
+
 {%- paginate collection.products by collection_pagination_count -%}
   {%- render 'shop-bar', results: collection, paginate: paginate, filtering: section.settings.enable_filtering, sorting: section.settings.enable_sorting, total_active: total_active -%}
 	{% if section.settings.enable_filtering %}
@@ -26,6 +34,7 @@
 	{% else %}
 	<form id="FacetFiltersForm" class="facets__form"></form>
 	{% endif %}
+	  
 	<div class="row">
     <div class="small-12 columns">
 			<div id="ProductGridContainer">
