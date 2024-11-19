@@ -114,7 +114,8 @@
       ],
       "custom_css": [
         ".section-margin,.spr-container {margin: 0;}",
-        ".thb-tab .tab-label {font-size: 18px; font-weight: 700;}"
+        ".thb-tab .tab-label {font-size: 18px; font-weight: 700;}",
+        ".thb-tab {padding: 15px 0;}"
       ],
       "settings": {
         "index": 0,
