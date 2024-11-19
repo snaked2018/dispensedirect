@@ -1,101 +1,152 @@
 <div class="section-margin {% if section.settings.disable_top_spacing %}section-no-top-margin{% endif %} {% if section.settings.disable_bottom_spacing %}section-no-bottom-margin{% endif %}" id="section-accordion-{{ section.id }}">
-	<div class="row">
-	  <div class="small-12 columns">
-			{{ 'accordion.css' | asset_url | stylesheet_tag }}
-	    <div class="blog-post-wrapper">
-				{%- for block in section.blocks -%}
-					{%- capture checked -%}
-						{%- if forloop.index == section.settings.index -%}
-							checked
-						{%- endif -%}
-					{%- endcapture -%}
-					<div class="thb-tab {{ section.settings.animation | escape }}" {{ block.shopify_attributes }}>
-						<input type="checkbox" id="{{ section.id }}-tab-{{ forloop.index }}" {{ checked | strip_newlines | escape }}>
-						<label class="tab-label" for="{{ section.id }}-tab-{{ forloop.index }}">{{ block.settings.title }}<span class="thb-accordion-arrow"></span></label>
-						<div class="tab-content">{{ block.settings.text }}</div>
-					</div>
-				{%- endfor -%}
+	<div class="row accordion-row-container">
+	  <!-- Image Container (left or right side) -->
+	  <div class="accordion-image-container" style="order:{% if section.settings.image_position == 'left' %}0{% elsif section.settings.image_position == 'right' %}1{% endif %}">
+		<img src="{{ section.settings.image | img_url: 'master' }}" alt="Accordion Image">
+	  </div>
+  
+	  <!-- Accordion Container -->
+	  <div class="columns">
+		{{ 'accordion.css' | asset_url | stylesheet_tag }}
+		<div class="blog-post-wrapper">
+		  {%- for block in section.blocks -%}
+			{%- capture checked -%}
+			  {%- if forloop.index == section.settings.index -%}
+				checked
+			  {%- endif -%}
+			{%- endcapture -%}
+			<div class="thb-tab {{ section.settings.animation | escape }}" {{ block.shopify_attributes }}>
+			  <input type="checkbox" id="{{ section.id }}-tab-{{ forloop.index }}" {{ checked | strip_newlines | escape }}>
+			  <label class="tab-label" for="{{ section.id }}-tab-{{ forloop.index }}">
+				{{ block.settings.title }}<span class="thb-accordion-arrow"></span>
+			  </label>
+			  <div class="tab-content">{{ block.settings.text }}</div>
 			</div>
+		  {%- endfor -%}
+		</div>
 	  </div>
 	</div>
-</div>
-
-{% schema %}
-  {
-    "name": "Accordion",
-    "settings": [
-			{
-				"type": "number",
-				"id": "index",
-				"label": "Active tab",
-				"default": 1,
-        "info": "Select default open tab."
-			},
-			{
-				"type": "select",
-				"id": "animation",
-				"label": "Loading animation",
-				"default": "",
-				"options": [
-					{ "value": "", "label": "None" },
-					{ "value": "animation right-to-left", "label": "Right to left" },
-					{ "value": "animation left-to-right", "label": "Left to right" },
-					{ "value": "animation right-to-left-long", "label": "Right to left long" },
-					{ "value": "animation left-to-right-long", "label": "Left to right long" },
-					{ "value": "animation bottom-to-top", "label": "Bottom to top" },
-					{ "value": "animation top-to-bottom", "label": "Top to bottom" },
-					{ "value": "animation scale", "label": "Scale" },
-					{ "value": "animation fade-in", "label": "Fade" }
-				]
-			},
-			{
-        "type": "header",
-        "content": "Spacing"
-      },
-			{
-				"type": "checkbox",
-				"id": "disable_top_spacing",
-				"default": false,
-				"label": "Remove top spacing"
-			},
-			{
-				"type": "checkbox",
-				"id": "disable_bottom_spacing",
-				"default": false,
-				"label": "Remove bottom spacing"
-			}
-    ],
-    "blocks": [
-      {
-        "type": "tab",
-        "name": "Tab",
-        "settings": [
-					{
-						"type": "text",
-						"id": "title",
-						"label": "Heading",
-						"default": "Collapsible row"
-					},
-          {
-            "type": "richtext",
-            "id": "text",
-            "label": "Row content"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Accordion",
-				"blocks": [
-					{
-						"type": "tab"
-					},
-					{
-						"type": "tab"
-					}
-				]
-      }
-    ]
+  </div>
+  
+  <style>
+  .accordion-image-container {
+	width: 50%;
+	display: flex;
   }
-{% endschema %}
+  
+  .accordion-image-container img {
+	width: 100%;
+	height: auto;
+  }
+  @media(max-width: 768px){
+	.accordion-image-container {
+		display: none;
+	}
+  }
+  
+  .accordion-row-container {
+	display: flex;
+	align-items: flex-start;
+  }
+  </style>
+  
+  {% schema %}
+  {
+	"name": "Accordion",
+	"settings": [
+	  {
+		"type": "number",
+		"id": "index",
+		"label": "Active tab",
+		"default": 1,
+		"info": "Select default open tab."
+	  },
+	  {
+		"type": "select",
+		"id": "animation",
+		"label": "Loading animation",
+		"default": "",
+		"options": [
+		  { "value": "", "label": "None" },
+		  { "value": "animation right-to-left", "label": "Right to left" },
+		  { "value": "animation left-to-right", "label": "Left to right" },
+		  { "value": "animation right-to-left-long", "label": "Right to left long" },
+		  { "value": "animation left-to-right-long", "label": "Left to right long" },
+		  { "value": "animation bottom-to-top", "label": "Bottom to top" },
+		  { "value": "animation top-to-bottom", "label": "Top to bottom" },
+		  { "value": "animation scale", "label": "Scale" },
+		  { "value": "animation fade-in", "label": "Fade" }
+		]
+	  },
+	  {
+		"type": "header",
+		"content": "Spacing"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "disable_top_spacing",
+		"default": false,
+		"label": "Remove top spacing"
+	  },
+	  {
+		"type": "checkbox",
+		"id": "disable_bottom_spacing",
+		"default": false,
+		"label": "Remove bottom spacing"
+	  },
+	  {
+		"type": "header",
+		"content": "Image Settings"
+	  },
+	  {
+		"type": "image_picker",
+		"id": "image",
+		"label": "Accordion Image",
+		"info": "Choose an image for the accordion"
+	  },
+	  {
+		"type": "select",
+		"id": "image_position",
+		"label": "Image Position",
+		"default": "left",
+		"options": [
+		  { "value": "left", "label": "Left" },
+		  { "value": "right", "label": "Right" }
+		]
+	  }
+	],
+	"blocks": [
+	  {
+		"type": "tab",
+		"name": "Tab",
+		"settings": [
+		  {
+			"type": "text",
+			"id": "title",
+			"label": "Heading",
+			"default": "Collapsible row"
+		  },
+		  {
+			"type": "richtext",
+			"id": "text",
+			"label": "Row content"
+		  }
+		]
+	  }
+	],
+	"presets": [
+	  {
+		"name": "Accordion",
+		"blocks": [
+		  {
+			"type": "tab"
+		  },
+		  {
+			"type": "tab"
+		  }
+		]
+	  }
+	]
+  }
+  {% endschema %}
+  
