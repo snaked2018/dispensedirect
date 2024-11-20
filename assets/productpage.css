@@ -371,7 +371,8 @@ https://flickity.metafizzy.co
     margin: 0 0 20px;
     cursor: pointer;
     flex-shrink: 0;
-    width: 84px; }
+    width: 84px;
+    margin: 10px 5px }
     .thb-product-detail .product-thumbnail-container .product-thumbnail:before {
       content: "";
       display: block;

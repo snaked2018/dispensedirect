@@ -1,5 +1,5 @@
 <div class="account-holder {% unless section.settings.header_secondary_icons %}has-text-links{% else %}has-icon-links{% endunless %} uppercase-{{ settings.menu_uppercase }}">
-	<a href="https://medevolve.com.au/"><i style="font-size: 17px; color: #83c429;" class="fa-solid fa-user"></i></a>
+	<a class="patient-login-btn" href="https://medevolve.com.au/">Patient Login</a>
 	{% if customer %}
 	  {% assign profile_link = routes.account_url %}
 	  {% capture profile_text %}

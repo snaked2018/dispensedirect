@@ -4770,3 +4770,39 @@ h2.title-style2 {
     height: 60px !important;
   }
 }
+.patient-login-btn {
+  opacity: 0;
+}
+.full-menu ul li:last-child {
+  display: block;
+}
+@media(min-width:769px){
+  .patient-login-btn {
+    display: block;
+    background-color: #83c429;
+    color: white;
+    font-size: 12px !important;
+    padding: 8px 10px !important;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 1;
+  }
+  .patient-login-btn:hover {
+    color: white !important;
+    background-color: #76af25;
+    transition: all 0.3s;
+  }
+  .full-menu ul li a[title="Patient Login"] {
+    display: none;
+  }
+}
+  .product-single__media a img, .products .product .product_thumbnail img{
+    border: var(--media-border-width) solid rgba(var(--color-foreground), var(--media-border-opacity));
+    border-radius: var(--media-radius);
+    border-radius: 12px;
+    overflow: none !important;
+    background-color: #FFF;
+    padding: 10px;
+    aspect-ratio: 1;
+  }

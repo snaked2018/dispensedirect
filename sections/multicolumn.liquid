@@ -1,20 +1,20 @@
 {%- liquid
-	assign image_ratio = section.settings.image_ratio
-	assign disable_top_spacing = section.settings.disable_top_spacing
-	assign disable_bottom_spacing = section.settings.disable_bottom_spacing
-	assign full_width = section.settings.full_width
-	assign padding = section.settings.padding
-	assign mobile_swipe = section.settings.mobile_swipe
-	case section.blocks.size
-	  when 1
-	    assign grid_item_width = 'small-12'
-	  when 2
-	    assign grid_item_width = 'small-12 medium-6'
-	  when 3
-	    assign grid_item_width = 'small-12 medium-4'
-	  when 4
-	    assign grid_item_width = 'small-12 medium-3'
-	endcase
+  assign image_ratio = section.settings.image_ratio
+  assign disable_top_spacing = section.settings.disable_top_spacing
+  assign disable_bottom_spacing = section.settings.disable_bottom_spacing
+  assign full_width = section.settings.full_width
+  assign padding = section.settings.padding
+  assign mobile_swipe = section.settings.mobile_swipe
+  case section.blocks.size
+    when 1
+      assign grid_item_width = 'small-12'
+    when 2
+      assign grid_item_width = 'small-12 medium-6'
+    when 3
+      assign grid_item_width = 'small-12 medium-4'
+    when 4
+      assign grid_item_width = 'small-12 medium-3'
+  endcase
 -%}
 {{ 'multicolumn.css' | asset_url | stylesheet_tag }}
 {{ 'https://unpkg.com/swiper/swiper-bundle.min.css' | stylesheet_tag }}
@@ -23,66 +23,79 @@
 <div class="section-margin {% if disable_top_spacing %}section-no-top-margin{% endif %} {% if disable_bottom_spacing %}section-no-bottom-margin{% endif %}">
   <div class="row align-center {% if full_width %}full-width-row no-padding{% endif %}" id="multicolumn-{{ section.id }}">
     <div class="small-12 columns">
-      <div class="multicolumn{% if mobile_swipe %} swipe-on-mobile{% endif %}">
+      <div class="multicolumn">
         <div class="swiper-container multicolumn-swiper">
           <div class="swiper-wrapper">
             {% for block in section.blocks limit: 4 %}
-            <div class="swiper-slide {{ grid_item_width | escape }} {{ block.settings.text_alignment }} horizontal-textbox {{ block.settings.animation }}" id="block-{{ block.id }}" {{ block.shopify_attributes }}>
-              <div class="horizontal-textbox-inner">
-                {%- if block.settings.image != blank -%}
-                {%- liquid
-                  assign image = block.settings.image
-                  assign height = image.src.height
-                  assign image_link = block.settings.image_link
-                  case image_ratio
-                    when 'adapt'
-                      assign ratio = image.aspect_ratio
-                      assign percent_ratio = 100 | divided_by: ratio | append: '%'
-                    when 'square'
-                      assign ratio = 1
-                      assign height = image.src.width
-                    when 'portrait'
-                      assign ratio = 0.8
-                      assign height = image.src.width | times: ratio
-                  endcase
-                  assign master_width = image.src.width | append: 'x' | append: height
-                -%}
-                <div class="multicolumn--image media-aspect--{{ image_ratio }}" style="--var-media-aspect-ratio: {{ percent_ratio }}">
-                  {% if image_link != blank %}
-                  <a href="{{ image_link }}">
-                  {% endif %}
-                  {%- render 'responsive-image', image: image, sizes: master_width -%}
-                  {% if image_link != blank %}
-                  </a>
-                  {% endif %}
-                </div>
-                {%- endif -%}
-                {% if block.settings.title != blank %}
-                <h4>{{ block.settings.title }}</h4>
-                {% endif %}
-                <div class="rte">
-                  {{ block.settings.text }}
-                </div>
-                {% if block.settings.button-text != blank %}
-                <div class="vc_empty_space" style="height: 20px"></div>
-                <a class="btn-text" href="{{ block.settings.button-link | escape }}" title="{{ block.settings.button-text | escape }}"><span>{{ block.settings.button-text }}</span>
-                  <div class="arrow">
-                    <div>
-                      {% render 'svg-icons' with 'thb-button-arrow' %}
-                      {% render 'svg-icons' with 'thb-button-arrow' %}
+              <div
+                class="swiper-slide {{ grid_item_width | escape }} {{ block.settings.text_alignment }} horizontal-textbox {{ block.settings.animation }}"
+                id="block-{{ block.id }}"
+                {{ block.shopify_attributes }}>
+                <div class="horizontal-textbox-inner">
+                  {%- if block.settings.image != blank -%}
+                    {%- liquid
+                      assign image = block.settings.image
+                      assign height = image.src.height
+                      assign image_link = block.settings.image_link
+                      case image_ratio
+                        when 'adapt'
+                          assign ratio = image.aspect_ratio
+                          assign percent_ratio = 100 | divided_by: ratio | append: '%'
+                        when 'square'
+                          assign ratio = 1
+                          assign height = image.src.width
+                        when 'portrait'
+                          assign ratio = 0.8
+                          assign height = image.src.width | times: ratio
+                      endcase
+                      assign master_width = image.src.width | append: 'x' | append: height
+                    -%}
+                    <div class="multicolumn--image media-aspect--{{ image_ratio }}" style="--var-media-aspect-ratio: {{ percent_ratio }}">
+                      {% if image_link != blank %}
+                        <a href="{{ image_link }}">
+                      {% endif %}
+                      {%- render 'responsive-image'
+                        , image: image
+                        , sizes: master_width -%}
+                      {% if image_link != blank %}
+                        </a>
+                      {% endif %}
                     </div>
+                  {%- endif -%}
+                  {% if block.settings.title != blank %}
+                    <h4>{{ block.settings.title }}</h4>
+                  {% endif %}
+                  <div class="rte">
+                    {{ block.settings.text }}
                   </div>
-                </a>
-                {% endif %}
+                </div>
               </div>
-            </div>
             {% endfor %}
+          </div>
+          <div class="column-arrows">
+            <span>{% render 'svg-icons' with 'arrow-multicolumn-left' %}</span>
+            <span>{% render 'svg-icons' with 'arrow-multicolumn-right' %}</span>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .column-arrows {
+    display: none;
+  }
+  @media(max-width: 768px) {
+    .column-arrows {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      position: relative;
+      top: -302px;
+    }
+  }
+</style>
 
 {% schema %}
   {
@@ -100,69 +113,66 @@
         "label": "Column spacing",
         "default": "",
         "options": [
-          { "value": "", "label": "Large" },
-          { "value": "low-padding", "label": "Medium" },
-          { "value": "pixel-padding", "label": "Small" }
+          {
+            "value": "",
+            "label": "Large"
+          }, {
+            "value": "low-padding",
+            "label": "Medium"
+          }, {
+            "value": "pixel-padding",
+            "label": "Small"
+          }
         ]
       },
-	    {
-				"type": "select",
-				"id": "image_ratio",
-				"options": [
-					{
-					  "value": "adapt",
-					  "label": "Adapt to image"
-					},
-					{
-					  "value": "portrait",
-					  "label": "Portrait"
-					},
-					{
-					  "value": "square",
-					  "label": "Square"
-					}
-				],
-				"default": "adapt",
-				"label": "Image ratio"
-			},
-			{
-				"type": "checkbox",
-				"id": "mobile_swipe",
-				"default": false,
-				"label": "Enable swipe on mobile"
-			},
-			{
-				"type": "header",
-				"content": "Spacing"
-			},
-			{
-				"type": "checkbox",
-				"id": "disable_top_spacing",
-				"default": false,
-				"label": "Remove top spacing"
-			},
-			{
-				"type": "checkbox",
-				"id": "disable_bottom_spacing",
-				"default": false,
-				"label": "Remove bottom spacing"
-			}
+      {
+        "type": "select",
+        "id": "image_ratio",
+        "options": [
+          {
+            "value": "adapt",
+            "label": "Adapt to image"
+          }, {
+            "value": "portrait",
+            "label": "Portrait"
+          }, {
+            "value": "square",
+            "label": "Square"
+          }
+        ],
+        "default": "adapt",
+        "label": "Image ratio"
+      },
+      {
+        "type": "header",
+        "content": "Spacing"
+      }, {
+        "type": "checkbox",
+        "id": "disable_top_spacing",
+        "default": false,
+        "label": "Remove top spacing"
+      }, {
+        "type": "checkbox",
+        "id": "disable_bottom_spacing",
+        "default": false,
+        "label": "Remove bottom spacing"
+      }
     ],
     "blocks": [
       {
         "type": "block",
         "name": "Column",
         "settings": [
-					{
-						"type": "image_picker",
-						"id": "image",
-						"label": "Image"
-					},
-					{
-	          "type": "url",
-	          "id": "image_link",
-	          "label": "Image link"
-	        },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "url",
+            "id": "image_link",
+            "label": "Image link"
+          },
           {
             "type": "text",
             "id": "title",
@@ -174,64 +184,85 @@
             "id": "text",
             "label": "Content",
             "default": "<p>Focus on your upcoming sales. Add details on availability, style, or even provide a review.</p>"
-          },
-					{
-		         "type": "select",
-		         "id": "text_alignment",
-		         "label": "Content alignment",
-		         "options": [
-		           { "value": "text-center", "label": "Center" },
-		           { "value": "text-left", "label": "Left" },
-		           { "value": "text-right", "label": "Right" }
-		         ],
-		         "default": "text-center"
-		      },
-          {
+          }, {
+            "type": "select",
+            "id": "text_alignment",
+            "label": "Content alignment",
+            "options": [
+              {
+                "value": "text-center",
+                "label": "Center"
+              }, {
+                "value": "text-left",
+                "label": "Left"
+              }, {
+                "value": "text-right",
+                "label": "Right"
+              }
+            ],
+            "default": "text-center"
+          }, {
             "id": "button-text",
             "type": "text",
             "label": "Button label",
             "default": "Shop Now",
-						"info": "Leave the label blank to hide the button."
-          },
-          {
+            "info": "Leave the label blank to hide the button."
+          }, {
             "id": "button-link",
             "type": "url",
             "label": "Button link"
-          },
-					{
-		        "type": "select",
-		        "id": "animation",
-		        "label": "Loading animation",
-		        "default": "animation fade-in",
-		        "options": [
-		          { "value": "", "label": "None" },
-		          { "value": "animation right-to-left", "label": "Right to left" },
-		          { "value": "animation left-to-right", "label": "Left to right" },
-		          { "value": "animation right-to-left-long", "label": "Right to left long" },
-		          { "value": "animation left-to-right-long", "label": "Left to right long" },
-		          { "value": "animation bottom-to-top", "label": "Bottom to top" },
-		          { "value": "animation top-to-bottom", "label": "Top to bottom" },
-		          { "value": "animation scale", "label": "Scale" },
-		          { "value": "animation fade-in", "label": "Fade" }
-		        ]
-		      },
-					{
-		        "type": "header",
-		        "content": "Colors"
-		      },
-					{
-						"type": "color",
-						"id": "heading_color",
-						"label": "Heading",
-						"default": "#151515"
-					},
-					{
-						"type": "color",
-						"id": "text_color",
-						"label": "Text",
-						"default": "#444444"
-					},
-          {
+          }, {
+            "type": "select",
+            "id": "animation",
+            "label": "Loading animation",
+            "default": "animation fade-in",
+            "options": [
+              {
+                "value": "",
+                "label": "None"
+              },
+              {
+                "value": "animation right-to-left",
+                "label": "Right to left"
+              },
+              {
+                "value": "animation left-to-right",
+                "label": "Left to right"
+              },
+              {
+                "value": "animation right-to-left-long",
+                "label": "Right to left long"
+              }, {
+                "value": "animation left-to-right-long",
+                "label": "Left to right long"
+              }, {
+                "value": "animation bottom-to-top",
+                "label": "Bottom to top"
+              }, {
+                "value": "animation top-to-bottom",
+                "label": "Top to bottom"
+              }, {
+                "value": "animation scale",
+                "label": "Scale"
+              }, {
+                "value": "animation fade-in",
+                "label": "Fade"
+              }
+            ]
+          }, {
+            "type": "header",
+            "content": "Colors"
+          }, {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading",
+            "default": "#151515"
+          }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text",
+            "default": "#444444"
+          }, {
             "type": "color",
             "id": "bg_color",
             "label": "Background",
@@ -240,42 +271,58 @@
         ]
       }
     ],
-  	"max_blocks": 4,
+    "max_blocks": 4,
     "presets": [
       {
         "name": "Multicolumn",
-				"blocks": [
-					{
-						"type": "block"
-					},
-					{
-						"type": "block"
-					},
-					{
-						"type": "block"
-					}
-				]
+        "blocks": [
+          {
+            "type": "block"
+          }, {
+            "type": "block"
+          }, {
+            "type": "block"
+          }
+        ]
       }
     ]
   }
 {% endschema %}
 
+<style>
+  .section-margin {
+    position: relative;
+  }
+</style>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Only initialize Swiper if the screen width is 768px or less (mobile)
-    if (window.innerWidth <= 768) {
-      var swiper = new Swiper('.multicolumn-swiper', {
-        slidesPerView: 1, // Default for mobile
-        spaceBetween: 20,
-        loop: true, // Enable infinite loop
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
+    document.addEventListener('DOMContentLoaded', function() {
+    var swiperInstance = null;
+
+    function initializeSwiper() {
+      if (window.innerWidth <= 768) {
+        if (!swiperInstance) {
+          swiperInstance = new Swiper('.multicolumn-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+          });
+        }
+      } else {
+        if (swiperInstance) {
+          swiperInstance.destroy(true, true);
+          swiperInstance = null;
+        }
+      }
+    }
+
+    // Initialize Swiper on load only if the category wrapper is visible
+    if (document.querySelector('.section-margin')) {
+      initializeSwiper();
+
+      // Reinitialize Swiper on window resize
+      window.addEventListener('resize', function() {
+        initializeSwiper();
       });
     }
   });
