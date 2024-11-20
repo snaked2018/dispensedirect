@@ -578,7 +578,7 @@
         "text_size": 16,
         "text_uppercase": false,
         "image_size": "small",
-        "color_bg": "#d7d2cb",
+        "color_bg": "#f4f4f4",
         "color_text": "#151515",
         "overlay_color": "#000000",
         "overlay_opacity": 0,
