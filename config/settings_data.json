@@ -14,7 +14,7 @@
     "menu_font": "harmonia_sans_n4",
     "menu_uppercase": false,
     "button_font": "harmonia_sans_n4",
-    "body_bg": "#d7d2cb",
+    "body_bg": "#f4f4f4",
     "border_color": "rgba(0,0,0,0)",
     "heading_text_color": "#051235",
     "body_text_color": "#051235",
@@ -24,7 +24,7 @@
     "stars_color": "#051235",
     "global_notification_text_color": "#051235",
     "global_notification_bg_color": "#d7d2cb",
-    "header_bg": "#d7d2cb",
+    "header_bg": "#f4f4f4",
     "header_links_color": "#051235",
     "header_links_hover_color": "#83c429",
     "header_icons_color": "#83c429",
@@ -568,7 +568,7 @@
   },
   "platform_customizations": {
     "custom_css": [
-      "select[name=\"sort_by\"] option{background-color:#111}"
+      "select[name=\"sort_by\"] option {background-color: #111;}"
     ]
   }
 }
