@@ -4266,9 +4266,9 @@ Shop
         line-height: 25px; 
         margin-bottom: 5px;}
       .products .product .product_after_title .product_after_shop_loop_buttons {
-        position: absolute;
+        /* position: absolute;
         top: 100%;
-        left: 0;
+        left: 0; */
         width: 100%;
         font-size: 14px;
         color: var(--color-text);
