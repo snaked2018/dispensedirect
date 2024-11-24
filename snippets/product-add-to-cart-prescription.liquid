@@ -66,6 +66,7 @@
                   </div>
                 </div>
               </div>
+          </div>
 				<button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %} disabled>
 					<span class="single-add-to-cart-button--text">
 						{%- liquid
@@ -82,7 +83,7 @@
 						{{ button_content }}
 					</span>
 				</button>
-			</div>
+			
       
 			{%- if show_dynamic_checkout -%}
 				{{ form | payment_button }}
