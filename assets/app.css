@@ -4808,6 +4808,10 @@ h2.title-style2 {
     aspect-ratio: 1;
   }
 
+.header.light-title:hover a:hover, .header.light-title.hover a:hover, .header:not(.light-title) a:hover {
+    color: #051235;
+}
+
 .fitText {
     color: #394263 !important;
 }
