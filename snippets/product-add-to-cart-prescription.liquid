@@ -135,3 +135,21 @@
 </pickup-availability>
 <script src="{{ 'pickup-availability.min.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  // Get references to the checkbox and button
+  const termsCheckbox = document.getElementById('termsCheckbox');
+  const addToCartButton = document.getElementById('AddToCart');
+
+  // Add an event listener to toggle the button's disabled state
+  termsCheckbox.addEventListener('change', function () {
+    if (this.checked) {
+      addToCartButton.removeAttribute('disabled');
+    } else {
+      addToCartButton.setAttribute('disabled', 'disabled');
+    }
+  });
+});
+</script>
