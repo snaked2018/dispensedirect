@@ -89,7 +89,7 @@
         "hulk_form_builder_form_block_TzrkmW"
       ],
       "custom_css": [
-        "label.fitText.block_label {color: black !important;}"
+        ".form_generater_form_div,.form_generater_form_div .block_label,.form_generater_form_div .infoMessage {white-space: normal; text-transform: none; word-break: normal; color: #000 !important;}"
       ],
       "settings": {}
     }
