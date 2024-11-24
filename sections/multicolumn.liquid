@@ -68,6 +68,17 @@
                   <div class="rte">
                     {{ block.settings.text }}
                   </div>
+                  {% if block.settings.button-text != blank %}
+		            <div class="vc_empty_space" style="height: 20px"></div>
+		            <a class="btn-text" href="{{ block.settings.button-link | escape }}" title="{{ block.settings.button-text | escape }}"><span>{{ block.settings.button-text }}</span>
+		              <div class="arrow">
+		                <div>
+		                  {% render 'svg-icons' with 'thb-button-arrow' %}
+		                  {% render 'svg-icons' with 'thb-button-arrow' %}
+		                </div>
+		              </div>
+		            </a>
+		            {% endif %}
                 </div>
               </div>
             {% endfor %}
@@ -99,7 +110,7 @@
 
 {% schema %}
   {
-    "name": "Multicolumn",
+    "name": "Multicolumn Swiper",
     "settings": [
       {
         "type": "checkbox",
@@ -274,7 +285,7 @@
     "max_blocks": 4,
     "presets": [
       {
-        "name": "Multicolumn",
+        "name": "Multicolumn Swiper",
         "blocks": [
           {
             "type": "block"
