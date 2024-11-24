@@ -49,15 +49,22 @@
 					<input type="button" value="–" class="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}" />
 				</quantity-selector>
 				{%- endif -%}
-              <div class="add_to_cart_holder">
-                <!-- Checkbox container -->
-                <div class="terms-checkbox-container">
-                  <label for="termsCheckbox">
-                    <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
-                    Agree
-                  </label>
+                <div class="add_to_cart_holder">
+                <!-- Accordion for Terms and Conditions -->
+                <div class="terms-accordion">
+                  <button class="accordion-toggle" id="termsAccordionToggle">
+                    {{ section.settings.terms_conditions_title }}
+                  </button>
+                  <div class="accordion-content" id="termsAccordionContent">
+                    <p>{{ section.settings.terms_conditions_details }}</p>
+                    <!-- Checkbox inside the accordion -->
+                    <label for="termsCheckbox">
+                      <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
+                      {{ section.settings.agree_to_terms }}
+                    </label>
+                  </div>
                 </div>
-              </div>
+                </div>  
 				<button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %} disabled>
 					<span class="single-add-to-cart-button--text">
 						{%- liquid
@@ -136,20 +143,28 @@
 <script src="{{ 'pickup-availability.min.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-  // Get references to the checkbox and button
-  const termsCheckbox = document.getElementById('termsCheckbox');
-  const addToCartButton = document.getElementById('AddToCart');
+<div class="add_to_cart_holder">
+  <!-- Accordion for Terms and Conditions -->
+  <div class="terms-accordion">
+    <button class="accordion-toggle" id="termsAccordionToggle">
+      {{ section.settings.terms_conditions_title }}
+    </button>
+    <div class="accordion-content" id="termsAccordionContent">
+      <p>{{ section.settings.terms_conditions_details }}</p>
+      <!-- Checkbox inside the accordion -->
+      <label for="termsCheckbox">
+        <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
+        {{ section.settings.agree_to_terms }}
+      </label>
+    </div>
+  </div>
 
-  // Add an event listener to toggle the button's disabled state
-  termsCheckbox.addEventListener('change', function () {
-    if (this.checked) {
-      addToCartButton.removeAttribute('disabled');
-    } else {
-      addToCartButton.setAttribute('disabled', 'disabled');
-    }
-  });
-});
+  <!-- Add to Cart Button -->
+  <button type="submit" id="AddToCart" class="single-add-to-cart-button button" disabled>
+    <span class="single-add-to-cart-button--text">
+      {{ section.settings.add_to_cart_text }}
+    </span>
+  </button>
+</div>
 </script>
