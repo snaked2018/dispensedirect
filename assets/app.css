@@ -4784,6 +4784,7 @@ h2.title-style2 {
         font-size: 16px !important;
         padding: 12px 10px !important;
         border-radius: 20px;
+        margin-right: 8px;
         text-decoration: none;
         cursor: pointer;
         opacity: 1;
