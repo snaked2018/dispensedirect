@@ -4807,3 +4807,8 @@ h2.title-style2 {
     padding: 10px;
     aspect-ratio: 1;
   }
+
+.block_label {
+    color: #394263;
+    font-size: 14px;
+}
