@@ -25,6 +25,23 @@
       {% if product.has_only_default_variant or has_variant_picker == false %}
         <input name="id" type="hidden" value="{{ current_variant.id }}" />
       {% endif %}
+        <div class="terms-accordion swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <button class="accordion-toggle" id="termsAccordionToggle">
+                {{ section.settings.terms_conditions_title }}
+              </button>
+              <div class="accordion-content" id="termsAccordionContent">
+                <p>{{ section.settings.terms_conditions_details }}</p>
+                <!-- Checkbox inside the accordion -->
+                <label for="termsCheckbox">
+                  <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
+                  {{ section.settings.agree_to_terms }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       {%- if gift_card_recipient_feature_active -%}
         {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
       {%- endif -%}
@@ -50,23 +67,6 @@
           <input type="button" value="–" class="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}" />
         </quantity-selector>
         {%- endif -%}
-        <div class="terms-accordion swiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <button class="accordion-toggle" id="termsAccordionToggle">
-                {{ section.settings.terms_conditions_title }}
-              </button>
-              <div class="accordion-content" id="termsAccordionContent">
-                <p>{{ section.settings.terms_conditions_details }}</p>
-                <!-- Checkbox inside the accordion -->
-                <label for="termsCheckbox">
-                  <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
-                  {{ section.settings.agree_to_terms }}
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %} disabled>
         <span class="single-add-to-cart-button--text">
