@@ -108,12 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
       draggable: true,
     },
   });
-
-  // Accordion toggle functionality
+  
   const accordionToggle = document.getElementById('termsAccordionToggle');
   const accordionContent = document.getElementById('termsAccordionContent');
 
-  accordionToggle.addEventListener('click', function () {
+  accordionToggle.addEventListener('click', function (event) {
+    event.preventDefault();
     const isExpanded = accordionContent.style.display === 'block';
     accordionContent.style.display = isExpanded ? 'none' : 'block';
     accordionToggle.classList.toggle('active', !isExpanded);
@@ -123,11 +123,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const termsCheckbox = document.getElementById('termsCheckbox');
   const addToCartButton = document.getElementById('AddToCart');
 
-  termsCheckbox.addEventListener('change', function () {
+  addToCartButton.setAttribute('disabled', 'disabled');
+
+  termsCheckbox.addEventListener('change', function (event) {
+    event.stopPropagation();
     if (this.checked) {
       addToCartButton.removeAttribute('disabled');
     } else {
       addToCartButton.setAttribute('disabled', 'disabled');
+    }
+  });
+
+  addToCartButton.addEventListener('click', function (event) {
+    if (!termsCheckbox.checked) {
+      event.preventDefault();
+      alert('Please agree to the terms and conditions before proceeding.');
     }
   });
 });
