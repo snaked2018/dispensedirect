@@ -10,7 +10,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "main-product-prescription",
       "blocks": {
         "8a82546d-51ba-42f6-b7e6-7fa73fcde938": {
           "type": "breadcrumbs",
