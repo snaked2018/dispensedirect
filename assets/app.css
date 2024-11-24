@@ -4809,6 +4809,5 @@ h2.title-style2 {
   }
 
 .fitText {
-    color: #394263;
-    font-size: 14px;
+    color: #394263 !important;
 }
