@@ -138,7 +138,7 @@ assign product_form_id = 'product-form-' | append: section.id
 		{% endif %}
 		{% if block.type == 'buy_buttons' %}
 				<div {{ block.shopify_attributes }}>
-						{% render 'product-add-to-cart', product: product, form: form, product_form_id: product_form_id, block: block, pickup: pickup, has_variant_picker: has_variant_picker %}
+						{% render 'product-add-to-cart-prescription', product: product, form: form, product_form_id: product_form_id, block: block, pickup: pickup, has_variant_picker: has_variant_picker %}
 						{{ form | payment_terms }}
 				</div>
 		{% endif %}
