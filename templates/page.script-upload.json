@@ -89,7 +89,7 @@
         "hulk_form_builder_form_block_TzrkmW"
       ],
       "custom_css": [
-        ".block_label {color: #394263; font-size: 14px;}"
+        "label.fitText.block_label {color: black !important;}"
       ],
       "settings": {}
     }
