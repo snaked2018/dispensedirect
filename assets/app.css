@@ -4778,15 +4778,15 @@ h2.title-style2 {
 }
 @media(min-width:769px){
   .patient-login-btn {
-    display: block;
-    background-color: #83c429;
-    color: white;
-    font-size: 12px !important;
-    padding: 8px 10px !important;
-    border-radius: 10px;
-    text-decoration: none;
-    cursor: pointer;
-    opacity: 1;
+        display: block;
+        background-color: #83c429;
+        color: #fff;
+        font-size: 12px !important;
+        padding: 12px 10px !important;
+        border-radius: 20px;
+        text-decoration: none;
+        cursor: pointer;
+        opacity: 1;
   }
   .patient-login-btn:hover {
     color: white !important;
