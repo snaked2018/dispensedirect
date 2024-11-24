@@ -1,4 +1,4 @@
-
+{{- 'product-add-to-cart-prescription.css' | asset_url | stylesheet_tag -}}
 {%- if product.available -%}
   {%- assign current_variant = product.selected_or_first_available_variant -%}
   {%- liquid
