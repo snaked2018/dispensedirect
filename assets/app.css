@@ -4809,7 +4809,7 @@ h2.title-style2 {
   }
 
 .header.light-title:hover a:hover, .header.light-title.hover a:hover, .header:not(.light-title) a:hover {
-    color: #051235;
+    color: #051235 !important;
 }
 
 .fitText {
