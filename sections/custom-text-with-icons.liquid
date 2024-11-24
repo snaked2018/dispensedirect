@@ -230,7 +230,7 @@
 			if (mediaQuery.matches) {
 				// Mobile: infinite slide
 				sliderTrack.style.animation = 'scroll 40s linear infinite';
-				slider.removeEventListener('mouseover', pauseScroll);
+				slider.removeEventListener('mouseover', resumeScroll);
 				slider.removeEventListener('mouseout', resumeScroll);
 			} else {
 				// Desktop: slide on hover
