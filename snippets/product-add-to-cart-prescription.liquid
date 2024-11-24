@@ -49,22 +49,7 @@
 					<input type="button" value="–" class="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}" />
 				</quantity-selector>
 				{%- endif -%}
-				<button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %}>
-					<span class="single-add-to-cart-button--text">
-						{%- liquid
-							if product.selected_or_first_available_variant.available == false
-								assign button_content = 'products.product.soldout' | t
-							else
-								if product_template == 'pre-order'
-									assign button_content = 'products.product.pre_order' | t
-								else
-									assign button_content = 'products.product.add_to_cart' | t
-								endif
-							endif
-						-%}
-						{{ button_content }}
-					</span>
-				</button>
+				test
 			</div>
 			{%- if show_dynamic_checkout -%}
 				{{ form | payment_button }}
