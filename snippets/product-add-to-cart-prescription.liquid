@@ -28,6 +28,22 @@
 			{%- if gift_card_recipient_feature_active -%}
 				{%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
 			{%- endif -%}
+            <div class="add_to_cart_holder">
+                <!-- Accordion for Terms and Conditions -->
+                <div class="terms-accordion">
+                  <button class="accordion-toggle" id="termsAccordionToggle">
+                    {{ section.settings.terms_conditions_title }}
+                  </button>
+                  <div class="accordion-content" id="termsAccordionContent">
+                    <p>{{ section.settings.terms_conditions_details }}</p>
+                    <!-- Checkbox inside the accordion -->
+                    <label for="termsCheckbox">
+                      <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
+                      {{ section.settings.agree_to_terms }}
+                    </label>
+                  </div>
+                </div>
+              </div>
 			<div class="add_to_cart_holder">
 				{%- if block.settings.show_quantity_selector -%}
 				<quantity-selector class="quantity">
@@ -50,23 +66,6 @@
 					<input type="button" value="–" class="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}" />
 				</quantity-selector>
 				{%- endif -%}
-                <div class="add_to_cart_holder">
-                <!-- Accordion for Terms and Conditions -->
-                <div class="terms-accordion">
-                  <button class="accordion-toggle" id="termsAccordionToggle">
-                    {{ section.settings.terms_conditions_title }}
-                  </button>
-                  <div class="accordion-content" id="termsAccordionContent">
-                    <p>{{ section.settings.terms_conditions_details }}</p>
-                    <!-- Checkbox inside the accordion -->
-                    <label for="termsCheckbox">
-                      <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
-                      {{ section.settings.agree_to_terms }}
-                    </label>
-                  </div>
-                </div>
-              </div>
-          </div>
 				<button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %} disabled>
 					<span class="single-add-to-cart-button--text">
 						{%- liquid
@@ -83,7 +82,7 @@
 						{{ button_content }}
 					</span>
 				</button>
-			
+			</div>
       
 			{%- if show_dynamic_checkout -%}
 				{{ form | payment_button }}
