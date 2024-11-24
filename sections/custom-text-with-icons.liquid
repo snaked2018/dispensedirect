@@ -230,13 +230,13 @@
 			if (mediaQuery.matches) {
 				// Mobile: infinite slide
 				sliderTrack.style.animation = 'scroll 40s linear infinite';
-				slider.removeEventListener('mouseover', resumeScroll);
+				slider.removeEventListener('mouseover', pauseScroll);
 				slider.removeEventListener('mouseout', resumeScroll);
 			} else {
 				// Desktop: slide on hover
-				sliderTrack.style.animation = 'none'; // Disable animation initially
+				sliderTrack.style.animation = 'scroll 40s linear infinite'; // Disable animation initially
 				slider.addEventListener('mouseover', resumeScroll);
-				slider.addEventListener('mouseout', pauseScroll);
+				slider.addEventListener('mouseout', resumeScroll);
 			}
 		}
 	
