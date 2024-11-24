@@ -1,0 +1,211 @@
+{%- liquid
+assign has_variant_picker = false
+assign variant_picker = section.blocks | where: "variant_picker"
+if variant_picker.size > 0
+    assign has_variant_picker = true
+endif
+assign product_form_id = 'product-form-' | append: section.id
+-%}
+<div class="summary entry-summary">
+	{% for block in section.blocks %}
+		{%- if block.type == '@app' -%}
+				{% render block %}
+		{% endif %}
+		{% if block.type == 'breadcrumbs' %}
+				{% render 'breadcrumbs' %}
+		{% endif %}
+		{% if block.type == 'title' %}
+				<h1 class="product_title uppercase-{{ block.settings.uppercase }}" {{ block.shopify_attributes }}>{{ product.title }}</h1>
+		{% endif %}
+		{% if block.type == 'price' %}
+			<div class="product-price-container" {{ block.shopify_attributes }}>
+				<div class="no-js-hidden" id="price-{{ section.id }}">
+					{% render 'product-price', product: product, use_variant: true %}
+				</div>
+				{%- if section.settings.show_taxes_included != blank -%}
+					{%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+						<div class="product__tax caption">
+								{%- if cart.taxes_included -%}
+								{{ 'products.product.include_taxes' | t }}
+								{%- endif -%}
+								{%- if shop.shipping_policy.body != blank -%}
+								{{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+								{%- endif -%}
+						</div>
+					{%- endif -%}
+				{%- endif -%}
+			</div>
+		{% endif %}
+		{% if block.type == 'rating' %}
+			{%- if product.metafields.reviews.rating.value != blank -%}
+					{% liquid assign rating = product.metafields.reviews.rating.value.rating | divided_by: product.metafields.reviews.rating.value.scale_max | times: 100 | append: '%' %}
+					<div class="star-rating-container" {{ block.shopify_attributes }}>
+							<div class="star-rating" role="img">
+									<span aria-hidden="true" style="width: {{ rating | escape }};"></span>
+							</div>
+							<p class="rating-count">
+									{{ 'products.product.reviews' | t: count: product.metafields.reviews.rating_count }}
+							</p>
+					</div>
+			{%- endif -%}
+		{%- endif -%}
+		{% if block.type == 'description' %}
+				<div class="product-short-description rte" {{ block.shopify_attributes }}>{{ product.description }}</div>
+		{% endif %}
+		{% if block.type == 'variant_picker' %}
+			{%- unless product.has_only_default_variant -%}
+				{%- assign is_disabled = block.settings.variant_is_disabled -%}
+				<variant-selects id="variant-selects-{{ section.id }}" class="no-js-hidden" data-section="{{ section.id }}" data-url="{{ product.url }}" data-is-disabled="{{ is_disabled }}">
+					<div class="variations" {{ block.shopify_attributes }}>
+						<div class="js-product-options">
+							{%- for option in product.options_with_values -%}
+								{%- liquid
+									assign option_name = option.name | downcase | escape
+									assign option_type = block.settings.picker_type
+									assign swatch_count = option.values | map: 'swatch' | compact | size 
+									if block.settings.color_picker
+										if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe'
+											assign option_type = 'color'
+										endif
+										# Additional swatch variant options set inside theme settings
+										assign color_swatches_variant_option = settings.color_swatches_variant_option | downcase | split: ', '
+
+										if color_swatches_variant_option contains option_name
+											assign option_type = 'color'
+										endif
+									endif
+
+									if swatch_count > 0
+										assign option_type = 'color'
+									endif
+								-%}
+								{%- liquid
+									assign option_slug = option_name | downcase
+									assign sizing_link = ''
+
+									assign sizing_guide_variant = block.settings.sizing_guide_variant | default: 'Size' | downcase
+								-%}
+								{%- if option_slug == sizing_guide_variant -%}
+										{%- if block.settings.sizing_guide_text != empty -%}
+												{%- capture sizing_link -%}
+													<modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}">
+														<button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button" type="button" aria-haspopup="dialog"><span>{{ block.settings.sizing_guide_text }}</span></button>
+													</modal-opener>
+												{%- endcapture -%}
+												{%- capture sizing_popup -%}
+												<modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal">
+													<div role="dialog" aria-label="{{ block.settings.sizing_guide_text }}" aria-modal="true" class="product-popup-modal__content" tabindex="-1">
+														<div class="product-popup-modal__content-header">
+															<h5>{{ block.settings.sizing_guide_page.title | default: block.settings.sizing_guide_text }}</h5>
+															<button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'general.close' | t }}">{% render 'svg-icons' with 'thb-close' %}</button>
+														</div>
+														<scroll-shadow>
+															<div class="product-popup-modal__content-info">
+																{{ block.settings.sizing_guide_page.content }}
+															</div>
+														</scroll-shadow>
+													</div>
+												</modal-dialog>
+												{%- endcapture -%}
+										{%- endif -%}
+								{%- endif -%}
+								{%- render 'product-option', option_type: option_type, product: product, option: option, option_loop: forloop, product_form_id: product_form_id, sizing_link: sizing_link -%}
+							{%- endfor -%}
+							<input class="js-product-variant-id-input" type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" />
+						</div>
+					</div>
+					<script type="application/json">
+						{{ product.variants | json }}
+					</script>
+				</variant-selects>
+			{%- endunless -%}
+			<noscript class="product-form__noscript-wrapper-{{ section.id }}">
+					<div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+							<label for="Variants-{{ section.id }}">{{ 'products.product.product_variants' | t }}</label>
+							<div class="select">
+									<select name="id" id="Variants-{{ section.id }}" class="select__select">
+											{%- for variant in product.variants -%}
+													<option {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %} {% if variant.available == false %}disabled{% endif %} value="{{ variant.id }}">
+															{{ variant.title }}
+															{%- if variant.available == false %} - {{ 'products.product.soldout' | t }}{% endif %}
+															- {{ variant.price | money | strip_html }}
+													</option>
+											{%- endfor -%}
+									</select>
+							</div>
+					</div>
+			</noscript>
+		{% endif %}
+		{% if block.type == 'buy_buttons' %}
+				<div {{ block.shopify_attributes }}>
+						{% render 'product-add-to-cart', product: product, form: form, product_form_id: product_form_id, block: block, pickup: pickup, has_variant_picker: has_variant_picker %}
+						{{ form | payment_terms }}
+				</div>
+		{% endif %}
+		{% if block.type == 'share' %}
+				{% render 'social-share', share_title: product.title, share_permalink: product.url, share_image: product.featured_image %}
+		{% endif %}
+		{% if block.type == 'meta' %}
+			{% render 'product-meta', product: product, product_meta_collections: block.settings.product_meta_collections, product_meta_tags: block.settings.product_meta_tags, product_meta_vendors: block.settings.product_meta_vendors, product_meta_sku: block.settings.product_meta_sku, section_id: section.id %}
+		{% endif %}
+		{% if block.type == 'collapsible_tab' %}
+				<div class="thb-tab" {{ block.shopify_attributes }}>
+						<input type="checkbox" id="{{ section.id }}-tab-{{ block.id }}" {% if block.settings.open %}checked{% endif %}>
+						<label class="tab-label" for="{{ section.id }}-tab-{{ block.id }}">{{ block.settings.heading | default: block.settings.page.title }}<span class="thb-accordion-arrow"></span></label>
+						<div class="tab-content">
+								{{ block.settings.content }}
+								{{ block.settings.page.content }}
+								{{ block.settings.custom_liquid }}
+						</div>
+				</div>
+		{% endif %}
+		{% if block.type == 'custom_liquid' %}
+				{{ block.settings.custom_liquid }}
+		{% endif %}
+		{% if block.type == 'complementary' %}
+				<product-recommendations class="complementary-products no-js-hidden" data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ block.settings.product_list_limit }}&intent=complementary">
+						{%- if recommendations.performed and recommendations.products_count > 0 -%}
+								<div class="complementary-products--inner product_list_widget">
+										{%- if block.settings.block_heading != blank -%}
+												<div class="complementary-products--heading">{{ block.settings.block_heading }}</div>
+										{%- endif -%}
+										{%- for product in recommendations.products limit: block.settings.product_list_limit -%}
+										<div class="mini_cart_item">
+												<div class="product-cart-item-image">
+														<a href="{{ product.url }}" title="{{ product.title | escape }}" class="cart-product-link">
+														{% if product.featured_media %}
+																{%- render 'responsive-image', image: product.featured_media, sizes: '128x0' -%}
+														{% else %}
+																<div class="thb-placeholder" style="width: 64px;">
+																		{{ 'product-1' | placeholder_svg_tag }}
+																</div>
+														{% endif %}
+														</a>
+												</div>
+												<div class="mini_cart_item_content">
+														<a href="{{ product.url }}" title="{{ product.title | escape }}" class="cart-product-link">{{ product.title }}</a>
+														{% render 'product-price', product: product %}
+												</div>
+										</div>
+										{%- endfor -%}
+								</div>
+								<script src="{{ 'product-recommendations.min.js' | asset_url }}" defer="defer"></script>
+						{%- endif -%}
+				</product-recommendations>
+		{% endif %}
+		{% if block.type == 'shipping_estimator' -%}
+			<div class="thb-tab" {{ block.shopify_attributes }}>
+				<input type="checkbox" id="{{ section.id }}-tab-{{ block.id }}" {% if block.settings.open %}checked{% endif %}>
+				<label class="tab-label" for="{{ section.id }}-tab-{{ block.id }}">{{- 'cart.shipping_estimator.estimate_shipping' | t -}}<span class="thb-accordion-arrow"></span></label>
+				<div class="tab-content">
+						{%- render 'shipping-estimator', section: section, shipping_estimator: block, in_product: true -%}
+				</div>
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>
+
+{%- if sizing_popup != '' %}
+{{ 'sizing-popup.css' | asset_url | stylesheet_tag }}
+{{ sizing_popup }}
+{%- endif -%}
