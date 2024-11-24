@@ -49,6 +49,15 @@
 					<input type="button" value="–" class="minus" aria-label="{{ 'products.product.quantity.decrease' | t: product: product.title | escape }}" />
 				</quantity-selector>
 				{%- endif -%}
+              <div class="add_to_cart_holder">
+                <!-- Checkbox container -->
+                <div class="terms-checkbox-container">
+                  <label for="termsCheckbox">
+                    <input type="checkbox" id="termsCheckbox" name="termsCheckbox" />
+                    Agree
+                  </label>
+                </div>
+              </div>
 				<button type="submit" name="add" id="AddToCart" class="single-add-to-cart-button button"{% unless product.selected_or_first_available_variant.available %} disabled="disabled"{% endunless %} disabled>
 					<span class="single-add-to-cart-button--text">
 						{%- liquid
