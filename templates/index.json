@@ -372,66 +372,67 @@
         "disable_bottom_spacing": false
       }
     },
-    "multicolumn_MVN6XP": {
-      "type": "multicolumn",
+    "multicolumn_o_ViY3zP": {
+      "type": "multicolumn-o",
       "blocks": {
-        "block_fUPbe7": {
+        "block_EJmtTE": {
           "type": "block",
           "settings": {
             "image_link": "",
             "title": "Patient Order",
-            "text": "<p>Existing patients can log into the portal to place repeat orders. </p><p></p>",
+            "text": "<p>Focus on your upcoming sales. Add details on availability, style, or even provide a review.</p>",
             "text_alignment": "text-center",
-            "button-text": "Patient login",
+            "button-text": "Shop Now",
             "button-link": "https://medevolve.com.au/",
             "animation": "animation fade-in",
-            "heading_color": "#051235",
-            "text_color": "#051235",
-            "bg_color": "rgba(0,0,0,0)"
+            "heading_color": "#151515",
+            "text_color": "#444444",
+            "bg_color": "#f5f5f5"
           }
         },
-        "block_4dQmmk": {
+        "block_hmnhdY": {
           "type": "block",
           "settings": {
             "image_link": "",
             "title": "New Patient",
             "text": "<p>Complete our new patient form to gain access to the patient portal.</p><p></p>",
             "text_alignment": "text-center",
-            "button-text": "Upload your script",
+            "button-text": "Shop Now",
             "button-link": "shopify://pages/upload-your-script",
             "animation": "animation fade-in",
-            "heading_color": "#051235",
-            "text_color": "#051235",
-            "bg_color": "rgba(0,0,0,0)"
+            "heading_color": "#151515",
+            "text_color": "#444444",
+            "bg_color": "#f5f5f5"
           }
         },
-        "block_b6YUYk": {
+        "block_Jfn7h6": {
           "type": "block",
           "settings": {
             "image_link": "",
             "title": "Need Help?",
             "text": "<p>Our friendly staff are available to answer any of your queries.</p><p></p>",
             "text_alignment": "text-center",
-            "button-text": "Get in touch",
+            "button-text": "Shop Now",
             "button-link": "shopify://pages/our-pharmacists-are-here-to-help",
             "animation": "animation fade-in",
-            "heading_color": "#051235",
-            "text_color": "#051235",
-            "bg_color": "rgba(0,0,0,0)"
+            "heading_color": "#151515",
+            "text_color": "#444444",
+            "bg_color": "#f5f5f5"
           }
         }
       },
       "block_order": [
-        "block_fUPbe7",
-        "block_4dQmmk",
-        "block_b6YUYk"
+        "block_EJmtTE",
+        "block_hmnhdY",
+        "block_Jfn7h6"
       ],
       "settings": {
-        "full_width": false,
+        "full_width": true,
         "padding": "",
         "image_ratio": "adapt",
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
+        "mobile_swipe": false,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
       }
     },
     "scrolling_text_qax8k4": {
@@ -648,7 +649,7 @@
     "image_with_text_overlay_GgiLtQ",
     "custom_accordion_XArKk3",
     "testimonials_hmPhEz",
-    "multicolumn_MVN6XP",
+    "multicolumn_o_ViY3zP",
     "scrolling_text_qax8k4",
     "testimonials_hVKeYh"
   ]
