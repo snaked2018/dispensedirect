@@ -631,7 +631,8 @@ https://flickity.metafizzy.co
     margin-top: 20px;
     margin-bottom: 30px; }
     .thb-product-detail .product-information .product-add-to-cart-container label {
-      display: block; }
+          display: flex;
+          gap: 5px; }
 
 @media only screen and (min-width: 1068px) {
   .thb-product-detail.thb-product-style1 .product-gallery-container, .thb-product-detail.thb-product-style2 .product-gallery-container {
