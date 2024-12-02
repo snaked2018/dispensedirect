@@ -334,7 +334,8 @@
         "section_niDYiN"
       ],
       "custom_css": [
-        ".custom-container {justify-content: center; align-items: center;}"
+        ".custom-container {justify-content: center; align-items: center;}",
+        ".custom-details-item-details {line-height: 20px;}"
       ],
       "settings": {}
     },
