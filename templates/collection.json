@@ -79,8 +79,8 @@
         "collection_layout": "style1",
         "collection_grid_num": 4,
         "enable_filtering": true,
-        "p1_title": "Hello",
-        "p1_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p><strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">ullamco laboris nisi</a> ut aliquip ex ea commodo consequat.</p>",
+        "p1_title": "Terms and Conditions",
+        "p1_description": "<p>After you purchase this medicine, a pharmacist will contact you within 1 business day to determine if this product is appropriate for you.<br/><br/>If we are unable to reach you, the product will be deleted from your order and the balance of your order will be dispatched.</p>",
         "p1_label": "I agree to the terms and conditions of this product",
         "enable_sorting": true,
         "show_counts": true
