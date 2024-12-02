@@ -112,6 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const accordionToggle = document.getElementById('termsAccordionToggle');
   const accordionContent = document.getElementById('termsAccordionContent');
 
+  // Ensure accordion starts open
+  accordionContent.style.display = 'block';
+  accordionToggle.classList.add('active');
+
   accordionToggle.addEventListener('click', function (event) {
     event.preventDefault();
     const isExpanded = accordionContent.style.display === 'block';
