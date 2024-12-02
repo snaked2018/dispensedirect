@@ -51,7 +51,7 @@
           "settings": {
             "button_text": "Become a Dispense Direct Patient",
             "button_link": "shopify://pages/upload-your-script",
-            "button_style": "pill alt"
+            "button_style": ""
           }
         }
       },
@@ -167,21 +167,21 @@
           "type": "section",
           "settings": {
             "title": "Reliable product availability",
-            "icon": "ruler"
+            "icon": "price_tag"
           }
         },
         "section_76Bzd4": {
           "type": "section",
           "settings": {
             "title": "Simple, secure payment platform",
-            "icon": "ruler"
+            "icon": "check_mark"
           }
         },
         "section_kxbWk6": {
           "type": "section",
           "settings": {
             "title": "Same-day dispatch across Australia for orders placed by 2pm (AEST)",
-            "icon": "ruler"
+            "icon": "truck"
           }
         }
       },
