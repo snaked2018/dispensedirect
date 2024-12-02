@@ -630,11 +630,11 @@
         "quote_eMP46q"
       ],
       "settings": {
-        "style": "style2",
+        "style": "style1",
         "autoplay": true,
         "autoplay_length": 3,
         "text_size": "text-small",
-        "color_bg": "rgba(0,0,0,0)",
+        "color_bg": "#fdfeff",
         "color_text": "#1a82c4",
         "disable_top_spacing": false,
         "disable_bottom_spacing": true
