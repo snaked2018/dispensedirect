@@ -320,7 +320,7 @@
           "settings": {
             "color": "#83c429",
             "title": "6. Repeat order",
-            "description": "<p>If you have repeats on your script,  simply log back into the portal to manage your scripts and place your next order.</p>",
+            "description": "<p>If you have repeats on your script,  simply log back into <a href=\"https://medevolve.com.au/\" target=\"_blank\" title=\"https://medevolve.com.au/\">the portal</a> to manage your scripts and place your next order.</p>",
             "image_url": "shopify://shop_images/young-mam-with-computer.png"
           }
         }
