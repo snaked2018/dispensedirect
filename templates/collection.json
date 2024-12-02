@@ -80,8 +80,8 @@
         "collection_grid_num": 4,
         "enable_filtering": true,
         "p1_title": "Hello",
-        "p1_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p></p><p>Test</p>",
-        "p1_label": "Title",
+        "p1_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p><strong>Ut enim ad minim veniam</strong>, quis nostrud exercitation <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">ullamco laboris nisi</a> ut aliquip ex ea commodo consequat.</p>",
+        "p1_label": "I agree to the terms and conditions of this product",
         "enable_sorting": true,
         "show_counts": true
       }
