@@ -160,7 +160,7 @@
           "type": "section",
           "settings": {
             "title": "Wide range of high quality products",
-            "icon": "heart"
+            "icon": "check_mark"
           }
         },
         "section_hC97gU": {
@@ -174,7 +174,7 @@
           "type": "section",
           "settings": {
             "title": "Simple, secure payment platform",
-            "icon": "check_mark"
+            "icon": "lock"
           }
         },
         "section_kxbWk6": {
