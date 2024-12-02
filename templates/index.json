@@ -273,35 +273,65 @@
         "section_xGwhkA": {
           "type": "section",
           "settings": {
-            "color": "#1a82c4",
-            "title": "01. Send us your scripts",
-            "description": "<p><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>",
+            "color": "#83c429",
+            "title": "1. Send us your scripts",
+            "description": "<p><a href=\"/pages/upload-your-script\" title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\" title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>",
             "image_url": "shopify://shop_images/old-woman-with-computer_a7a4dabf-3db8-42b1-a94f-bdc989ef7e03.png"
           }
         },
         "section_iakEYt": {
           "type": "section",
           "settings": {
-            "color": "#1a82c4",
-            "title": "Title here",
-            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "color": "#83c429",
+            "title": "2. Account set up",
+            "description": "<p>Our team will set you up with a Dispense Direct account and you will receive a welcome email. You can follow the link to access our online ordering portal.</p>",
             "image_url": "shopify://shop_images/young-woman-with-computer_d2e4a3a3-0772-4e94-93fd-046281fb4ea2.png"
           }
         },
         "section_9aeKeJ": {
           "type": "section",
           "settings": {
-            "color": "#1a82c4",
-            "title": "Title here",
-            "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>",
+            "color": "#83c429",
+            "title": "3. Support",
+            "description": "<p>A friendly pharmacist will contact you to talk through your medications and answer any questions you may have. You will also be guided through our ordering portal.</p>",
             "image_url": "shopify://shop_images/old-doctor-with-computer_1bd8b40a-439e-427b-821f-1dd5ca0e2cf7.png"
+          }
+        },
+        "section_BFFUmQ": {
+          "type": "section",
+          "settings": {
+            "color": "#83c429",
+            "title": "4. Review your order",
+            "description": "<p>Review which items you would like to order, confirm your shipping details and pay for your order securely.</p>",
+            "image_url": "shopify://shop_images/young-woman-with-computer-and-phone_365caa8b-c2a0-49fe-bc29-7defcbcd72d9.png"
+          }
+        },
+        "section_rpHy49": {
+          "type": "section",
+          "settings": {
+            "color": "#83c429",
+            "title": "5. Track your order",
+            "description": "<p>You order will be dispatched same-day*, and can be tracked via express post straight to your door.</p><h6><br/>*Same-day dispatch is available on orders placed by 2pm (AEST) that day.</h6>",
+            "image_url": "shopify://shop_images/old-woman-with-computer-and-phone.png"
+          }
+        },
+        "section_niDYiN": {
+          "type": "section",
+          "settings": {
+            "color": "#83c429",
+            "title": "6. Repeat order",
+            "description": "<p>If you have repeats on your script,  simply log back into the portal to manage your scripts and place your next order.</p>",
+            "image_url": "shopify://shop_images/young-mam-with-computer.png"
           }
         }
       },
       "block_order": [
         "section_xGwhkA",
         "section_iakEYt",
-        "section_9aeKeJ"
+        "section_9aeKeJ",
+        "section_BFFUmQ",
+        "section_rpHy49",
+        "section_niDYiN"
       ],
       "settings": {}
     },
@@ -311,7 +341,7 @@
         "quote_L6WgcF": {
           "type": "quote",
           "settings": {
-            "text": "<h3><strong>Step 1</strong> </h3><h3><a href=\"/pages/upload-your-script\"title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\"title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></h3>",
+            "text": "<h3><strong>Step 1</strong> </h3><h3><a href=\"/pages/upload-your-script\" title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\" title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></h3>",
             "author": ""
           }
         },
