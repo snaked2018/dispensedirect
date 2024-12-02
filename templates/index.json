@@ -376,7 +376,7 @@
         "quote_mqHkbE": {
           "type": "quote",
           "settings": {
-            "text": "<h3><strong>Step 6</strong></h3><h3>If you have repeats on your script, simply log back into the portal to manage your scripts and place your next order</h3>",
+            "text": "<h3><strong>Step 6</strong></h3><h3>If you have repeats on your script, simply log back into <a href=\"https://medevolve.com.au/\" target=\"_blank\" title=\"https://medevolve.com.au/\">the portal</a> to manage your scripts and place your next order</h3>",
             "author": ""
           }
         }
