@@ -169,13 +169,6 @@
             "text": "<p>With the new legislation, you will need a valid prescription to purchase nicotine vaping products. Additionally, these products will be subject to stricter regulatory controls to ensure quality and safety. Our pharmacy will assist you in navigating these changes and ensuring compliance with the law.</p>"
           }
         },
-        "tab_TMKGR8": {
-          "type": "tab",
-          "settings": {
-            "title": "Are there any restrictions on the types of nicotine vaping products available?",
-            "text": "<p>Yes, the new legislation has imposed restrictions on the flavours and strengths of nicotine vaping products that can be prescribed and sold. We will provide products that comply with these regulations and offer guidance on their appropriate use</p>"
-          }
-        },
         "tab_HDPm4H": {
           "type": "tab",
           "settings": {
@@ -188,7 +181,6 @@
         "tab_kLGgcJ",
         "tab_M8WUPA",
         "tab_JFeFVR",
-        "tab_TMKGR8",
         "tab_HDPm4H"
       ],
       "settings": {
@@ -196,7 +188,7 @@
         "animation": "",
         "disable_top_spacing": true,
         "disable_bottom_spacing": false,
-        "image": "shopify://shop_images/female-patient-with-computer-e1711038501782.png",
+        "image": "shopify://shop_images/old-doctor-with-computer_ed07f704-e0c2-4323-830e-8d4bd61fe9bd.png",
         "image_position": "right"
       }
     },
@@ -279,6 +271,61 @@
         "image_position": "left"
       }
     },
+    "rich_text_F3fNBx": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_98YqHr": {
+          "type": "heading",
+          "settings": {
+            "title": "Support",
+            "heading_size": "h2",
+            "title_color": "#051235",
+            "animation": ""
+          }
+        }
+      },
+      "block_order": [
+        "heading_98YqHr"
+      ],
+      "settings": {
+        "text_width": "medium",
+        "text_position": "center",
+        "text_alignment": "center",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "accordion_R9iRpf": {
+      "type": "accordion",
+      "blocks": {
+        "tab_CLhkj7": {
+          "type": "tab",
+          "settings": {
+            "title": "What should I do if my device isn’t working properly?",
+            "text": "<p>If your device is malfunctioning, check the user manual for troubleshooting tips. Common issues include battery problems, coil replacements,ore-liquid levels. If the problem persists, please contact us for assistance.</p>"
+          }
+        },
+        "tab_M6DeV4": {
+          "type": "tab",
+          "settings": {
+            "title": "How can I get more information or support?",
+            "text": "<p>You can contact our friendly team via phone or email. Our knowledgeable staff are here to assist you with any questions or concerns you may have.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tab_CLhkj7",
+        "tab_M6DeV4"
+      ],
+      "settings": {
+        "index": 1,
+        "animation": "",
+        "disable_top_spacing": true,
+        "disable_bottom_spacing": false,
+        "image": "shopify://shop_images/female-patient-with-computer-e1711038501782.png",
+        "image_position": "right"
+      }
+    },
     "border_seperator_LKkQ6W": {
       "type": "border-seperator",
       "settings": {
@@ -298,6 +345,8 @@
     "accordion_frNWmH",
     "rich_text_V3kdgF",
     "accordion_mHGEXi",
+    "rich_text_F3fNBx",
+    "accordion_R9iRpf",
     "border_seperator_LKkQ6W"
   ]
 }
