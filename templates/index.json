@@ -412,7 +412,7 @@
             "title": "Need Help?",
             "text": "<p>Our friendly staff are available to answer any of your queries.</p><p></p>",
             "text_alignment": "text-center",
-            "button-text": "Shop Now",
+            "button-text": "Get in touch",
             "button-link": "shopify://pages/our-pharmacists-are-here-to-help",
             "animation": "animation fade-in",
             "heading_color": "#1a82c4",
