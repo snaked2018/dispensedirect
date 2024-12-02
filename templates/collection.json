@@ -1,1 +1,95 @@
-{"sections":{"main-collection-banner":{"type":"main-collection-banner","settings":{"show_collection_description":false,"show_subcollections":false,"bg_image":"shopify:\/\/shop_images\/pexels-3886052-5781571.jpg"}},"text_with_icons_VFdhtq":{"type":"text-with-icons","blocks":{"icon_LPc3nX":{"type":"icon","settings":{"icon":"check_mark","heading":"High quality products in a wide range","text":""}},"icon_hrXGzD":{"type":"icon","settings":{"icon":"price_tag","heading":"Reliable product availability","text":""}},"icon_PeEmry":{"type":"icon","settings":{"icon":"lock","heading":"Simple, secure payment platform","text":""}},"icon_A9ddR3":{"type":"icon","settings":{"icon":"truck","heading":"Same-day dispatch across Australia for orders placed by 2pm (AEST)","text":""}}},"block_order":["icon_LPc3nX","icon_hrXGzD","icon_PeEmry","icon_A9ddR3"],"settings":{"text_alignment":"left","icon_position":"left","icon_size":"medium","heading_size":"small","mobile_swipe":false,"color_bg":"rgba(0,0,0,0)","color_heading":"#051235","color_text":"#051235","disable_top_spacing":false,"disable_bottom_spacing":false}},"main-collection-product-grid":{"type":"main-collection-product-grid","settings":{"collection_product_count":24,"collection_layout":"style1","collection_grid_num":4,"enable_filtering":true,"enable_sorting":true,"show_counts":true}}},"order":["main-collection-banner","text_with_icons_VFdhtq","main-collection-product-grid"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": false,
+        "show_subcollections": false,
+        "bg_image": "shopify://shop_images/pexels-3886052-5781571.jpg"
+      }
+    },
+    "text_with_icons_VFdhtq": {
+      "type": "text-with-icons",
+      "blocks": {
+        "icon_LPc3nX": {
+          "type": "icon",
+          "settings": {
+            "icon": "check_mark",
+            "heading": "High quality products in a wide range",
+            "text": ""
+          }
+        },
+        "icon_hrXGzD": {
+          "type": "icon",
+          "settings": {
+            "icon": "price_tag",
+            "heading": "Reliable product availability",
+            "text": ""
+          }
+        },
+        "icon_PeEmry": {
+          "type": "icon",
+          "settings": {
+            "icon": "lock",
+            "heading": "Simple, secure payment platform",
+            "text": ""
+          }
+        },
+        "icon_A9ddR3": {
+          "type": "icon",
+          "settings": {
+            "icon": "truck",
+            "heading": "Same-day dispatch across Australia for orders placed by 2pm (AEST)",
+            "text": ""
+          }
+        }
+      },
+      "block_order": [
+        "icon_LPc3nX",
+        "icon_hrXGzD",
+        "icon_PeEmry",
+        "icon_A9ddR3"
+      ],
+      "settings": {
+        "text_alignment": "left",
+        "icon_position": "left",
+        "icon_size": "medium",
+        "heading_size": "small",
+        "mobile_swipe": false,
+        "color_bg": "rgba(0,0,0,0)",
+        "color_heading": "#051235",
+        "color_text": "#051235",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
+    "main-collection-product-grid": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "collection_product_count": 24,
+        "collection_layout": "style1",
+        "collection_grid_num": 4,
+        "enable_filtering": true,
+        "p1_title": "Hello",
+        "p1_description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>",
+        "p1_label": "Title",
+        "enable_sorting": true,
+        "show_counts": true
+      }
+    }
+  },
+  "order": [
+    "main-collection-banner",
+    "text_with_icons_VFdhtq",
+    "main-collection-product-grid"
+  ]
+}
