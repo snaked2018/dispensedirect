@@ -117,7 +117,7 @@
         "animation": "",
         "disable_top_spacing": true,
         "disable_bottom_spacing": false,
-        "image": "shopify://shop_images/old-woman-with-computer_9c7c47e6-31b5-435e-aba8-1e1a5c459c03.png",
+        "image": "shopify://shop_images/young-woman-with-computer-and-phone_365caa8b-c2a0-49fe-bc29-7defcbcd72d9.png",
         "image_position": "left"
       }
     },
@@ -196,7 +196,8 @@
         "animation": "",
         "disable_top_spacing": true,
         "disable_bottom_spacing": false,
-        "image_position": "left"
+        "image": "shopify://shop_images/female-patient-with-computer-e1711038501782.png",
+        "image_position": "right"
       }
     },
     "rich_text_V3kdgF": {
@@ -274,6 +275,7 @@
         "animation": "",
         "disable_top_spacing": true,
         "disable_bottom_spacing": false,
+        "image": "shopify://shop_images/computer-with-logo-dispense-direct_1.png",
         "image_position": "left"
       }
     },
