@@ -385,9 +385,9 @@
             "button-text": "Shop Now",
             "button-link": "https://medevolve.com.au/",
             "animation": "animation fade-in",
-            "heading_color": "#151515",
+            "heading_color": "#1a82c4",
             "text_color": "#444444",
-            "bg_color": "#f5f5f5"
+            "bg_color": "#fdfeff"
           }
         },
         "block_hmnhdY": {
@@ -400,9 +400,9 @@
             "button-text": "Shop Now",
             "button-link": "shopify://pages/upload-your-script",
             "animation": "animation fade-in",
-            "heading_color": "#151515",
+            "heading_color": "#1a82c4",
             "text_color": "#444444",
-            "bg_color": "#f5f5f5"
+            "bg_color": "#fdfeff"
           }
         },
         "block_Jfn7h6": {
@@ -415,9 +415,9 @@
             "button-text": "Shop Now",
             "button-link": "shopify://pages/our-pharmacists-are-here-to-help",
             "animation": "animation fade-in",
-            "heading_color": "#151515",
+            "heading_color": "#1a82c4",
             "text_color": "#444444",
-            "bg_color": "#f5f5f5"
+            "bg_color": "#fdfeff"
           }
         }
       },
@@ -427,7 +427,7 @@
         "block_Jfn7h6"
       ],
       "settings": {
-        "full_width": true,
+        "full_width": false,
         "padding": "",
         "image_ratio": "adapt",
         "mobile_swipe": false,
