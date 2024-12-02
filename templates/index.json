@@ -333,6 +333,9 @@
         "section_rpHy49",
         "section_niDYiN"
       ],
+      "custom_css": [
+        ".custom-container {justify-content: center; align-items: center;}"
+      ],
       "settings": {}
     },
     "testimonials_hmPhEz": {
