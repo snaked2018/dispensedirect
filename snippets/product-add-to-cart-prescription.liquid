@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
   accordionToggle.addEventListener('click', function (event) {
     event.preventDefault();
     const isExpanded = accordionContent.style.display === 'block';
-    accordionContent.style.display = isExpanded ? 'none' : 'block';
+    accordionContent.style.display = isExpanded ? 'block' : 'block';
     accordionToggle.classList.toggle('active', !isExpanded);
   });
 
