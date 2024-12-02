@@ -255,7 +255,7 @@
       "type": "image-with-text-overlay",
       "settings": {
         "bg_image": "shopify://shop_images/Direct_to_your_door_1920_x_1080_px_2.svg",
-        "bg_image_mobile": "shopify://shop_images/375_x_550_px_12.svg",
+        "bg_image_mobile": "shopify://shop_images/375_x_550_px_089bd8ef-2868-4204-ac21-855d2b62cd09.svg",
         "parallax": false,
         "desktop_height": "desktop-height-450",
         "mobile_height": "mobile-height-350",
