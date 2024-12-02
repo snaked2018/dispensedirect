@@ -254,7 +254,7 @@
     "image_with_text_overlay_GgiLtQ": {
       "type": "image-with-text-overlay",
       "settings": {
-        "bg_image": "shopify://shop_images/Direct_to_your_door_1920_x_1080_px_1.svg",
+        "bg_image": "shopify://shop_images/Direct_to_your_door_1920_x_1080_px_2.svg",
         "bg_image_mobile": "shopify://shop_images/375_x_550_px_12.svg",
         "parallax": false,
         "desktop_height": "desktop-height-450",
@@ -583,8 +583,8 @@
         "color_text": "#151515",
         "overlay_color": "#000000",
         "overlay_opacity": 0,
-        "disable_top_spacing": true,
-        "disable_bottom_spacing": true
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
       }
     },
     "testimonials_hVKeYh": {
@@ -593,7 +593,7 @@
         "quote_ENkxFb": {
           "type": "quote",
           "settings": {
-            "text": "<h5>What fantastic service. These guys have gone above and beyond to source my product and get it to me. Fantastic communication, follow up and support. I would give more stars if I could.</h5>",
+            "text": "<h4>What fantastic service. These guys have gone above and beyond to source my product and get it to me. Fantastic communication, follow up and support. I would give more stars if I could.</h4>",
             "author": "Judy Wallace, Google",
             "image": "shopify://shop_images/Untitled_design_13.png"
           }
@@ -601,7 +601,7 @@
         "quote_h3khkJ": {
           "type": "quote",
           "settings": {
-            "text": "<h5>So rarely do you see a business that is the business of making life easier, not harder and NEVER have I seen it in a pharmacy before!I cannot recommend Dispense Direct enough.Super easy, super fast, super efficient and SUPER FRIENDLY! Well done.</h5>",
+            "text": "<h4>So rarely do you see a business that is the business of making life easier, not harder and NEVER have I seen it in a pharmacy before!I cannot recommend Dispense Direct enough.Super easy, super fast, super efficient and SUPER FRIENDLY! Well done.</h4>",
             "author": "Dee Riley, Google",
             "image": "shopify://shop_images/Untitled_design_13.png"
           }
@@ -609,7 +609,7 @@
         "quote_9KVNiY": {
           "type": "quote",
           "settings": {
-            "text": "<h5>The staff at Dispense Direct go out of their way to help you and provide invaluable advice. They provide relevant information and will go that extra mile to help!</h5>",
+            "text": "<h4>The staff at Dispense Direct go out of their way to help you and provide invaluable advice. They provide relevant information and will go that extra mile to help!</h4>",
             "author": "Rodney Suffolk, Google",
             "image": "shopify://shop_images/Untitled_design_13.png"
           }
@@ -617,7 +617,7 @@
         "quote_eMP46q": {
           "type": "quote",
           "settings": {
-            "text": "<h5>Brilliant company. I've never had better service anywhere.<br/>Every time I order my medicine, it's literally in the post to me within like 12 business hours and it's normally in my hands within 48 hrs of ordering. That's not once or twice, that's dozens of times. Problem? They call/message promptly to sort it out. I can not fault them and go out of my way to give them all my business.</h5>",
+            "text": "<h4>Brilliant company. I've never had better service anywhere.<br/>Every time I order my medicine, it's literally in the post to me within like 12 business hours and it's normally in my hands within 48 hrs of ordering. That's not once or twice, that's dozens of times. Problem? They call/message promptly to sort it out. I can not fault them and go out of my way to give them all my business.</h4>",
             "author": "Dylan Hughes, Google",
             "image": "shopify://shop_images/Untitled_design_13.png"
           }
@@ -635,8 +635,8 @@
         "autoplay_length": 3,
         "text_size": "text-small",
         "color_bg": "rgba(0,0,0,0)",
-        "color_text": "#051235",
-        "disable_top_spacing": true,
+        "color_text": "#1a82c4",
+        "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
     }
