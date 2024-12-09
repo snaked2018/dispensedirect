@@ -480,7 +480,7 @@
         "products_grid_num": 4,
         "show_view_all": true,
         "button_style": "pill alt",
-        "bg_color": "#ffffff",
+        "bg_color": "#fdfeff",
         "heading_color": "#1a82c4",
         "text_color": "#051235",
         "animation": "",
