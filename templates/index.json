@@ -470,6 +470,24 @@
         "disable_bottom_spacing": false
       }
     },
+    "featured_collection_67KETk": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Popular on the shop",
+        "text": "<p>510 Thread Batteries</p>",
+        "collection": "510-thread-batteries",
+        "products_num": 4,
+        "products_grid_num": 4,
+        "show_view_all": true,
+        "button_style": "pill alt",
+        "bg_color": "#ffffff",
+        "heading_color": "#051235",
+        "text_color": "#051235",
+        "animation": "",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "scrolling_text_qax8k4": {
       "type": "scrolling-text",
       "blocks": {
@@ -695,6 +713,7 @@
     "custom_accordion_XArKk3",
     "testimonials_hmPhEz",
     "multicolumn_o_ViY3zP",
+    "featured_collection_67KETk",
     "scrolling_text_qax8k4",
     "testimonials_hVKeYh"
   ]
