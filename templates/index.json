@@ -473,8 +473,8 @@
     "featured_collection_67KETk": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured Collection",
-        "text": "<p>510 Thread Batteries</p>",
+        "title": "Featured: 510 Batteries",
+        "text": "",
         "collection": "510-thread-batteries",
         "products_num": 4,
         "products_grid_num": 4,
