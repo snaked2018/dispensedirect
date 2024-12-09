@@ -589,6 +589,15 @@
             "link": "",
             "outline_text": false
           }
+        },
+        "text_HeMkwe": {
+          "type": "text",
+          "settings": {
+            "image": "shopify://shop_images/logo-inverse.svg",
+            "text": "",
+            "link": "",
+            "outline_text": false
+          }
         }
       },
       "block_order": [
@@ -604,7 +613,8 @@
         "text_rPE9An",
         "text_HpiJFD",
         "text_NrbxNa",
-        "text_tD8MxF"
+        "text_tD8MxF",
+        "text_HeMkwe"
       ],
       "settings": {
         "height": "height-auto",
