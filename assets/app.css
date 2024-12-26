@@ -4815,3 +4815,9 @@ h2.title-style2 {
 .fitText {
     color: #394263 !important;
 }
+
+/*Essential Apps Changes*/
+.mini-cart__buttons > form > div > [data-essential-upsell-element="container"] {
+  display:none!important;
+}
+/*Essential Apps Changes End*/
