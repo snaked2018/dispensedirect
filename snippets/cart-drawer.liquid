@@ -112,6 +112,7 @@
 					{% endif %}
 					{% if settings.cart_drawer_checkout_button %}
 					<form action="{{ routes.cart_url }}" method="post" novalidate>
+                      <div class="essential-upsell-side-cart-bottom"></div>
 						<button type="submit" class="button checkout full" name="checkout" title="{{ 'cart.sidecart.checkout' | t | escape }}">{{ 'cart.sidecart.checkout' | t }}</button>
 					</form>
 					{% endif %}
