@@ -14,7 +14,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "global_notification": true,
+        "global_notification": false,
         "global_notification_close": false,
         "global_notification_homepage_only": false,
         "global_notification_text": "Boxing Day: Up to 30% off selected items. Discount automatically applied at checkout.",
