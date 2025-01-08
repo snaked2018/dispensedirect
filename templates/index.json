@@ -702,12 +702,6 @@
         "disable_top_spacing": false,
         "disable_bottom_spacing": true
       }
-    },
-    "custom_liquid_UanH8N": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": ""
-      }
     }
   },
   "order": [
@@ -721,7 +715,6 @@
     "multicolumn_o_ViY3zP",
     "featured_collection_67KETk",
     "scrolling_text_qax8k4",
-    "testimonials_hVKeYh",
-    "custom_liquid_UanH8N"
+    "testimonials_hVKeYh"
   ]
 }
