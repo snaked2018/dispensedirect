@@ -75,6 +75,10 @@
 
 	<script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 	{{ settings.custom_html_head }}
+  <script
+    src='//au.fw-cdn.com/20892612/324207.js'
+    chat='true'>
+  </script>
 </head>
 <body class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template | replace: '.', '-' | handle }} button-uppercase--{{ settings.button_uppercase }}">
 	<a class="screen-reader-shortcut" href="#main-content">{{ 'general.misc.skip_to_content' | t }}</a>
