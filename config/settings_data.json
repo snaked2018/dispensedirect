@@ -138,19 +138,9 @@
           "quiz_exit_intent": false
         }
       },
-      "7887822579089021210": {
-        "type": "shopify://apps/age-gate-age-verification-18/blocks/app-embeded/5cb7a0f2-a06e-4e4a-b5ea-1077ee894568",
-        "disabled": true,
-        "settings": {}
-      },
       "6279071938380501511": {
         "type": "shopify://apps/powerful-form-builder/blocks/app-embed/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
         "disabled": false,
-        "settings": {}
-      },
-      "6143736321357441667": {
-        "type": "shopify://apps/tidio-live-chat-chatbots/blocks/app-embed/1002274d-fb18-4939-98f6-5f05a8deeadc",
-        "disabled": true,
         "settings": {}
       },
       "144831480468751239": {
