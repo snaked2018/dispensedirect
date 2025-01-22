@@ -38,7 +38,7 @@
         "header_search": true,
         "show_language_switcher": false,
         "show_currency_switcher": false,
-        "mobile_secondary_menu": ""
+        "mobile_secondary_menu": "sidebar-mobile-menu"
       }
     }
   },
