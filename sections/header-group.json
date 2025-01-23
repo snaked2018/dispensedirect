@@ -23,7 +23,9 @@
     },
     "header": {
       "type": "header",
-      "custom_css": [],
+      "custom_css": [
+        ".script-upload-btn {display: block; background-color: #1a82c4; color: #fff; font-size: 16px !important; padding: 12px 10px !important; border-radius: 20px; margin-right: 8px; text-decoration: none; cursor: pointer; opacity: 1;"
+      ],
       "settings": {
         "sticky_header": true,
         "logo": "shopify://shop_images/Icon_Dispense_Direct_A_-_Crop_1.svg",
