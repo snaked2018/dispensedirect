@@ -470,8 +470,60 @@
         "disable_bottom_spacing": false
       }
     },
+    "featured_product_apKYPb": {
+      "type": "featured-product",
+      "blocks": {
+        "title_fmRpD6": {
+          "type": "title",
+          "settings": {
+            "uppercase": true
+          }
+        },
+        "price_8xtxmn": {
+          "type": "price",
+          "settings": {}
+        },
+        "description_XzgVz9": {
+          "type": "description",
+          "settings": {}
+        },
+        "variant_picker_dBBtbH": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown",
+            "color_picker": true,
+            "variant_is_disabled": true,
+            "sizing_guide_variant": "Size",
+            "sizing_guide_text": "Sizing guide",
+            "sizing_guide_page": ""
+          }
+        },
+        "buy_buttons_UyVerF": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true
+          }
+        }
+      },
+      "block_order": [
+        "title_fmRpD6",
+        "price_8xtxmn",
+        "description_XzgVz9",
+        "variant_picker_dBBtbH",
+        "buy_buttons_UyVerF"
+      ],
+      "settings": {
+        "product": "valentines-day-starter-bundle",
+        "product_image_feature": "",
+        "show_taxes_included": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    },
     "featured_collection_67KETk": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured: Merchandise",
         "text": "",
@@ -713,6 +765,7 @@
     "custom_accordion_XArKk3",
     "testimonials_hmPhEz",
     "multicolumn_o_ViY3zP",
+    "featured_product_apKYPb",
     "featured_collection_67KETk",
     "scrolling_text_qax8k4",
     "testimonials_hVKeYh"
