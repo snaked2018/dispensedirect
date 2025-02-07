@@ -14,7 +14,7 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "settings": {
-        "global_notification": false,
+        "global_notification": true,
         "global_notification_close": false,
         "global_notification_homepage_only": false,
         "global_notification_text": "Our Valentine's Bundles have sold out, but get $10 off your XMAX V3 Pro with code XMAX10",
