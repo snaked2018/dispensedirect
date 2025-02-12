@@ -1,0 +1,84 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wDdWep": {
+      "type": "rich-text",
+      "blocks": {
+        "image_PNGJdp": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/16.svg",
+            "retina": true,
+            "animation": ""
+          }
+        },
+        "text_ggFPyi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At <strong>Dispense Direct</strong> we offer our patients alternative medicine and smoking cessation products. If you are an existing patient, you can place orders for either prescriptions by logging into our <a href=\"https://accounts.medevolve.com.au/sign-in?redirect_url=https%3A%2F%2Fmedevolve.com.au%2Fpatient\">ordering portal.</a></p><p>To become a new patient at Dispense Direct, please upload your scripts here and our team will contact you shortly with exclusive portal access.</p><p>If you are a new patient for smoking cessation services and are in need of a script. please <a href=\"https://greenheart-medical.com.au/smoking-cessation\">click here</a> for a free consultation by an authorised prescriber.</p>",
+            "custom_liquid": "",
+            "text_color": "#051235",
+            "animation": ""
+          }
+        },
+        "button_3N9HQD": {
+          "type": "button",
+          "settings": {
+            "button_text": "Patient log in",
+            "button_link": "https://medevolve.com.au/",
+            "button_style": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_PNGJdp",
+        "text_ggFPyi",
+        "button_3N9HQD"
+      ],
+      "settings": {
+        "text_width": "large",
+        "text_position": "center",
+        "text_alignment": "center",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "1726717701bb77be44": {
+      "type": "apps",
+      "disabled": true,
+      "custom_css": [
+        ".form_generater_form_div,.form_generater_form_div .block_label,.form_generater_form_div .infoMessage {white-space: normal; text-transform: none; word-break: normal; color: #000 !important;}"
+      ],
+      "settings": {}
+    },
+    "173313856679ada898": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_Th37cG": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"NjYzOTU=\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_Th37cG"
+      ],
+      "custom_css": [],
+      "settings": {}
+    }
+  },
+  "order": [
+    "rich_text_wDdWep",
+    "1726717701bb77be44",
+    "173313856679ada898"
+  ]
+}
