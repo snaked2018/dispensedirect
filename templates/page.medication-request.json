@@ -23,7 +23,7 @@
         "text_ggFPyi": {
           "type": "text",
           "settings": {
-            "text": "<p>We endeavour to source any pharmacy medication for you at competitive non-PBS pricing. If you have a particular medication you would like delivered to your door, please fill out the form below. </p><p>Please note: medication requests arrive into store next business day, so any orders placed will be dispatched upon its arrival. </p><p>Our team will contact you shortly with exclusive portal access. </p><p>If you are an existing patient, you will be able to place orders for prescriptions by logging into our <a href=\"https://accounts.medevolve.com.au/sign-in?redirect_url=https%3A%2F%2Fmedevolve.com.au%2Fpatient\">ordering portal.</a></p>",
+            "text": "<p>We endeavour to source any pharmacy medication for you at competitive non-PBS pricing. If you have a particular medication you would like delivered to your door, please fill out the form below. </p><p>Please note: medication requests arrive into store next business day, so any orders placed will be dispatched upon its arrival. </p><p><em>*We are not able to ship refrigerated lines*</em></p><p>Our team will contact you shortly with exclusive portal access. </p><p>If you are an existing patient, you will be able to place orders for prescriptions by logging into our <a href=\"https://accounts.medevolve.com.au/sign-in?redirect_url=https%3A%2F%2Fmedevolve.com.au%2Fpatient\">ordering portal.</a></p>",
             "custom_liquid": "",
             "text_color": "#051235",
             "animation": ""
