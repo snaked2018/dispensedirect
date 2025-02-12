@@ -15,7 +15,7 @@
         "image_PNGJdp": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/16.svg",
+            "image": "shopify://shop_images/18.svg",
             "retina": true,
             "animation": ""
           }
@@ -65,7 +65,7 @@
         "powerful_form_builder_app_block_Th37cG": {
           "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
           "settings": {
-            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"NjYzOTU=\"></div>"
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"NzU3OTM=\"></div>"
           }
         }
       },
