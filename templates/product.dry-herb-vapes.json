@@ -70,6 +70,21 @@
         "disable_bottom_spacing": false
       }
     },
+    "1740439911781986d0": {
+      "type": "apps",
+      "blocks": {
+        "powerful_form_builder_app_block_KBGjft": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"Nzc4ODM=\"></div>"
+          }
+        }
+      },
+      "block_order": [
+        "powerful_form_builder_app_block_KBGjft"
+      ],
+      "settings": {}
+    },
     "recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -81,6 +96,7 @@
   },
   "order": [
     "main",
+    "1740439911781986d0",
     "recommendations"
   ]
 }
