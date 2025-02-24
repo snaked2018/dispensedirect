@@ -41,6 +41,12 @@
             "sizing_guide_page": ""
           }
         },
+        "powerful_form_builder_app_block_N3pw7n": {
+          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
+          "settings": {
+            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"Nzc4ODM=\"></div>"
+          }
+        },
         "3184ed78-b74d-40cc-a072-56e6212c92ea": {
           "type": "buy_buttons",
           "settings": {
@@ -60,6 +66,7 @@
         "9050c7cb-7566-44de-b9d3-c89d6570e376",
         "f5f84edf-4b73-4785-a2c6-4f1861907b9d",
         "7462a6a5-d06d-4b93-8c5c-4cc6f3a1349b",
+        "powerful_form_builder_app_block_N3pw7n",
         "3184ed78-b74d-40cc-a072-56e6212c92ea",
         "03c4d510-b1c0-4245-abfe-20674cf3b97a"
       ],
@@ -69,21 +76,6 @@
         "show_taxes_included": true,
         "disable_bottom_spacing": false
       }
-    },
-    "1740439911781986d0": {
-      "type": "apps",
-      "blocks": {
-        "powerful_form_builder_app_block_KBGjft": {
-          "type": "shopify://apps/powerful-form-builder/blocks/app-block/e4bcb1eb-35b2-42e6-bc37-bfe0e1542c9d",
-          "settings": {
-            "shortcode": "<div class=\"globo-formbuilder\" data-id=\"Nzc4ODM=\"></div>"
-          }
-        }
-      },
-      "block_order": [
-        "powerful_form_builder_app_block_KBGjft"
-      ],
-      "settings": {}
     },
     "recommendations": {
       "type": "product-recommendations",
@@ -96,7 +88,6 @@
   },
   "order": [
     "main",
-    "1740439911781986d0",
     "recommendations"
   ]
 }
