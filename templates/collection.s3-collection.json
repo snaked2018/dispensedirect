@@ -74,6 +74,9 @@
     },
     "main-collection-product-grid": {
       "type": "main-collection-product-grid",
+      "custom_css": [
+        ".add_to_cart_button {display: none}"
+      ],
       "settings": {
         "collection_product_count": 24,
         "collection_layout": "style1",
