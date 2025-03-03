@@ -513,9 +513,8 @@
         "variant_picker_dBBtbH",
         "buy_buttons_UyVerF"
       ],
-      "disabled": true,
       "settings": {
-        "product": "valentines-day-starter-bundle",
+        "product": "mighty-medic-bundle",
         "product_image_feature": "",
         "show_taxes_included": true,
         "disable_top_spacing": false,
@@ -524,6 +523,7 @@
     },
     "featured_collection_67KETk": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured: Dry Herb Vaporisers",
         "text": "",
