@@ -513,6 +513,7 @@
         "variant_picker_dBBtbH",
         "buy_buttons_UyVerF"
       ],
+      "disabled": true,
       "settings": {
         "product": "mighty-medic-bundle",
         "product_image_feature": "",
@@ -523,7 +524,6 @@
     },
     "featured_collection_67KETk": {
       "type": "featured-collection",
-      "disabled": true,
       "settings": {
         "title": "Featured: Dry Herb Vaporisers",
         "text": "",
