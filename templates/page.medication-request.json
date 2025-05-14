@@ -12,11 +12,12 @@
     "rich_text_wDdWep": {
       "type": "rich-text",
       "blocks": {
-        "image_PNGJdp": {
-          "type": "image",
+        "text_d6XVMA": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/18.svg",
-            "retina": true,
+            "text": "<h3>Medication Request</h3>",
+            "custom_liquid": "",
+            "text_color": "#444444",
             "animation": ""
           }
         },
@@ -39,7 +40,7 @@
         }
       },
       "block_order": [
-        "image_PNGJdp",
+        "text_d6XVMA",
         "text_ggFPyi",
         "button_3N9HQD"
       ],
