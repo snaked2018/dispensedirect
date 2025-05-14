@@ -29,15 +29,6 @@
             "animation": "animation left-to-right"
           }
         },
-        "image_X8ijg6": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/11.svg",
-            "retina": false,
-            "animation": "animation bottom-to-top"
-          }
-        },
         "text": {
           "type": "text",
           "settings": {
@@ -68,7 +59,6 @@
       "block_order": [
         "image_APAwnN",
         "heading",
-        "image_X8ijg6",
         "text",
         "text_BhQVnU",
         "button_9yKjKY"
