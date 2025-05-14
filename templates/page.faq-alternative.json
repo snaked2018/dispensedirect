@@ -15,7 +15,7 @@
         "text_cEn7DD": {
           "type": "text",
           "settings": {
-            "text": "<h3>Frequently Asked Questions</h3>",
+            "text": "<h4>Frequently Asked Questions</h4>",
             "custom_liquid": "",
             "text_color": "#444444",
             "animation": ""
