@@ -15,7 +15,7 @@
         "text_8fh4Wr": {
           "type": "text",
           "settings": {
-            "text": "<h3>About us</h3>",
+            "text": "<h4>About us</h4>",
             "custom_liquid": "",
             "text_color": "#444444",
             "animation": ""
