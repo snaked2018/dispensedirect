@@ -12,11 +12,12 @@
     "rich_text_kKiFB9": {
       "type": "rich-text",
       "blocks": {
-        "image_mNwYwH": {
-          "type": "image",
+        "text_BrRDVh": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/15.svg",
-            "retina": true,
+            "text": "<h3>Frequently Asked Questions</h3>",
+            "custom_liquid": "",
+            "text_color": "#444444",
             "animation": ""
           }
         },
@@ -31,7 +32,7 @@
         }
       },
       "block_order": [
-        "image_mNwYwH",
+        "text_BrRDVh",
         "text_P4RC6V"
       ],
       "settings": {
