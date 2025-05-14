@@ -1,1 +1,49 @@
-{"sections":{"rich_text_wDdWep":{"type":"rich-text","blocks":{"image_PNGJdp":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/14.svg","retina":true,"animation":""}}},"block_order":["image_PNGJdp"],"settings":{"text_width":"large","text_position":"center","text_alignment":"center","disable_top_spacing":false,"disable_bottom_spacing":true}},"content":{"type":"contact-form","settings":{"show_phone_number":true,"disable_top_spacing":false,"disable_bottom_spacing":false}}},"order":["rich_text_wDdWep","content"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "rich_text_wDdWep": {
+      "type": "rich-text",
+      "blocks": {
+        "text_KPR8dP": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Our team are here to help</h3>",
+            "custom_liquid": "",
+            "text_color": "#444444",
+            "animation": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_KPR8dP"
+      ],
+      "settings": {
+        "text_width": "large",
+        "text_position": "center",
+        "text_alignment": "center",
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": true
+      }
+    },
+    "content": {
+      "type": "contact-form",
+      "settings": {
+        "show_phone_number": true,
+        "disable_top_spacing": false,
+        "disable_bottom_spacing": false
+      }
+    }
+  },
+  "order": [
+    "rich_text_wDdWep",
+    "content"
+  ]
+}
