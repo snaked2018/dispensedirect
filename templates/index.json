@@ -254,6 +254,7 @@
     },
     "image_with_text_overlay_GgiLtQ": {
       "type": "image-with-text-overlay",
+      "custom_css": [],
       "settings": {
         "bg_image": "shopify://shop_images/Direct_to_your_door_1920_x_1080_px_2.svg",
         "bg_image_mobile": "shopify://shop_images/375_x_550_px_089bd8ef-2868-4204-ac21-855d2b62cd09.svg",
@@ -275,7 +276,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "1. Send us your scripts",
+            "title": "Send us your scripts",
             "description": "<p><a href=\"/pages/upload-your-script\" title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\" title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>",
             "image_url": "shopify://shop_images/old-woman-with-computer_a7a4dabf-3db8-42b1-a94f-bdc989ef7e03.png"
           }
@@ -284,7 +285,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "2. Account set up",
+            "title": "Account set up",
             "description": "<p>Our team will set you up with a Dispense Direct account and you will receive a welcome email. You can follow the link to access our online ordering portal.</p>",
             "image_url": "shopify://shop_images/young-woman-with-computer_d2e4a3a3-0772-4e94-93fd-046281fb4ea2.png"
           }
@@ -293,7 +294,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "3. Support",
+            "title": "Support",
             "description": "<p>A friendly pharmacist will contact you to talk through your medications and answer any questions you may have. You will also be guided through our ordering portal.</p>",
             "image_url": "shopify://shop_images/old-doctor-with-computer_1bd8b40a-439e-427b-821f-1dd5ca0e2cf7.png"
           }
@@ -302,7 +303,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "4. Review your order",
+            "title": "Review your order",
             "description": "<p>Review which items you would like to order, confirm your shipping details and pay for your order securely.</p>",
             "image_url": "shopify://shop_images/young-woman-with-computer-and-phone_365caa8b-c2a0-49fe-bc29-7defcbcd72d9.png"
           }
@@ -311,7 +312,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "5. Track your order",
+            "title": "Track your order",
             "description": "<p>You order will be dispatched same-day*, and can be tracked via express post straight to your door.</p><h6><br/>*Same-day dispatch is available on orders placed by 2pm (AEST) that day.</h6>",
             "image_url": "shopify://shop_images/old-woman-with-computer-and-phone.png"
           }
@@ -320,7 +321,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "6. Repeat order",
+            "title": "Repeat order",
             "description": "<p>If you have repeats on your script,  simply log back into <a href=\"https://medevolve.com.au/\" target=\"_blank\" title=\"https://medevolve.com.au/\">the portal</a> to manage your scripts and place your next order.</p>",
             "image_url": "shopify://shop_images/young-mam-with-computer.png"
           }
