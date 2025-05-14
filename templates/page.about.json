@@ -143,6 +143,9 @@
         "block2",
         "block_NwN3Tq"
       ],
+      "custom_css": [
+        "h4 {font-size: 28px}"
+      ],
       "settings": {
         "full_width": false,
         "padding": "low-padding",
