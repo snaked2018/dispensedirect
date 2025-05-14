@@ -31,6 +31,7 @@
         },
         "image_X8ijg6": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/11.svg",
             "retina": false,
@@ -38,6 +39,15 @@
           }
         },
         "text": {
+          "type": "text",
+          "settings": {
+            "text": "<h3>Direct to Your Door</h3>",
+            "custom_liquid": "",
+            "text_color": "#051235",
+            "animation": ""
+          }
+        },
+        "text_BhQVnU": {
           "type": "text",
           "settings": {
             "text": "<p>Get the medicine you need, when you need it.</p>",
@@ -60,6 +70,7 @@
         "heading",
         "image_X8ijg6",
         "text",
+        "text_BhQVnU",
         "button_9yKjKY"
       ],
       "custom_css": [],
