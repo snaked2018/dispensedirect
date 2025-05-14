@@ -276,7 +276,7 @@
           "type": "section",
           "settings": {
             "color": "#83c429",
-            "title": "Send us your scripts",
+            "title": "1. Send us your scripts",
             "description": "<p><a href=\"/pages/upload-your-script\" title=\"Upload your script\">Upload your scripts here</a> or ask your healthcare professional to email your scripts to <a href=\"mailto:pharmacy@dispensedirect.com.au\" title=\"mailto:pharmacy@dispensedirect.com.au\">pharmacy@dispensedirect.com.au</a></p>",
             "image_url": "shopify://shop_images/old-woman-with-computer_a7a4dabf-3db8-42b1-a94f-bdc989ef7e03.png"
           }
