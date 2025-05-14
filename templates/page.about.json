@@ -12,17 +12,18 @@
     "rich_text_mgXUJi": {
       "type": "rich-text",
       "blocks": {
-        "image_LDtCLA": {
-          "type": "image",
+        "text_8fh4Wr": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/13.svg",
-            "retina": true,
+            "text": "<h3>About us</h3>",
+            "custom_liquid": "",
+            "text_color": "#444444",
             "animation": ""
           }
         }
       },
       "block_order": [
-        "image_LDtCLA"
+        "text_8fh4Wr"
       ],
       "settings": {
         "text_width": "large",
