@@ -12,11 +12,12 @@
     "rich_text_wDdWep": {
       "type": "rich-text",
       "blocks": {
-        "image_PNGJdp": {
-          "type": "image",
+        "text_bBFRWA": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/16.svg",
-            "retina": true,
+            "text": "<h3>Upload your scripts</h3>",
+            "custom_liquid": "",
+            "text_color": "#444444",
             "animation": ""
           }
         },
@@ -39,7 +40,7 @@
         }
       },
       "block_order": [
-        "image_PNGJdp",
+        "text_bBFRWA",
         "text_ggFPyi",
         "button_3N9HQD"
       ],
