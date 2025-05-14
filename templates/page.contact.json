@@ -15,7 +15,7 @@
         "text_KPR8dP": {
           "type": "text",
           "settings": {
-            "text": "<h3>Our team are here to help</h3>",
+            "text": "<h4>Our team are here to help</h4>",
             "custom_liquid": "",
             "text_color": "#444444",
             "animation": ""
