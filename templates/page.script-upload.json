@@ -15,7 +15,7 @@
         "text_bBFRWA": {
           "type": "text",
           "settings": {
-            "text": "<h3>Upload your scripts</h3>",
+            "text": "<h4>Upload your scripts</h4>",
             "custom_liquid": "",
             "text_color": "#444444",
             "animation": ""
